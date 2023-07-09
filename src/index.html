@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photon Slides</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <div id="top_bar"></div>
+    <div id="top_bar">Slide Name - Photon Slides</div>
     <div id="main_content">
         <div id="slides_display">
-            <div id="slides_title"></div>
+            <div id="slides_title">SLIDES</div>
             <div id="display_list"></div>
             <div id="slide_configuration">
 
@@ -19,7 +20,16 @@
         </div>
         <div id="slide_editing">
             <div id="slide_preview"></div>
-            <div id="file_editing"></div>
+            <div id="file_editing">
+                <div id="tabs">
+                    <div id="tab_css" class="tab">CSS</div>
+                    <div id="tab_html" class="tab">JS</div>
+                    <div id="tab_js" class="tab">HTML</div>
+                </div>
+                <div id="editor">
+                    <textarea id="text_editor"></textarea>
+                </div>
+            </div>
         </div>
     </div>
 </body>
