@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 const css = document.getElementById("tab_css");
 const html = document.getElementById("tab_html");
 const js = document.getElementById("tab_js");
@@ -7,6 +8,9 @@ const display_list = document.getElementById("display_list");
 const slide_preview = document.getElementById("slide_preview");
 const textarea = document.getElementById("text_editor");
 const lineNumbers = document.getElementById("line_numbers");
+const iframe = document.getElementById("container");
+const preview = ((iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) ||
+    ((_a = iframe === null || iframe === void 0 ? void 0 : iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
     var _a;
     adjustTextAreaSize();
@@ -29,13 +33,17 @@ function adjustTextAreaSize() {
     }
     if (editorIndex == 1) {
         slide_html = textarea.value;
+        preview.body.innerHTML = slide_html;
+        setSlide(activeSlide);
+        console.log(preview.body.innerHTML);
     }
     if (editorIndex == 2) {
         slide_js = textarea.value;
     }
 }
 slide_preview === null || slide_preview === void 0 ? void 0 : slide_preview.addEventListener("mousedown", function () {
-    window.frames[0].jumpNext();
+    setSlide(activeSlide + 1);
+    selectSlide(activeSlide + 1);
 });
 var slide_html = "";
 var slide_js = "";

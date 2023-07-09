@@ -10,6 +10,10 @@ const slide_preview = document.getElementById("slide_preview") as HTMLElement;
 const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 
+const iframe = document.getElementById("container") as HTMLIFrameElement;
+const preview = (iframe?.contentDocument ||
+  iframe?.contentWindow?.document) as Document;
+
 textarea?.addEventListener("keyup", () => {
   adjustTextAreaSize();
 
@@ -36,6 +40,11 @@ function adjustTextAreaSize() {
 
   if (editorIndex == 1) {
     slide_html = textarea.value;
+
+    preview.body.innerHTML = slide_html;
+
+    setSlide(activeSlide);
+    console.log(preview.body.innerHTML);
   }
 
   if (editorIndex == 2) {
@@ -44,7 +53,9 @@ function adjustTextAreaSize() {
 }
 
 slide_preview?.addEventListener("mousedown", function () {
-  (window.frames[0] as any).jumpNext();
+  setSlide(activeSlide + 1);
+
+  selectSlide(activeSlide + 1);
 });
 
 var slide_html: string = "";

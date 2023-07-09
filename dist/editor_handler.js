@@ -1,7 +1,6 @@
 "use strict";
-var slideNum = 0;
 document.addEventListener("keydown", () => {
-    setSlide(slideNum + 1);
+    setSlide(activeSlide + 1);
 });
 function setSlide(index) {
     var _a;
@@ -9,21 +8,26 @@ function setSlide(index) {
     if (index >= slides_css.length || index < 0) {
         return;
     }
-    if (index > slideNum) {
-        for (var i = index + 1; i <= slideNum; i++) {
-            const style = document.createElement("style");
+    if (index > activeSlide) {
+        for (var i = index + 1; i <= activeSlide; i++) {
+            const style = preview.createElement("style");
             style.setAttribute("id", "slideNum-" + i);
             style.innerHTML = slides_css[i].css;
-            document.body.appendChild(style);
+            preview.body.appendChild(style);
         }
     }
-    if (index < slideNum) {
-        for (var i = slideNum; i < index; i++) {
-            const slide = document.getElementById("slideNum-" + i);
+    if (index < activeSlide) {
+        for (var i = activeSlide; i < index; i++) {
+            const slide = preview.getElementById("slideNum-" + i);
             (_a = slide === null || slide === void 0 ? void 0 : slide.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(slide);
         }
     }
-    slideNum = index;
+    if (index == activeSlide) {
+        const style = preview.createElement("style");
+        style.setAttribute("id", "slideNum-" + index);
+        style.innerHTML = slides_css[index].css;
+        preview.body.appendChild(style);
+    }
 }
 // var reader = new XMLHttpRequest() || new ActiveXObject("MSXML2.XMLHTTP");
 // function loadFile(url: URL) {

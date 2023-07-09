@@ -1,7 +1,5 @@
-var slideNum = 0;
-
 document.addEventListener("keydown", () => {
-  setSlide(slideNum + 1);
+  setSlide(activeSlide + 1);
 });
 
 function setSlide(index: number) {
@@ -11,26 +9,31 @@ function setSlide(index: number) {
     return;
   }
 
-  if (index > slideNum) {
-    for (var i = index + 1; i <= slideNum; i++) {
-      const style = document.createElement("style");
+  if (index > activeSlide) {
+    for (var i = index + 1; i <= activeSlide; i++) {
+      const style = preview.createElement("style");
 
       style.setAttribute("id", "slideNum-" + i);
 
       style.innerHTML = slides_css[i].css;
 
-      document.body.appendChild(style);
+      preview.body.appendChild(style);
     }
   }
 
-  if (index < slideNum) {
-    for (var i = slideNum; i < index; i++) {
-      const slide = document.getElementById("slideNum-" + i);
+  if (index < activeSlide) {
+    for (var i = activeSlide; i < index; i++) {
+      const slide = preview.getElementById("slideNum-" + i);
       slide?.parentNode?.removeChild(slide);
     }
   }
 
-  slideNum = index;
+  if (index == activeSlide) {
+    const style = preview.createElement("style");
+    style.setAttribute("id", "slideNum-" + index);
+    style.innerHTML = slides_css[index].css;
+    preview.body.appendChild(style);
+  }
 }
 
 // var reader = new XMLHttpRequest() || new ActiveXObject("MSXML2.XMLHTTP");
