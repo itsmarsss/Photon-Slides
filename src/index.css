@@ -19,6 +19,20 @@ body {
     overflow: hidden;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--topbar);
+    border-radius: 20px;
+    border: 3px solid var(--secondary);
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -61,7 +75,8 @@ body {
 #display_list {
     overflow-y: auto;
     width: 300px;
-    height: calc(100% - 50px - 30px);
+    height: calc(100vh - 50px - 30px - 30px - 15px);
+    padding-bottom: 15px;
 }
 
 #slide_configuration {

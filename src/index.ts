@@ -11,7 +11,6 @@ var slide_js: String;
 
 type Slide = {
   css: String;
-  domValue: HTMLElement;
 };
 
 var slides_css: Slide[] = [];
@@ -27,15 +26,17 @@ function switchView(view: number) {
 var activeSlide: number = 0;
 
 function selectSlide(slideIndex: number) {
-  slides_css[activeSlide]?.domValue?.classList.remove("active");
-  slides_css[slideIndex]?.domValue?.classList.add("active");
+  const slides = document.getElementsByClassName("slide_card");
+
+  slides[activeSlide]?.classList.remove("active");
+  slides[slideIndex]?.classList.add("active");
 
   activeSlide = slideIndex;
 }
 
 function addSlide() {
   display_list.innerHTML += `
-<div class="slide_card" onclick="selectSlide(${slides_css.length}})" id="slide-${slides_css.length}">
+<div class="slide_card" onclick="selectSlide(${slides_css.length})" id="slide-${slides_css.length}">
     <div class="left">${slides_css.length}</div>
     <div class="right">
         <img src="not_found.jpg">
@@ -43,11 +44,32 @@ function addSlide() {
 </div>
     `;
 
-  selectSlide(slides_css.length - 1);
+  const slide: Slide = {
+    css: "",
+  };
+
+  slides_css.push(slide);
 }
 
 function deleteSlide() {
   display_list.innerHTML = "";
 
   slides_css.splice(activeSlide, 1);
+
+  rerenderSlides();
+}
+
+function rerenderSlides() {
+  slides_css.forEach((slide, index) => {
+    slide = slide;
+
+    display_list.innerHTML += `
+<div class="slide_card" onclick="selectSlide(${index})" id="slide-${index}">
+    <div class="left">${index}</div>
+    <div class="right">
+        <img src="not_found.jpg">
+    </div>
+</div>
+      `;
+  });
 }
