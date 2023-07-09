@@ -46,6 +46,7 @@ body {
     line-height: 30px;
     font-size: 12px;
     text-align: center;
+    z-index: 1;
 }
 
 #main_content {
@@ -60,6 +61,7 @@ body {
     width: 300px;
     display: flex;
     flex-direction: column;
+    z-index: 1;
 }
 
 #slides_title {
@@ -121,6 +123,8 @@ body {
     display: flex;
     flex-direction: column;
     height: calc(50vh - 30px);
+    background: var(--main);
+    z-index: 1;
 }
 
 .tab {

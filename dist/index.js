@@ -107,10 +107,21 @@ function rerenderSlides() {
 </div>
       `;
     });
+    selectSlide(activeSlide - 1);
 }
 function getSlides() {
     return slides_css;
 }
+var scale = 1;
+slide_preview.addEventListener("wheel", (event) => {
+    const iframe = document.getElementById("container");
+    const scrollAmt = (event === null || event === void 0 ? void 0 : event.deltaY) / 10000;
+    if (scale + scrollAmt < 0.05) {
+        return;
+    }
+    scale += scrollAmt;
+    iframe.style.transform = `scale(${scale})`;
+});
 document.addEventListener("DOMContentLoaded", function () {
     addSlide();
 });
