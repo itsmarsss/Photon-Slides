@@ -43,7 +43,7 @@ body {
 
 #slides_display {
     background: var(--secondary);
-    width: 200px;
+    width: 300px;
     display: flex;
     flex-direction: column;
 }
@@ -60,6 +60,7 @@ body {
 
 #display_list {
     overflow-y: auto;
+    width: 300px;
     height: calc(100% - 50px - 30px);
 }
 
