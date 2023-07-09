@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photon Slides</title>
     <link rel="stylesheet" href="index.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"
+        type="text/css">
 </head>
 
 <body>
@@ -15,16 +17,17 @@
             <div id="slides_title">SLIDES</div>
             <div id="display_list"></div>
             <div id="slide_configuration">
-
+                <i class="fa-solid fa-plus" id="add"></i>
+                <i class="fa-solid fa-trash-can" id="remove"></i>
             </div>
         </div>
         <div id="slide_editing">
             <div id="slide_preview"></div>
             <div id="file_editing">
                 <div id="tabs">
-                    <div id="tab_css" class="tab" active>CSS</div>
-                    <div id="tab_html" class="tab">JS</div>
-                    <div id="tab_js" class="tab">HTML</div>
+                    <div id="tab_css" class="tab active" onclick="switchView('0')">CSS</div>
+                    <div id="tab_html" class="tab" onclick="switchView('1')">HTML</div>
+                    <div id="tab_js" class="tab" onclick="switchView('2')">JS</div>
                 </div>
                 <div id="editor">
                     <textarea id="text_editor"></textarea>
@@ -33,5 +36,6 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="../dist/index.js"></script>
 
 </html>

@@ -60,13 +60,30 @@ body {
 
 #display_list {
     overflow-y: auto;
-    height: calc(100% - 100px - 30px);
+    height: calc(100% - 50px - 30px);
 }
 
 #slide_configuration {
     background: var(--tertiary);
     color: var(--text-accent);
-    height: 100px;
+    height: 50px;
+    display: flex;
+}
+
+#slide_configuration>* {
+    width: 50%;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    transition: 100ms;
+}
+
+#slide_configuration>*:hover {
+    transform: scale(1.15);
+}
+
+#remove {
+    color: #ff9494;
 }
 
 #slide_editing {
@@ -92,18 +109,19 @@ body {
     height: 40px;
     padding-left: 20px;
     padding-right: 20px;
+    margin-right: 10px;
     line-height: 40px;
     font-size: 12px;
     cursor: pointer;
     text-align: center;
-    transition: 100ms;
+    transition: 200ms;
 }
 
 .tab:hover {
     color: var(--text);
 }
 
-.tab[active] {
+.tab.active {
     color: var(--text);
     border-bottom: 1px var(--text) solid;
 }
