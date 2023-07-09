@@ -5,6 +5,7 @@ const js = document.getElementById("tab_js");
 const tabList = [css, html, js];
 
 const display_list = document.getElementById("display_list") as HTMLElement;
+const slide_preview = document.getElementById("slide_preview") as HTMLElement;
 
 const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
@@ -29,6 +30,14 @@ function adjustTextAreaSize() {
   console.log(numberOfLines);
   textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
 }
+
+slide_preview?.addEventListener("mousedown", function () {
+  (window.frames[0] as any).jumpNext();
+});
+
+document.addEventListener("keydown", function () {
+  (window.frames[0] as any).jumpNext();
+});
 
 var slide_html: String;
 var slide_js: String;
@@ -73,6 +82,8 @@ function addSlide() {
   };
 
   slides_css.push(slide);
+
+  selectSlide(slides_css?.length - 1);
 }
 
 function deleteSlide() {
@@ -96,4 +107,8 @@ function rerenderSlides() {
 </div>
       `;
   });
+}
+
+function getSlides() {
+  return slides_css;
 }

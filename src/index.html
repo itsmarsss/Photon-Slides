@@ -25,7 +25,19 @@
             </div>
         </div>
         <div id="slide_editing">
-            <div id="slide_preview"></div>
+            <div id="slide_preview">
+                <style>
+                    #container {
+                        aspect-ratio: 16 / 9;
+                        height: 100%;
+                        background: #fff;
+                        border: none;
+                    }
+                </style>
+                <iframe id="container" src="content/content.html" name="preview">
+
+                </iframe>
+            </div>
             <div id="file_editing">
                 <div id="tabs">
                     <div id="tab_css" class="tab active" onclick="switchView('0')">CSS</div>

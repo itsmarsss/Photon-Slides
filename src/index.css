@@ -112,6 +112,9 @@ body {
 #slide_preview {
     height: 50%;
     border-bottom: 2px solid var(--tertiary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #file_editing {

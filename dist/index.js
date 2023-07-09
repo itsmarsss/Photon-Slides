@@ -4,6 +4,7 @@ const html = document.getElementById("tab_html");
 const js = document.getElementById("tab_js");
 const tabList = [css, html, js];
 const display_list = document.getElementById("display_list");
+const slide_preview = document.getElementById("slide_preview");
 const textarea = document.getElementById("text_editor");
 const lineNumbers = document.getElementById("line_numbers");
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
@@ -24,6 +25,12 @@ function adjustTextAreaSize() {
     console.log(numberOfLines);
     textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
 }
+slide_preview === null || slide_preview === void 0 ? void 0 : slide_preview.addEventListener("mousedown", function () {
+    window.frames[0].jumpNext();
+});
+document.addEventListener("keydown", function () {
+    window.frames[0].jumpNext();
+});
 var slide_html;
 var slide_js;
 var slides_css = [];
@@ -55,6 +62,7 @@ function addSlide() {
         css: "",
     };
     slides_css.push(slide);
+    selectSlide((slides_css === null || slides_css === void 0 ? void 0 : slides_css.length) - 1);
 }
 function deleteSlide() {
     display_list.innerHTML = "";
@@ -73,4 +81,7 @@ function rerenderSlides() {
 </div>
       `;
     });
+}
+function getSlides() {
+    return slides_css;
 }
