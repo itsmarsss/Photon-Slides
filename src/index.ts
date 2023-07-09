@@ -39,11 +39,11 @@ document.addEventListener("keydown", function () {
   (window.frames[0] as any).jumpNext();
 });
 
-var slide_html: String;
-var slide_js: String;
+var slide_html: string;
+var slide_js: string;
 
 type Slide = {
-  css: String;
+  css: string;
 };
 
 var slides_css: Slide[] = [];
@@ -54,6 +54,18 @@ function switchView(view: number) {
   js?.classList.remove("active");
 
   tabList[view]?.classList.add("active");
+
+  if (view == 0) {
+    textarea.value = slides_css[activeSlide].css;
+  }
+
+  if (view == 1) {
+    textarea.value = slide_html;
+  }
+
+  if (view == 2) {
+    textarea.value = slide_js;
+  }
 }
 
 var activeSlide: number = 0;
