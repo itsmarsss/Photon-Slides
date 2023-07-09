@@ -17,21 +17,21 @@
         <div id="slides_display">
             <div id="slides_title">SLIDES</div>
             <div id="display_list">
-                <div class="slide_card active" onclick="selectSlide(0)">
+                <div class="slide_card active" onclick="selectSlide(0)" id="slide-0">
                     <div class="left">0</div>
                     <div class="right">
                         <img src="not_found.jpg">
                     </div>
                 </div>
 
-                <div class="slide_card" onclick="selectSlide(1)">
+                <div class="slide_card" onclick="selectSlide(1)" id="slide-1">
                     <div class="left">1</div>
                     <div class="right">
                         <img src="not_found.jpg">
                     </div>
                 </div>
 
-                <div class="slide_card" onclick="selectSlide(2)">
+                <div class="slide_card" onclick="selectSlide(2)" id="slide-2">
                     <div class="left">2</div>
                     <div class="right">
                         <img src="not_found.jpg">
@@ -39,8 +39,8 @@
                 </div>
             </div>
             <div id="slide_configuration">
-                <i class="fa-solid fa-plus" id="add"></i>
-                <i class="fa-solid fa-trash-can" id="remove"></i>
+                <i class="fa-solid fa-plus" id="add" onclick="addSlide()"></i>
+                <i class="fa-solid fa-trash-can" id="remove" onclick="deleteSlide()"></i>
             </div>
         </div>
         <div id="slide_editing">
