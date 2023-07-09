@@ -7,6 +7,7 @@ const display_list = document.getElementById("display_list");
 const textarea = document.getElementById("text_editor");
 const lineNumbers = document.getElementById("line_numbers");
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
+    textarea.style.height = textarea.scrollHeight + "px";
     const numberOfLines = textarea.value.split("\n").length;
     lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 });

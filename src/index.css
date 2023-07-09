@@ -110,14 +110,14 @@ body {
 }
 
 #slide_preview {
-    height: 75%;
+    height: 50%;
     border-bottom: 2px solid var(--tertiary);
 }
 
 #file_editing {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(50vh - 30px);
 }
 
 .tab {
@@ -148,18 +148,15 @@ body {
 }
 
 #editor {
-    width: 100%;
-    height: 100%;
-}
-
-#editor {
-    display: inline-flex;
+    display: flex;
     gap: 10px;
     font-family: monospace;
     line-height: 21px;
-    background: #282a3a;
+    background: var(--main);
     border-radius: 2px;
-    padding: 20px 10px;
+    margin: 10px;
+    height: calc(100% - 40px);
+    overflow: auto;
 }
 
 #line_numbers {
@@ -180,12 +177,12 @@ body {
 
 #text_editor {
     line-height: 21px;
-    overflow-y: hidden;
     padding: 0;
     border: 0;
-    background: #282a3a;
-    color: #FFF;
-    min-width: 500px;
+    background: var(--main);
+    color: var(--text);
+    width: 100%;
+    height: 100%;
     outline: none;
     resize: none;
 }

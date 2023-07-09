@@ -10,6 +10,8 @@ const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 
 textarea?.addEventListener("keyup", () => {
+  textarea.style.height = (textarea.scrollHeight + 20).toString() + "px";
+
   const numberOfLines = textarea.value.split("\n").length;
 
   lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
