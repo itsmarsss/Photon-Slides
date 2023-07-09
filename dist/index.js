@@ -26,7 +26,6 @@ textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("k
 function adjustTextAreaSize() {
     var _a;
     const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
-    console.log(numberOfLines);
     textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
     if (editorIndex == 0) {
         slides_css[activeSlide].css = textarea.value;
@@ -64,6 +63,7 @@ function switchView(view) {
     if (view == 2) {
         textarea.value = slide_js;
     }
+    adjustTextAreaSize();
 }
 var activeSlide = 0;
 function selectSlide(slideIndex) {

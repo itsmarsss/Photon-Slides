@@ -86,6 +86,8 @@ function switchView(view: number) {
   if (view == 2) {
     textarea.value = slide_js;
   }
+
+  adjustTextAreaSize();
 }
 
 var activeSlide: number = 0;

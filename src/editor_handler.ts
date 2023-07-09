@@ -29,6 +29,9 @@ function setSlide(index: number) {
   }
 
   if (index == activeSlide) {
+    const slide = preview.getElementById("slideNum-" + index);
+    slide?.parentNode?.removeChild(slide);
+
     const style = preview.createElement("style");
     style.setAttribute("id", "slideNum-" + index);
     style.innerHTML = slides_css[index].css;

@@ -3,7 +3,7 @@ document.addEventListener("keydown", () => {
     setSlide(activeSlide + 1);
 });
 function setSlide(index) {
-    var _a;
+    var _a, _b;
     const slides_css = getSlides();
     if (index >= slides_css.length || index < 0) {
         return;
@@ -23,6 +23,8 @@ function setSlide(index) {
         }
     }
     if (index == activeSlide) {
+        const slide = preview.getElementById("slideNum-" + index);
+        (_b = slide === null || slide === void 0 ? void 0 : slide.parentNode) === null || _b === void 0 ? void 0 : _b.removeChild(slide);
         const style = preview.createElement("style");
         style.setAttribute("id", "slideNum-" + index);
         style.innerHTML = slides_css[index].css;
