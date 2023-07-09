@@ -10,3 +10,11 @@ function switchView(view) {
     js === null || js === void 0 ? void 0 : js.classList.remove("active");
     (_a = tabList[view]) === null || _a === void 0 ? void 0 : _a.classList.add("active");
 }
+var activeSlide = 0;
+function selectSlide(slideIndex) {
+    var _a, _b;
+    const slides = document.getElementsByClassName("slide_card");
+    (_a = slides[activeSlide]) === null || _a === void 0 ? void 0 : _a.classList.remove("active");
+    (_b = slides[slideIndex]) === null || _b === void 0 ? void 0 : _b.classList.add("active");
+    activeSlide = slideIndex;
+}

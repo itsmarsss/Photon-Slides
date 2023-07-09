@@ -11,3 +11,14 @@ function switchView(view: number) {
 
   tabList[view]?.classList.add("active");
 }
+
+var activeSlide: number = 0;
+
+function selectSlide(slideIndex: number) {
+  const slides = document.getElementsByClassName("slide_card");
+
+  slides[activeSlide]?.classList.remove("active");
+  slides[slideIndex]?.classList.add("active");
+
+  activeSlide = slideIndex;
+}

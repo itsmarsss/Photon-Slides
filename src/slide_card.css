@@ -16,6 +16,11 @@
     box-shadow: none;
 }
 
+.slide_card.active {
+    filter: brightness(1.5);
+    box-shadow: none;
+}
+
 .left {
     color: var(--text);
     width: 35px;
