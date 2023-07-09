@@ -34,12 +34,11 @@ function adjustTextAreaSize() {
     if (editorIndex == 1) {
         slide_html = textarea.value;
         preview.body.innerHTML = slide_html;
-        setSlide(activeSlide);
-        console.log(preview.body.innerHTML);
     }
     if (editorIndex == 2) {
         slide_js = textarea.value;
     }
+    setSlide(activeSlide);
 }
 slide_preview === null || slide_preview === void 0 ? void 0 : slide_preview.addEventListener("mousedown", function () {
     setSlide(activeSlide + 1);

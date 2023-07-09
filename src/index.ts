@@ -31,7 +31,6 @@ textarea?.addEventListener("keydown", () => {
 function adjustTextAreaSize() {
   const numberOfLines = textarea.value?.split("\n").length;
 
-  console.log(numberOfLines);
   textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
 
   if (editorIndex == 0) {
@@ -42,14 +41,13 @@ function adjustTextAreaSize() {
     slide_html = textarea.value;
 
     preview.body.innerHTML = slide_html;
-
-    setSlide(activeSlide);
-    console.log(preview.body.innerHTML);
   }
 
   if (editorIndex == 2) {
     slide_js = textarea.value;
   }
+
+  setSlide(activeSlide);
 }
 
 slide_preview?.addEventListener("mousedown", function () {
