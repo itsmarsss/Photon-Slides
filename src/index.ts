@@ -29,24 +29,33 @@ function adjustTextAreaSize() {
 
   console.log(numberOfLines);
   textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
+
+  if (editorIndex == 0) {
+    slides_css[activeSlide].css = textarea.value;
+  }
+
+  if (editorIndex == 1) {
+    slide_html = textarea.value;
+  }
+
+  if (editorIndex == 2) {
+    slide_js = textarea.value;
+  }
 }
 
 slide_preview?.addEventListener("mousedown", function () {
   (window.frames[0] as any).jumpNext();
 });
 
-document.addEventListener("keydown", function () {
-  (window.frames[0] as any).jumpNext();
-});
-
-var slide_html: string;
-var slide_js: string;
+var slide_html: string = "";
+var slide_js: string = "";
 
 type Slide = {
   css: string;
 };
 
 var slides_css: Slide[] = [];
+var editorIndex: number = 0;
 
 function switchView(view: number) {
   css?.classList.remove("active");
@@ -54,6 +63,8 @@ function switchView(view: number) {
   js?.classList.remove("active");
 
   tabList[view]?.classList.add("active");
+
+  editorIndex = view;
 
   if (view == 0) {
     textarea.value = slides_css[activeSlide].css;
@@ -124,3 +135,5 @@ function rerenderSlides() {
 function getSlides() {
   return slides_css;
 }
+
+addSlide();

@@ -24,22 +24,39 @@ function adjustTextAreaSize() {
     const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
     console.log(numberOfLines);
     textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
+    if (editorIndex == 0) {
+        slides_css[activeSlide].css = textarea.value;
+    }
+    if (editorIndex == 1) {
+        slide_html = textarea.value;
+    }
+    if (editorIndex == 2) {
+        slide_js = textarea.value;
+    }
 }
 slide_preview === null || slide_preview === void 0 ? void 0 : slide_preview.addEventListener("mousedown", function () {
     window.frames[0].jumpNext();
 });
-document.addEventListener("keydown", function () {
-    window.frames[0].jumpNext();
-});
-var slide_html;
-var slide_js;
+var slide_html = "";
+var slide_js = "";
 var slides_css = [];
+var editorIndex = 0;
 function switchView(view) {
     var _a;
     css === null || css === void 0 ? void 0 : css.classList.remove("active");
     html === null || html === void 0 ? void 0 : html.classList.remove("active");
     js === null || js === void 0 ? void 0 : js.classList.remove("active");
     (_a = tabList[view]) === null || _a === void 0 ? void 0 : _a.classList.add("active");
+    editorIndex = view;
+    if (view == 0) {
+        textarea.value = slides_css[activeSlide].css;
+    }
+    if (view == 1) {
+        textarea.value = slide_html;
+    }
+    if (view == 2) {
+        textarea.value = slide_js;
+    }
 }
 var activeSlide = 0;
 function selectSlide(slideIndex) {
@@ -85,3 +102,4 @@ function rerenderSlides() {
 function getSlides() {
     return slides_css;
 }
+addSlide();
