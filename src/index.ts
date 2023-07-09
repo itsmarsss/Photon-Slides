@@ -10,24 +10,25 @@ const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 
 textarea?.addEventListener("keyup", () => {
-  textarea.style.height = (textarea.scrollHeight + 20).toString() + "px";
+  adjustTextAreaSize();
 
-  const numberOfLines = textarea.value.split("\n").length;
-
+  const numberOfLines = textarea.value?.split("\n").length;
   lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 });
 
-textarea.addEventListener("keydown", (event) => {
-  if (event.key === "Tab") {
-    const start = textarea.selectionStart;
-    const end = textarea.selectionEnd;
+textarea?.addEventListener("keydown", () => {
+  adjustTextAreaSize();
 
-    textarea.value =
-      textarea.value.substring(0, start) + "\t" + textarea.value.substring(end);
-
-    event.preventDefault();
-  }
+  const numberOfLines = textarea.value?.split("\n").length;
+  lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 });
+
+function adjustTextAreaSize() {
+  const numberOfLines = textarea.value?.split("\n").length;
+
+  console.log(numberOfLines);
+  textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
+}
 
 var slide_html: String;
 var slide_js: String;

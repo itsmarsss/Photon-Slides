@@ -7,19 +7,23 @@ const display_list = document.getElementById("display_list");
 const textarea = document.getElementById("text_editor");
 const lineNumbers = document.getElementById("line_numbers");
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
-    textarea.style.height = textarea.scrollHeight + "px";
-    const numberOfLines = textarea.value.split("\n").length;
+    var _a;
+    adjustTextAreaSize();
+    const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
     lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 });
-textarea.addEventListener("keydown", (event) => {
-    if (event.key === "Tab") {
-        const start = textarea.selectionStart;
-        const end = textarea.selectionEnd;
-        textarea.value =
-            textarea.value.substring(0, start) + "\t" + textarea.value.substring(end);
-        event.preventDefault();
-    }
+textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keydown", () => {
+    var _a;
+    adjustTextAreaSize();
+    const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
+    lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 });
+function adjustTextAreaSize() {
+    var _a;
+    const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
+    console.log(numberOfLines);
+    textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
+}
 var slide_html;
 var slide_js;
 var slides_css = [];

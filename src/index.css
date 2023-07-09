@@ -151,10 +151,11 @@ body {
     display: flex;
     gap: 10px;
     font-family: monospace;
-    line-height: 21px;
+    line-height: 20px;
     background: var(--main);
     border-radius: 2px;
     margin: 10px;
+    width: calc(100vw - 300px);
     height: calc(100% - 40px);
     overflow: auto;
 }
@@ -162,27 +163,37 @@ body {
 #line_numbers {
     width: 20px;
     text-align: right;
+    background: var(--main);
 }
 
 #line_numbers span {
-    height: 21px;
+    height: 20px;
     counter-increment: linenumber;
+    background: var(--main);
 }
 
 #line_numbers span::before {
     content: counter(linenumber);
     display: block;
     color: #506882;
+    background: var(--main);
 }
 
 #text_editor {
-    line-height: 21px;
+    line-height: 20px;
     padding: 0;
     border: 0;
     background: var(--main);
     color: var(--text);
-    width: 100%;
+    width: calc(100vw - 20px - 20px - 10px - 300px);
     height: 100%;
     outline: none;
     resize: none;
+    overflow-wrap: normal;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+#text_editor::-webkit-scrollbar {
+    display: none;
 }
