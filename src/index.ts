@@ -6,6 +6,27 @@ const tabList = [css, html, js];
 
 const display_list = document.getElementById("display_list") as HTMLElement;
 
+const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
+const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
+
+textarea?.addEventListener("keyup", () => {
+  const numberOfLines = textarea.value.split("\n").length;
+
+  lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
+});
+
+textarea.addEventListener("keydown", (event) => {
+  if (event.key === "Tab") {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+
+    textarea.value =
+      textarea.value.substring(0, start) + "\t" + textarea.value.substring(end);
+
+    event.preventDefault();
+  }
+});
+
 var slide_html: String;
 var slide_js: String;
 

@@ -152,17 +152,40 @@ body {
     height: 100%;
 }
 
+#editor {
+    display: inline-flex;
+    gap: 10px;
+    font-family: monospace;
+    line-height: 21px;
+    background: #282a3a;
+    border-radius: 2px;
+    padding: 20px 10px;
+}
+
+#line_numbers {
+    width: 20px;
+    text-align: right;
+}
+
+#line_numbers span {
+    height: 21px;
+    counter-increment: linenumber;
+}
+
+#line_numbers span::before {
+    content: counter(linenumber);
+    display: block;
+    color: #506882;
+}
+
 #text_editor {
-    background: transparent;
-    color: var(--text);
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-    border: none;
+    line-height: 21px;
+    overflow-y: hidden;
+    padding: 0;
+    border: 0;
+    background: #282a3a;
+    color: #FFF;
+    min-width: 500px;
     outline: none;
     resize: none;
-    box-sizing: border-box;
-    white-space: pre;
-    overflow-wrap: normal;
-    overflow-x: auto;
 }

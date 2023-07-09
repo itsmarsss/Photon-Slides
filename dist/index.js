@@ -4,6 +4,21 @@ const html = document.getElementById("tab_html");
 const js = document.getElementById("tab_js");
 const tabList = [css, html, js];
 const display_list = document.getElementById("display_list");
+const textarea = document.getElementById("text_editor");
+const lineNumbers = document.getElementById("line_numbers");
+textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
+    const numberOfLines = textarea.value.split("\n").length;
+    lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
+});
+textarea.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        textarea.value =
+            textarea.value.substring(0, start) + "\t" + textarea.value.substring(end);
+        event.preventDefault();
+    }
+});
 var slide_html;
 var slide_js;
 var slides_css = [];
@@ -16,10 +31,10 @@ function switchView(view) {
 }
 var activeSlide = 0;
 function selectSlide(slideIndex) {
-    var _a;
+    var _a, _b;
     const slides = document.getElementsByClassName("slide_card");
     (_a = slides[activeSlide]) === null || _a === void 0 ? void 0 : _a.classList.remove("active");
-    slides[slideIndex].classList.add("active");
+    (_b = slides[slideIndex]) === null || _b === void 0 ? void 0 : _b.classList.add("active");
     activeSlide = slideIndex;
 }
 function addSlide() {
