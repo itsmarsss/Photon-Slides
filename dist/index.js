@@ -12,18 +12,14 @@ const iframe = document.getElementById("container");
 const preview = ((iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) ||
     ((_a = iframe === null || iframe === void 0 ? void 0 : iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
-    var _a;
-    adjustTextAreaSize();
-    const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
-    lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
+    adjustTextArea();
+    adjustLineNumber();
 });
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keydown", () => {
-    var _a;
-    adjustTextAreaSize();
-    const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
-    lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
+    adjustTextArea();
+    adjustLineNumber();
 });
-function adjustTextAreaSize() {
+function adjustTextArea() {
     var _a;
     const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
     textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
@@ -38,6 +34,11 @@ function adjustTextAreaSize() {
         slide_js = textarea.value;
     }
     setSlide(activeSlide);
+}
+function adjustLineNumber() {
+    var _a;
+    const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
+    lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 }
 slide_preview === null || slide_preview === void 0 ? void 0 : slide_preview.addEventListener("mousedown", function () {
     setSlide(activeSlide + 1);
@@ -63,7 +64,8 @@ function switchView(view) {
     if (view == 2) {
         textarea.value = slide_js;
     }
-    adjustTextAreaSize();
+    adjustTextArea();
+    adjustLineNumber();
 }
 var activeSlide = 0;
 function selectSlide(slideIndex) {

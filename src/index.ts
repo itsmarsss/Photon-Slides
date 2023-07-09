@@ -15,20 +15,16 @@ const preview = (iframe?.contentDocument ||
   iframe?.contentWindow?.document) as Document;
 
 textarea?.addEventListener("keyup", () => {
-  adjustTextAreaSize();
-
-  const numberOfLines = textarea.value?.split("\n").length;
-  lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
+  adjustTextArea();
+  adjustLineNumber();
 });
 
 textarea?.addEventListener("keydown", () => {
-  adjustTextAreaSize();
-
-  const numberOfLines = textarea.value?.split("\n").length;
-  lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
+  adjustTextArea();
+  adjustLineNumber();
 });
 
-function adjustTextAreaSize() {
+function adjustTextArea() {
   const numberOfLines = textarea.value?.split("\n").length;
 
   textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
@@ -48,6 +44,11 @@ function adjustTextAreaSize() {
   }
 
   setSlide(activeSlide);
+}
+
+function adjustLineNumber() {
+  const numberOfLines = textarea.value?.split("\n").length;
+  lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 }
 
 slide_preview?.addEventListener("mousedown", function () {
@@ -87,7 +88,8 @@ function switchView(view: number) {
     textarea.value = slide_js;
   }
 
-  adjustTextAreaSize();
+  adjustTextArea();
+  adjustLineNumber();
 }
 
 var activeSlide: number = 0;
