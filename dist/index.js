@@ -1,5 +1,4 @@
 "use strict";
-var _a;
 const css = document.getElementById("tab_css");
 const html = document.getElementById("tab_html");
 const js = document.getElementById("tab_js");
@@ -8,9 +7,6 @@ const display_list = document.getElementById("display_list");
 const slide_preview = document.getElementById("slide_preview");
 const textarea = document.getElementById("text_editor");
 const lineNumbers = document.getElementById("line_numbers");
-const iframe = document.getElementById("container");
-const preview = ((iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) ||
-    ((_a = iframe === null || iframe === void 0 ? void 0 : iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
     adjustTextArea();
     adjustLineNumber();
@@ -20,7 +16,7 @@ textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("k
     adjustLineNumber();
 });
 function adjustTextArea() {
-    var _a;
+    var _a, _b;
     const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
     textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
     if (editorIndex == 0) {
@@ -28,6 +24,9 @@ function adjustTextArea() {
     }
     if (editorIndex == 1) {
         slide_html = textarea.value;
+        const iframe = document.getElementById("container");
+        const preview = ((iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) ||
+            ((_b = iframe === null || iframe === void 0 ? void 0 : iframe.contentWindow) === null || _b === void 0 ? void 0 : _b.document));
         preview.body.innerHTML = slide_html;
     }
     if (editorIndex == 2) {
@@ -74,6 +73,7 @@ function selectSlide(slideIndex) {
     (_a = slides[activeSlide]) === null || _a === void 0 ? void 0 : _a.classList.remove("active");
     (_b = slides[slideIndex]) === null || _b === void 0 ? void 0 : _b.classList.add("active");
     activeSlide = slideIndex;
+    switchView(editorIndex);
 }
 function addSlide() {
     display_list.innerHTML += `
@@ -111,4 +111,6 @@ function rerenderSlides() {
 function getSlides() {
     return slides_css;
 }
-addSlide();
+document.addEventListener("DOMContentLoaded", function () {
+    addSlide();
+});

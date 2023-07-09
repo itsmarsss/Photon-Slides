@@ -10,10 +10,6 @@ const slide_preview = document.getElementById("slide_preview") as HTMLElement;
 const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 
-const iframe = document.getElementById("container") as HTMLIFrameElement;
-const preview = (iframe?.contentDocument ||
-  iframe?.contentWindow?.document) as Document;
-
 textarea?.addEventListener("keyup", () => {
   adjustTextArea();
   adjustLineNumber();
@@ -35,6 +31,10 @@ function adjustTextArea() {
 
   if (editorIndex == 1) {
     slide_html = textarea.value;
+
+    const iframe = document.getElementById("container") as HTMLIFrameElement;
+    const preview = (iframe?.contentDocument ||
+      iframe?.contentWindow?.document) as Document;
 
     preview.body.innerHTML = slide_html;
   }
@@ -101,6 +101,8 @@ function selectSlide(slideIndex: number) {
   slides[slideIndex]?.classList.add("active");
 
   activeSlide = slideIndex;
+
+  switchView(editorIndex);
 }
 
 function addSlide() {
@@ -149,4 +151,6 @@ function getSlides() {
   return slides_css;
 }
 
-addSlide();
+document.addEventListener("DOMContentLoaded", function () {
+  addSlide();
+});

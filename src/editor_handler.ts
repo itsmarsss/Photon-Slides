@@ -9,6 +9,10 @@ function setSlide(index: number) {
     return;
   }
 
+  const iframe = document.getElementById("container") as HTMLIFrameElement;
+  const preview = (iframe?.contentDocument ||
+    iframe?.contentWindow?.document) as Document;
+
   if (index > activeSlide) {
     for (var i = index + 1; i <= activeSlide; i++) {
       const style = preview.createElement("style");
@@ -17,7 +21,7 @@ function setSlide(index: number) {
 
       style.innerHTML = slides_css[i].css;
 
-      preview.body.appendChild(style);
+      preview?.body?.appendChild(style);
     }
   }
 
@@ -35,7 +39,7 @@ function setSlide(index: number) {
     const style = preview.createElement("style");
     style.setAttribute("id", "slideNum-" + index);
     style.innerHTML = slides_css[index].css;
-    preview.body.appendChild(style);
+    preview?.body?.appendChild(style);
   }
 }
 
