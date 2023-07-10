@@ -179,6 +179,7 @@ body {
     width: calc(100vw - 300px);
     height: calc(100% - 40px);
     overflow: auto;
+    position: relative;
 }
 
 #line_numbers {
@@ -200,9 +201,11 @@ body {
     background: var(--main);
 }
 
-#text_editor {
+#text_editor,
+#highlighting {
     line-height: 20px;
     padding: 0;
+    margin: 0;
     border: 0;
     background: var(--main);
     color: var(--text);
@@ -214,6 +217,16 @@ body {
     overflow-wrap: normal;
     overflow-x: hidden;
     overflow-y: hidden;
+    background: transparent;
+    position: absolute;
+    top: 0;
+    left: 30px;
+    z-index: 1;
+}
+
+#highlighting {
+    z-index: 0;
+    left: 0px;
 }
 
 #text_editor::-webkit-scrollbar {
