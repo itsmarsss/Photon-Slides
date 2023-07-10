@@ -176,7 +176,7 @@ body {
     background: var(--main);
     border-radius: 2px;
     margin: 10px;
-    width: calc(100vw - 300px);
+    width: calc(100vw - 300px - 10px);
     height: calc(100% - 40px);
     overflow: auto;
     position: relative;
@@ -201,9 +201,8 @@ body {
     background: var(--main);
 }
 
-#text_editor,
-#highlighting,
-#highlighting_content {
+/* 
+#text_editor {
     line-height: 20px;
     font-family: monospace;
     font-size: 13px;
@@ -217,27 +216,66 @@ body {
     outline: none;
     resize: none;
     tab-size: 2;
-    white-space: pre;
     overflow-wrap: normal;
     overflow-x: hidden;
     overflow-y: hidden;
-    background: transparent;
     position: absolute;
     top: 0px;
     left: 30px;
     z-index: 1;
 }
 
-#highlighting,
-#highlighting_content {
-    z-index: 0;
-    padding: 0;
-    top: 0px;
-    left: 0px;
+#text_editor {
+    background: transparent;
 }
 
 #highlighting_content {
-    background: rgba(255, 0, 0, 0.351);
+    background: red;
+    padding: 0;
+    left: 0px;
+    z-index: 0;
+    line-height: 20px;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+#highlighting_content {} */
+
+#text_editor,
+#highlighting {
+    /* Both elements need the same text and space styling so they are directly on top of each other */
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    resize: none;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 30px;
+    overflow: auto;
+    white-space: nowrap;
+}
+
+#text_editor,
+#highlighting,
+#highlighting_content {
+    background: transparent;
+    font-size: 13px;
+    font-family: monospace;
+    line-height: 20px;
+    text-shadow: none;
+    tab-size: 2;
+}
+
+#text_editor {
+    z-index: 1;
+    color: rgba(255, 0, 0, 0.295);
+    caret-color: white;
+}
+
+#highlighting {
+    z-index: 0;
 }
 
 #text_editor::-webkit-scrollbar {

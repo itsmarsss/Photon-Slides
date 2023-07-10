@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea id="editing" oninput="update(this.value);"></textarea>
+
+    <code class="language-html" id="highlighting-content"></code>
+
+    <style>
+        #editing,
+        #highlighting {
+            margin: 10px;
+            padding: 10px;
+            border: 0;
+            width: calc(100% - 32px);
+            height: 150px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: auto;
+            white-space: nowrap;
+        }
+
+        #editing,
+        #highlighting,
+        #highlighting * {
+            font-size: 15pt;
+            font-family: monospace;
+            line-height: 20pt;
+        }
+
+        #editing {
+            z-index: 1;
+            color: transparent;
+            background: transparent;
+            caret-color: white;
+        }
+
+        #highlighting {
+            z-index: 0;
+        }
+    </style>
+    <script type="text/javascript" src="./libraries/prism.js"></script>
+    <link rel="stylesheet" href="./libraries/prism.css">
+    <script>
+        function update(text) {
+            let result_element = document.querySelector("#highlighting-content");
+            // Update code
+            result_element.textContent = text;
+            // Syntax Highlight
+            Prism.highlightElement(result_element);
+        }
+    </script>
+</body>
+
+</html>

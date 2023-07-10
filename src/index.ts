@@ -9,6 +9,9 @@ const preview_cover = document.getElementById("preview_cover") as HTMLElement;
 
 const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
 const highlighting = document.getElementById("highlighting") as HTMLElement;
+const highlighting_content = document.getElementById(
+  "highlighting_content"
+) as HTMLElement;
 
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 
@@ -25,8 +28,16 @@ textarea?.addEventListener("keydown", () => {
 function adjustTextArea() {
   const numberOfLines = textarea.value?.split("\n").length;
 
-  textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
-  highlighting.style.height = (numberOfLines * 20 + 20).toString() + "px";
+  const width = textarea.scrollWidth + "px";
+  const height = numberOfLines * 20 + 20 + "px";
+
+  textarea.style.width = width;
+  highlighting.style.width = width;
+  highlighting_content.style.width = width;
+
+  textarea.style.height = height;
+  highlighting.style.height = height;
+  highlighting_content.style.height = height;
 
   if (editorIndex == 0) {
     slides_css[activeSlide].css = textarea.value;

@@ -7,6 +7,7 @@ const display_list = document.getElementById("display_list");
 const preview_cover = document.getElementById("preview_cover");
 const textarea = document.getElementById("text_editor");
 const highlighting = document.getElementById("highlighting");
+const highlighting_content = document.getElementById("highlighting_content");
 const lineNumbers = document.getElementById("line_numbers");
 textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
     adjustTextArea();
@@ -19,8 +20,14 @@ textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("k
 function adjustTextArea() {
     var _a, _b;
     const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
-    textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
-    highlighting.style.height = (numberOfLines * 20 + 20).toString() + "px";
+    const width = textarea.scrollWidth + "px";
+    const height = numberOfLines * 20 + 20 + "px";
+    textarea.style.width = width;
+    highlighting.style.width = width;
+    highlighting_content.style.width = width;
+    textarea.style.height = height;
+    highlighting.style.height = height;
+    highlighting_content.style.height = height;
     if (editorIndex == 0) {
         slides_css[activeSlide].css = textarea.value;
     }
