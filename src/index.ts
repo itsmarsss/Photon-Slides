@@ -225,6 +225,23 @@ preview_cover?.addEventListener("keydown", (event) => {
   }
 });
 
+preview_cover?.addEventListener("dblclick", () => {
+  const iframe = document.getElementById("container") as HTMLIFrameElement;
+
+  if (scale + 1 > 8) {
+    return;
+  }
+
+  iframe.style.transition = "200ms";
+
+  scale += 1;
+  iframe.style.transform = `scale(${scale})`;
+
+  setTimeout(() => {
+    iframe.style.transition = "";
+  }, 200);
+});
+
 function updateiFrames() {
   for (var i = 0; i < slides_css.length; i++) {
     const iframe = document.getElementById(
