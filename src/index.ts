@@ -28,8 +28,15 @@ textarea?.addEventListener("keydown", () => {
 function adjustTextArea() {
   const numberOfLines = textarea.value?.split("\n").length;
 
-  const width = textarea.scrollWidth + "px";
   const height = numberOfLines * 20 + 20 + "px";
+
+  const lines = textarea.value.split("\n");
+
+  var max = 0;
+  for (var i = 0; i < lines.length; i++) {
+    max = Math.max(max, lines[i].length);
+  }
+  const width = max * 7.5 + 20 + "px";
 
   textarea.style.width = width;
   highlighting.style.width = width;

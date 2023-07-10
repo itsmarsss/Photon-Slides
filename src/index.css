@@ -201,59 +201,19 @@ body {
     background: var(--main);
 }
 
-/* 
-#text_editor {
-    line-height: 20px;
-    font-family: monospace;
-    font-size: 13px;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    background: var(--main);
-    color: var(--text);
-    width: calc(100vw - 20px - 20px - 10px - 300px);
-    height: 100%;
-    outline: none;
-    resize: none;
-    tab-size: 2;
-    overflow-wrap: normal;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    position: absolute;
-    top: 0px;
-    left: 30px;
-    z-index: 1;
-}
-
-#text_editor {
-    background: transparent;
-}
-
-#highlighting_content {
-    background: red;
-    padding: 0;
-    left: 0px;
-    z-index: 0;
-    line-height: 20px;
-    font-family: monospace;
-    font-size: 13px;
-}
-
-#highlighting_content {} */
-
 #text_editor,
 #highlighting {
-    /* Both elements need the same text and space styling so they are directly on top of each other */
     margin: 0;
     padding: 0;
     border: 0;
     outline: none;
     resize: none;
+    min-width: calc(100% - 20px - 10px);
     height: 150px;
     position: absolute;
     top: 0;
     left: 30px;
-    overflow: auto;
+    overflow: hidden;
     white-space: nowrap;
 }
 
@@ -270,7 +230,7 @@ body {
 
 #text_editor {
     z-index: 1;
-    color: rgba(255, 0, 0, 0.295);
+    color: transparent;
     caret-color: white;
 }
 
