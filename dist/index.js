@@ -115,12 +115,32 @@ function getSlides() {
 var scale = 1;
 slide_preview.addEventListener("wheel", (event) => {
     const iframe = document.getElementById("container");
-    const scrollAmt = (event === null || event === void 0 ? void 0 : event.deltaY) / 10000;
+    const scrollAmt = (event === null || event === void 0 ? void 0 : event.deltaY) / 5000;
     if (scale + scrollAmt < 0.05) {
         return;
     }
     scale += scrollAmt;
     iframe.style.transform = `scale(${scale})`;
+});
+var x;
+var y;
+var isDragging = false;
+slide_preview.addEventListener("mousedown", (event) => {
+    x = event.clientX;
+    y = event.clientY;
+    isDragging = true;
+});
+slide_preview.addEventListener("mouseup", () => {
+    isDragging = false;
+});
+slide_preview.addEventListener("mousemove", (event) => {
+    if (isDragging) {
+        const xOffset = event.clientX - x;
+        const yOffset = event.clientY - y;
+        const iframe = document.getElementById("container");
+        iframe.style.top = yOffset + "px";
+        iframe.style.left = xOffset + "px";
+    }
 });
 document.addEventListener("DOMContentLoaded", function () {
     addSlide();
