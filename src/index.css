@@ -209,6 +209,7 @@ body {
     height: 100%;
     outline: none;
     resize: none;
+    white-space: pre;
     overflow-wrap: normal;
     overflow-x: hidden;
     overflow-y: hidden;

@@ -108,7 +108,7 @@ function addSlide() {
 <div class="slide_card" onclick="selectSlide(${slides_css.length})" id="slide-${slides_css.length}">
     <div class="left">${slides_css.length}</div>
     <div class="right">
-        <iframe class="container-${slides_css.length}" name="preview-${slides_css.length}">
+        <iframe id="container-${slides_css.length}" name="preview-${slides_css.length}">
         </iframe>
     </div>
 </div>
@@ -139,7 +139,7 @@ function rerenderSlides() {
 <div class="slide_card" onclick="selectSlide(${index})" id="slide-${index}">
     <div class="left">${index}</div>
     <div class="right">
-        <iframe class="container-${index}" name="preview-${index}">
+        <iframe id="container-${index}" name="preview-${index}">
         </iframe>
     </div>
 </div>
@@ -216,6 +216,34 @@ preview_cover?.addEventListener("keydown", (event) => {
     selectSlide(activeSlide + 1);
   }
 });
+
+function updateiFrames() {
+  console.log("updated");
+
+  for (var i = 0; i < slides_css.length; i++) {
+    const iframe = document.getElementById(
+      "container-" + i
+    ) as HTMLIFrameElement;
+    const preview = (iframe?.contentDocument ||
+      iframe?.contentWindow?.document) as Document;
+
+    console.log(i);
+
+    preview.body.innerHTML = slide_html;
+
+    for (var j = 0; j <= i; j++) {
+      const style = preview.createElement("style");
+      style.setAttribute("id", "slideNum-" + j);
+      style.innerHTML = slides_css[j].css;
+
+      preview?.body?.appendChild(style);
+    }
+  }
+}
+
+setInterval(function () {
+  updateiFrames();
+}, 10000);
 
 document.addEventListener("DOMContentLoaded", function () {
   addSlide();

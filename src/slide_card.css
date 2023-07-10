@@ -23,18 +23,18 @@
 
 .left {
     color: var(--text);
-    width: 35px;
 }
 
 .right {
     object-fit: cover;
-    width: 150px;
     height: 100%;
 }
 
 .right>iframe {
     object-fit: cover;
+    aspect-ratio: 16 / 9;
     background: #fff;
-    width: 150px;
-    height: 100%;
+    border: none;
+    transform: scale(0.6) translate(-80px, -40px);
+    border-radius: 10px;
 }
