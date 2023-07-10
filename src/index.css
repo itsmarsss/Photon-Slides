@@ -17,6 +17,7 @@ body {
     font-family: "Poppins";
     height: 100%;
     overflow: hidden;
+    user-select: none;
 }
 
 ::-webkit-scrollbar {
@@ -127,14 +128,14 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    cursor: grab;
+    cursor: move;
     z-index: 1;
 }
 
 #file_editing {
     display: flex;
     flex-direction: column;
-    height: calc(50vh - 30px);
+    height: calc(50vh - 15px);
     background: var(--main);
     z-index: 1;
 }

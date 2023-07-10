@@ -5,7 +5,7 @@ const js = document.getElementById("tab_js");
 const tabList = [css, html, js];
 
 const display_list = document.getElementById("display_list") as HTMLElement;
-const slide_preview = document.getElementById("slide_preview") as HTMLElement;
+const preview_cover = document.getElementById("preview_cover") as HTMLElement;
 
 const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
@@ -50,12 +50,6 @@ function adjustLineNumber() {
   const numberOfLines = textarea.value?.split("\n").length;
   lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 }
-
-slide_preview?.addEventListener("mousedown", function () {
-  setSlide(activeSlide + 1);
-
-  selectSlide(activeSlide + 1);
-});
 
 var slide_html: string = "";
 var slide_js: string = "";
@@ -155,16 +149,16 @@ function getSlides() {
 
 var scale: number = 1;
 
-slide_preview.addEventListener("wheel", (event) => {
+preview_cover?.addEventListener("wheel", (event) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
   const scrollAmt = event?.deltaY / 5000;
 
-  if (scale + scrollAmt < 0.05) {
+  if (scale - scrollAmt < 0.05 || scale - scrollAmt > 8) {
     return;
   }
 
-  scale += scrollAmt;
+  scale -= scrollAmt;
   iframe.style.transform = `scale(${scale})`;
 });
 
@@ -174,7 +168,7 @@ var xPos: number;
 var yPos: number;
 var isDragging: boolean = false;
 
-slide_preview.addEventListener("mousedown", (event) => {
+preview_cover?.addEventListener("mousedown", (event) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
   x = event.clientX;
@@ -185,11 +179,15 @@ slide_preview.addEventListener("mousedown", (event) => {
   isDragging = true;
 });
 
-slide_preview.addEventListener("mouseup", () => {
+preview_cover?.addEventListener("mouseup", () => {
   isDragging = false;
 });
 
-slide_preview.addEventListener("mousemove", (event) => {
+preview_cover?.addEventListener("mouseout", () => {
+  isDragging = false;
+});
+
+preview_cover?.addEventListener("mousemove", (event) => {
   if (isDragging) {
     const iframe = document.getElementById("container") as HTMLIFrameElement;
 
@@ -198,6 +196,19 @@ slide_preview.addEventListener("mousemove", (event) => {
 
     iframe.style.left = xOffset + "px";
     iframe.style.top = yOffset + "px";
+  }
+});
+
+preview_cover?.addEventListener("keydown", (event) => {
+  console.log(event.key);
+  if (event.key === "ArrowLeft") {
+    setSlide(activeSlide - 1);
+    selectSlide(activeSlide - 1);
+  }
+
+  if (event.key === "ArrowRight") {
+    setSlide(activeSlide + 1);
+    selectSlide(activeSlide + 1);
   }
 });
 
