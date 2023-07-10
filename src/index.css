@@ -202,8 +202,11 @@ body {
 }
 
 #text_editor,
-#highlighting {
+#highlighting,
+#highlighting_content {
     line-height: 20px;
+    font-family: monospace;
+    font-size: 13px;
     padding: 0;
     margin: 0;
     border: 0;
@@ -220,14 +223,21 @@ body {
     overflow-y: hidden;
     background: transparent;
     position: absolute;
-    top: 0;
+    top: 0px;
     left: 30px;
     z-index: 1;
 }
 
-#highlighting {
+#highlighting,
+#highlighting_content {
     z-index: 0;
+    padding: 0;
+    top: 0px;
     left: 0px;
+}
+
+#highlighting_content {
+    background: rgba(255, 0, 0, 0.351);
 }
 
 #text_editor::-webkit-scrollbar {

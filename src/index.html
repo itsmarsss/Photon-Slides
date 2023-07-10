@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photon Slides</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="slide_card.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"
         type="text/css">
 </head>
@@ -52,7 +50,8 @@
                     <div id="line_numbers">
                         <span></span>
                     </div>
-                    <textarea id="text_editor" contenteditable="true" spellcheck="false"></textarea>
+                    <textarea id="text_editor" contenteditable="true" spellcheck="false"
+                        oninput="update(this.value)"></textarea>
                     <pre id="highlighting" aria-hidden="true">
                         <code class="language-html" id="highlighting_content"></code>
                     </pre>
@@ -63,5 +62,21 @@
 </body>
 <script type="text/javascript" src="../dist/editor_handler.js"></script>
 <script type="text/javascript" src="../dist/index.js"></script>
+
+<script type="text/javascript" src="./libraries/prism.js"></script>
+<link rel="stylesheet" href="./libraries/prism.css">
+
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="slide_card.css">
+
+<script>
+    function update(text) {
+        const result_element = document.getElementById("highlighting_content");
+
+        result_element.innerHTML = text.replace(new RegExp("&", "g"), "&").replace(new RegExp("<", "g"), "<");;
+
+        Prism.highlightElement(result_element);
+    }
+</script>
 
 </html>
