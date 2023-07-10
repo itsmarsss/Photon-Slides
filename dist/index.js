@@ -61,6 +61,7 @@ function switchView(view) {
     }
     adjustTextArea();
     adjustLineNumber();
+    updateiFrames();
 }
 var activeSlide = 0;
 function selectSlide(slideIndex) {

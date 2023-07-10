@@ -19,6 +19,7 @@
 .slide_card.active {
     transform: translateX(10px);
     box-shadow: none;
+    background-color: var(--topbar);
 }
 
 .left {

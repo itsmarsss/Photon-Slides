@@ -84,6 +84,7 @@ function switchView(view: number) {
 
   adjustTextArea();
   adjustLineNumber();
+  updateiFrames();
 }
 
 var activeSlide: number = 0;
