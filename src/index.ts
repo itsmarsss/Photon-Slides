@@ -108,7 +108,8 @@ function addSlide() {
 <div class="slide_card" onclick="selectSlide(${slides_css.length})" id="slide-${slides_css.length}">
     <div class="left">${slides_css.length}</div>
     <div class="right">
-        <img src="not_found.jpg">
+        <iframe class="container-${slides_css.length}" name="preview-${slides_css.length}">
+        </iframe>
     </div>
 </div>
     `;
@@ -138,7 +139,8 @@ function rerenderSlides() {
 <div class="slide_card" onclick="selectSlide(${index})" id="slide-${index}">
     <div class="left">${index}</div>
     <div class="right">
-        <img src="not_found.jpg">
+        <iframe class="container-${index}" name="preview-${index}">
+        </iframe>
     </div>
 </div>
       `;

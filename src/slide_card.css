@@ -32,8 +32,9 @@
     height: 100%;
 }
 
-.right>img {
+.right>iframe {
     object-fit: cover;
+    background: #fff;
     width: 150px;
     height: 100%;
 }
