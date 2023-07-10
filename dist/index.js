@@ -155,13 +155,20 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
     }
 });
 preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-        setSlide(activeSlide - 1);
-        selectSlide(activeSlide - 1);
-    }
-    if (event.key === "ArrowRight" || event.key === " ") {
-        setSlide(activeSlide + 1);
-        selectSlide(activeSlide + 1);
+    console.log(event.key);
+    switch (event.key) {
+        case "ArrowLeft":
+        case "ArrowUp":
+        case "Del":
+            setSlide(activeSlide - 1);
+            selectSlide(activeSlide - 1);
+            break;
+        case "ArrowRight":
+        case "ArrowDown":
+        case " ":
+            setSlide(activeSlide + 1);
+            selectSlide(activeSlide + 1);
+            break;
     }
 });
 function updateiFrames() {

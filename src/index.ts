@@ -209,14 +209,19 @@ preview_cover?.addEventListener("mousemove", (event) => {
 });
 
 preview_cover?.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft") {
-    setSlide(activeSlide - 1);
-    selectSlide(activeSlide - 1);
-  }
-
-  if (event.key === "ArrowRight" || event.key === " ") {
-    setSlide(activeSlide + 1);
-    selectSlide(activeSlide + 1);
+  switch (event.key) {
+    case "ArrowLeft":
+    case "ArrowUp":
+    case "Delete":
+      setSlide(activeSlide - 1);
+      selectSlide(activeSlide - 1);
+      break;
+    case "ArrowRight":
+    case "ArrowDown":
+    case " ":
+      setSlide(activeSlide + 1);
+      selectSlide(activeSlide + 1);
+      break;
   }
 });
 
