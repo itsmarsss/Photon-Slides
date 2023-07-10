@@ -184,8 +184,12 @@ body {
 
 #line_numbers {
     width: 20px;
+    padding-right: 5px;
     text-align: right;
     background: var(--main);
+    position: sticky;
+    left: 0;
+    z-index: 1;
 }
 
 #line_numbers span {
