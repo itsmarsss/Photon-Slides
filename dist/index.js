@@ -180,7 +180,7 @@ function updateiFrames() {
 }
 setInterval(function () {
     updateiFrames();
-}, 10000);
+}, 5000);
 document.addEventListener("DOMContentLoaded", function () {
     addSlide();
 });
