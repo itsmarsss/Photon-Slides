@@ -8,6 +8,9 @@ const display_list = document.getElementById("display_list") as HTMLElement;
 const preview_cover = document.getElementById("preview_cover") as HTMLElement;
 
 const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
+const highlighting = document.getElementById(
+  "highlighting_content"
+) as HTMLElement;
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 
 textarea?.addEventListener("keyup", () => {
@@ -24,6 +27,10 @@ function adjustTextArea() {
   const numberOfLines = textarea.value?.split("\n").length;
 
   textarea.style.height = (numberOfLines * 20 + 20).toString() + "px";
+
+  highlighting.innerText = textarea.value;
+
+  console.log(textarea.value);
 
   if (editorIndex == 0) {
     slides_css[activeSlide].css = textarea.value;

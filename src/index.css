@@ -213,6 +213,7 @@ body {
     height: 100%;
     outline: none;
     resize: none;
+    tab-size: 2;
     white-space: pre;
     overflow-wrap: normal;
     overflow-x: hidden;
