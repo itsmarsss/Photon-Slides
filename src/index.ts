@@ -161,7 +161,7 @@ var scale: number = 1;
 preview_cover?.addEventListener("wheel", (event) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  const scrollAmt = event?.deltaY / 5000;
+  const scrollAmt = event?.deltaY / 2500;
 
   if (scale - scrollAmt < 0.05 || scale - scrollAmt > 8) {
     return;

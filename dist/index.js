@@ -119,7 +119,7 @@ function getSlides() {
 var scale = 1;
 preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("wheel", (event) => {
     const iframe = document.getElementById("container");
-    const scrollAmt = (event === null || event === void 0 ? void 0 : event.deltaY) / 5000;
+    const scrollAmt = (event === null || event === void 0 ? void 0 : event.deltaY) / 2500;
     if (scale - scrollAmt < 0.05 || scale - scrollAmt > 8) {
         return;
     }
