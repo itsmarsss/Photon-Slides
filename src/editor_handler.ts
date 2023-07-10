@@ -1,7 +1,3 @@
-document.addEventListener("keydown", () => {
-  setSlide(activeSlide + 1);
-});
-
 function setSlide(index: number) {
   const slides_css = getSlides();
 
@@ -13,32 +9,16 @@ function setSlide(index: number) {
   const preview = (iframe?.contentDocument ||
     iframe?.contentWindow?.document) as Document;
 
-  if (index > activeSlide) {
-    for (var i = index + 1; i <= activeSlide; i++) {
-      const style = preview.createElement("style");
-
-      style.setAttribute("id", "slideNum-" + i);
-
-      style.innerHTML = slides_css[i].css;
-
-      preview?.body?.appendChild(style);
-    }
-  }
-
-  if (index < activeSlide) {
-    for (var i = activeSlide; i < index; i++) {
-      const slide = preview.getElementById("slideNum-" + i);
-      slide?.parentNode?.removeChild(slide);
-    }
-  }
-
-  if (index == activeSlide) {
-    const slide = preview.getElementById("slideNum-" + index);
+  for (var i = 0; i < slides_css.length; i++) {
+    const slide = preview.getElementById("slideNum-" + i);
     slide?.parentNode?.removeChild(slide);
+  }
 
+  for (var i = 0; i <= index; i++) {
     const style = preview.createElement("style");
-    style.setAttribute("id", "slideNum-" + index);
-    style.innerHTML = slides_css[index].css;
+    style.setAttribute("id", "slideNum-" + i);
+    style.innerHTML = slides_css[i].css;
+
     preview?.body?.appendChild(style);
   }
 }

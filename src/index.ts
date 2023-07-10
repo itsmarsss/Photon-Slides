@@ -210,7 +210,7 @@ preview_cover?.addEventListener("keydown", (event) => {
     selectSlide(activeSlide - 1);
   }
 
-  if (event.key === "ArrowRight") {
+  if (event.key === "ArrowRight" || event.key === "Space") {
     setSlide(activeSlide + 1);
     selectSlide(activeSlide + 1);
   }

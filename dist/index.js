@@ -155,7 +155,7 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
         setSlide(activeSlide - 1);
         selectSlide(activeSlide - 1);
     }
-    if (event.key === "ArrowRight") {
+    if (event.key === "ArrowRight" || event.key === "Space") {
         setSlide(activeSlide + 1);
         selectSlide(activeSlide + 1);
     }
