@@ -170,11 +170,17 @@ slide_preview.addEventListener("wheel", (event) => {
 
 var x: number;
 var y: number;
+var xPos: number;
+var yPos: number;
 var isDragging: boolean = false;
 
 slide_preview.addEventListener("mousedown", (event) => {
+  const iframe = document.getElementById("container") as HTMLIFrameElement;
+
   x = event.clientX;
   y = event.clientY;
+  xPos = iframe.offsetLeft;
+  yPos = iframe.offsetTop;
 
   isDragging = true;
 });
@@ -185,12 +191,13 @@ slide_preview.addEventListener("mouseup", () => {
 
 slide_preview.addEventListener("mousemove", (event) => {
   if (isDragging) {
-    const xOffset = event.clientX - x;
-    const yOffset = event.clientY - y;
     const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-    iframe.style.top = yOffset + "px";
+    const xOffset = xPos + (event.clientX - x);
+    const yOffset = yPos + (event.clientY - y);
+
     iframe.style.left = xOffset + "px";
+    iframe.style.top = yOffset + "px";
   }
 });
 

@@ -124,10 +124,15 @@ slide_preview.addEventListener("wheel", (event) => {
 });
 var x;
 var y;
+var xPos;
+var yPos;
 var isDragging = false;
 slide_preview.addEventListener("mousedown", (event) => {
+    const iframe = document.getElementById("container");
     x = event.clientX;
     y = event.clientY;
+    xPos = iframe.offsetLeft;
+    yPos = iframe.offsetTop;
     isDragging = true;
 });
 slide_preview.addEventListener("mouseup", () => {
@@ -135,11 +140,13 @@ slide_preview.addEventListener("mouseup", () => {
 });
 slide_preview.addEventListener("mousemove", (event) => {
     if (isDragging) {
-        const xOffset = event.clientX - x;
-        const yOffset = event.clientY - y;
         const iframe = document.getElementById("container");
-        iframe.style.top = yOffset + "px";
+        const xOffset = xPos + (event.clientX - x);
+        const yOffset = yPos + (event.clientY - y);
+        console.log(xOffset);
+        console.log(yOffset);
         iframe.style.left = xOffset + "px";
+        iframe.style.top = yOffset + "px";
     }
 });
 document.addEventListener("DOMContentLoaded", function () {
