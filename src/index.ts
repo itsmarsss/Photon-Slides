@@ -218,16 +218,12 @@ preview_cover?.addEventListener("keydown", (event) => {
 });
 
 function updateiFrames() {
-  console.log("updated");
-
   for (var i = 0; i < slides_css.length; i++) {
     const iframe = document.getElementById(
       "container-" + i
     ) as HTMLIFrameElement;
     const preview = (iframe?.contentDocument ||
       iframe?.contentWindow?.document) as Document;
-
-    console.log(i);
 
     preview.body.innerHTML = slide_html;
 

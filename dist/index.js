@@ -163,12 +163,10 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
 });
 function updateiFrames() {
     var _a, _b;
-    console.log("updated");
     for (var i = 0; i < slides_css.length; i++) {
         const iframe = document.getElementById("container-" + i);
         const preview = ((iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) ||
             ((_a = iframe === null || iframe === void 0 ? void 0 : iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
-        console.log(i);
         preview.body.innerHTML = slide_html;
         for (var j = 0; j <= i; j++) {
             const style = preview.createElement("style");

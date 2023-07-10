@@ -76,6 +76,7 @@ body {
 }
 
 #display_list {
+    overflow-x: hidden;
     overflow-y: auto;
     width: 300px;
     height: calc(100vh - 50px - 30px - 30px - 15px);

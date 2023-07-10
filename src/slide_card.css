@@ -17,7 +17,7 @@
 }
 
 .slide_card.active {
-    filter: brightness(1.5);
+    transform: translateX(10px);
     box-shadow: none;
 }
 
@@ -27,6 +27,7 @@
 
 .right {
     object-fit: cover;
+    width: 150px;
     height: 100%;
 }
 
