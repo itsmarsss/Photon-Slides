@@ -89,18 +89,25 @@ function switchView(view: number) {
 
   tabList[view]?.classList.add("active");
 
+  highlighting_content.classList.remove("language-css");
+  highlighting_content.classList.remove("language-html");
+  highlighting_content.classList.remove("language-js");
+
   editorIndex = view;
 
   if (view == 0) {
     textarea.value = slides_css[activeSlide].css;
+    highlighting_content.classList.add("language-css");
   }
 
   if (view == 1) {
     textarea.value = slide_html;
+    highlighting_content.classList.add("language-html");
   }
 
   if (view == 2) {
     textarea.value = slide_js;
+    highlighting_content.classList.add("language-js");
   }
 
   adjustTextArea();
@@ -133,7 +140,7 @@ function addSlide() {
         <iframe id="container-${slides_css.length}" name="preview-${slides_css.length}">
         </iframe>
     </div>
-    <div class="card_cover" onclick="selectSlide(${slides_css.length})"></div>
+    <div class="card_cover" onclick="selectSlide(${slides_css.length}); updateCode();"></div>
 </div>
     `;
 
@@ -165,7 +172,7 @@ function rerenderSlides() {
         <iframe id="container-${index}" name="preview-${index}">
         </iframe>
     </div>
-    <div class="card_cover" onclick="selectSlide(${index})"></div>
+    <div class="card_cover" onclick="selectSlide(${index}); updateCode();></div>
 </div>
       `;
   });

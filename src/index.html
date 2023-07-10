@@ -42,9 +42,9 @@
             </div>
             <div id="file_editing">
                 <div id="tabs">
-                    <div id="tab_css" class="tab active" onclick="switchView('0')">CSS</div>
-                    <div id="tab_html" class="tab" onclick="switchView('1')">HTML</div>
-                    <div id="tab_js" class="tab" onclick="switchView('2')">JS</div>
+                    <div id="tab_css" class="tab active" onclick="switchView('0'); updateCode();">CSS</div>
+                    <div id="tab_html" class="tab" onclick="switchView('1'); updateCode();">HTML</div>
+                    <div id="tab_js" class="tab" onclick="switchView('2'); updateCode();">JS</div>
                 </div>
                 <div id="editor">
                     <div id="line_numbers">
@@ -61,6 +61,7 @@
     </div>
 </body>
 <script type="text/javascript" src="../dist/editor_handler.js"></script>
+<script type="text/javascript" src="../dist/code_handler.js"></script>
 <script type="text/javascript" src="../dist/index.js"></script>
 
 <script type="text/javascript" src="./libraries/prism.js"></script>
@@ -68,30 +69,5 @@
 
 <link rel="stylesheet" href="index.css">
 <link rel="stylesheet" href="slide_card.css">
-
-<script>
-    function update(text) {
-        const result_element = document.getElementById("highlighting_content");
-
-        result_element.textContent = text;
-        Prism.highlightElement(result_element);
-    }
-
-    function check_tab(element, event) {
-        let code = element.value;
-        if (event.key == "Tab") {
-            /* Tab key pressed */
-            event.preventDefault(); // stop normal
-            let before_tab = code.slice(0, element.selectionStart); // text before tab
-            let after_tab = code.slice(element.selectionEnd, element.value.length); // text after tab
-            let cursor_pos = element.selectionEnd + 1; // where cursor moves after tab - moving forward by 1 char to after tab
-            element.value = before_tab + "\t" + after_tab; // add tab char
-            // move cursor
-            element.selectionStart = cursor_pos;
-            element.selectionEnd = cursor_pos;
-            update(element.value); // Update text to include indent
-        }
-    }
-</script>
 
 </html>
