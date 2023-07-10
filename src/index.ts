@@ -204,13 +204,12 @@ preview_cover?.addEventListener("mousemove", (event) => {
 });
 
 preview_cover?.addEventListener("keydown", (event) => {
-  console.log(event.key);
   if (event.key === "ArrowLeft") {
     setSlide(activeSlide - 1);
     selectSlide(activeSlide - 1);
   }
 
-  if (event.key === "ArrowRight" || event.key === "Space") {
+  if (event.key === "ArrowRight" || event.key === " ") {
     setSlide(activeSlide + 1);
     selectSlide(activeSlide + 1);
   }
