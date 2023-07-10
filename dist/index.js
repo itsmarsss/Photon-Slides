@@ -149,7 +149,7 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
         iframe.style.top = yOffset + "px";
     }
 });
-preview_cover.addEventListener("keydown", (event) => {
+preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("keydown", (event) => {
     console.log(event.key);
     if (event.key === "ArrowLeft") {
         setSlide(activeSlide - 1);
@@ -162,4 +162,10 @@ preview_cover.addEventListener("keydown", (event) => {
 });
 document.addEventListener("DOMContentLoaded", function () {
     addSlide();
+});
+document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey && (event.key === "s" || event.key === "S")) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
 });
