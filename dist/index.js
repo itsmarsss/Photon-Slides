@@ -65,6 +65,9 @@ function switchView(view) {
 var activeSlide = 0;
 function selectSlide(slideIndex) {
     var _a, _b;
+    if (slideIndex >= slides_css.length || slideIndex < 0) {
+        return;
+    }
     const slides = document.getElementsByClassName("slide_card");
     (_a = slides[activeSlide]) === null || _a === void 0 ? void 0 : _a.classList.remove("active");
     (_b = slides[slideIndex]) === null || _b === void 0 ? void 0 : _b.classList.add("active");
@@ -146,7 +149,7 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
         iframe.style.top = yOffset + "px";
     }
 });
-preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("keydown", (event) => {
+preview_cover.addEventListener("keydown", (event) => {
     console.log(event.key);
     if (event.key === "ArrowLeft") {
         setSlide(activeSlide - 1);

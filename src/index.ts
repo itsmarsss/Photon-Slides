@@ -89,6 +89,10 @@ function switchView(view: number) {
 var activeSlide: number = 0;
 
 function selectSlide(slideIndex: number) {
+  if (slideIndex >= slides_css.length || slideIndex < 0) {
+    return;
+  }
+
   const slides = document.getElementsByClassName("slide_card");
 
   slides[activeSlide]?.classList.remove("active");
@@ -199,7 +203,7 @@ preview_cover?.addEventListener("mousemove", (event) => {
   }
 });
 
-preview_cover?.addEventListener("keydown", (event) => {
+preview_cover.addEventListener("keydown", (event) => {
   console.log(event.key);
   if (event.key === "ArrowLeft") {
     setSlide(activeSlide - 1);
