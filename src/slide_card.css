@@ -9,6 +9,7 @@
     border: 1px var(--text) dotted;
     display: flex;
     box-shadow: #ffffff33 0px 4px 12px;
+    position: relative;
     transition: 200ms;
 }
 
@@ -20,6 +21,16 @@
     transform: translateX(10px);
     box-shadow: none;
     background-color: var(--topbar);
+}
+
+.card_cover {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
 }
 
 .left {

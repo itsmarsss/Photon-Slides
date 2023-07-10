@@ -77,12 +77,13 @@ function selectSlide(slideIndex) {
 }
 function addSlide() {
     display_list.innerHTML += `
-<div class="slide_card" onclick="selectSlide(${slides_css.length})" id="slide-${slides_css.length}">
+<div class="slide_card" id="slide-${slides_css.length}">
     <div class="left">${slides_css.length}</div>
     <div class="right">
         <iframe id="container-${slides_css.length}" name="preview-${slides_css.length}">
         </iframe>
     </div>
+    <div class="card_cover" onclick="selectSlide(${slides_css.length})"></div>
 </div>
     `;
     const slide = {
@@ -100,12 +101,13 @@ function rerenderSlides() {
     slides_css.forEach((slide, index) => {
         slide = slide;
         display_list.innerHTML += `
-<div class="slide_card" onclick="selectSlide(${index})" id="slide-${index}">
+<div class="slide_card" id="slide-${index}">
     <div class="left">${index}</div>
     <div class="right">
         <iframe id="container-${index}" name="preview-${index}">
         </iframe>
     </div>
+    <div class="card_cover" onclick="selectSlide(${index})"></div>
 </div>
       `;
     });
