@@ -172,7 +172,7 @@ function rerenderSlides() {
         <iframe id="container-${index}" name="preview-${index}">
         </iframe>
     </div>
-    <div class="card_cover" onclick="selectSlide(${index}); updateCode();></div>
+    <div class="card_cover" onclick="selectSlide(${index}); updateCode();"></div>
 </div>
       `;
   });
