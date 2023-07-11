@@ -125,7 +125,7 @@ body {
 #preview_cover {
     position: absolute;
     background: transparent;
-    width: 100%;
+    width: calc(100% - 13px);
     height: 100%;
     top: 0;
     left: 0;
