@@ -24,8 +24,8 @@ function check_tab(element, event) {
 
 function updateCode() {
     const textarea = document.getElementById("text_editor");
-    const result_element = document.getElementById("highlighting_content");
+    const highlight = document.getElementById("highlighting_content");
 
-    result_element.textContent = textarea.value;
-    Prism.highlightElement(result_element);
+    highlight.textContent = textarea.value;
+    Prism.highlightElement(highlight);
 }
