@@ -50,6 +50,19 @@ body {
     z-index: 1;
 }
 
+#slide_name {
+    line-height: 12px;
+    outline: none;
+    transition: 200ms;
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary);
+}
+
+#slide_name:hover {
+    border: 2px solid var(--text-accent);
+}
+
 #main_content {
     background: var(--main);
     width: 100%;
