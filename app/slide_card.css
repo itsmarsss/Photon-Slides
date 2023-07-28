@@ -20,6 +20,7 @@
 .slide_card.active {
     transform: translateX(10px);
     box-shadow: none;
+    box-shadow: #ffffff84 0px 0px 50px;
 }
 
 .card_cover {
