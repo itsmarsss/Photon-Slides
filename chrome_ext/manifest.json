@@ -9,19 +9,17 @@
   "manifest_version": 3,
   "description": "Assistant for Photon Slides",
   "author": "Marsss' Dev Team",
-  "permissions": [
-        "scripting",
-        "activeTab",
-        "storage"
-  ],
+  "permissions": ["scripting", "activeTab", "storage"],
   "icons": {
     "16": "assets/icon-16.png",
     "32": "assets/icon-32.png",
     "48": "assets/icon-48.png",
-    "128": "assets/icon-128.png"
+    "128": "assets/icon-128.png",
+    "256": "assets/icon-256.png",
+    "512": "assets/icon-512.png"
   },
   "background": {
-      "service_worker": "/scripts/background.js"
+    "service_worker": "/scripts/background.js"
   },
   "action": {
     "default_popup": "/popup/popup.html"
