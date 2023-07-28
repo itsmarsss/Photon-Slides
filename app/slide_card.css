@@ -20,7 +20,6 @@
 .slide_card.active {
     transform: translateX(10px);
     box-shadow: none;
-    background-color: var(--topbar);
 }
 
 .card_cover {
@@ -35,12 +34,7 @@
 
 .left {
     color: var(--text);
-}
-
-.right {
-    object-fit: cover;
-    width: 150px;
-    height: 100%;
+    transform: translateX(-30px);
 }
 
 .right>iframe {
@@ -48,6 +42,11 @@
     aspect-ratio: 16 / 9;
     background: #fff;
     border: none;
-    transform: scale(0.6) translate(-80px, -40px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 220px;
+    height: 120px;
     border-radius: 10px;
+    transition: 100ms;
 }
