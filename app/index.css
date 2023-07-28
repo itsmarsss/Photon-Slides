@@ -57,9 +57,13 @@ body {
     padding: 3px;
     border-radius: 5px;
     border: 1px solid var(--secondary);
+    background: transparent;
+    color: var(--text);
+    width: 150px;
+    height: 12px;
 }
 
-#slide_name:hover {
+#slide_name:is(:active, :focus) {
     border: 2px solid var(--text-accent);
 }
 
@@ -111,7 +115,7 @@ body {
     transition: 100ms;
 }
 
-#slide_configuration>*:hover {
+#slide_configuration>*:is(:hover) {
     transform: scale(1.15);
 }
 
