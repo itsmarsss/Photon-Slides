@@ -1,11 +1,11 @@
 {
   "browser_specific_settings": {
     "gecko": {
-      "id": "itsmarzzzzzz@protonmail.com"
+      "id": "photonslides.itsmarzzzzzz@protonmail.com"
     }
   },
   "name": "Photon Slides",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "manifest_version": 3,
   "description": "Assistant for Photon Slides",
   "author": "Marsss' Dev Team",

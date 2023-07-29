@@ -110,18 +110,20 @@ body {
 
 .slide::before {
     content: "";
-    background: #ffffff86;
+    background: #ffffffee;
     width: 160;
     height: 90px;
     position: absolute;
     border-radius: 10px;
-    transform: scale(0);
+    transform: scaleY(0);
+    transform-origin: top;
     transition: 200ms ease-in-out;
     z-index: 0;
+    cursor: pointer;
 }
 
 .slide:hover::before {
-    transform: scale(1);
+    transform: scaleY(1);
 }
 
 .slide:hover {
