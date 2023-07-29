@@ -19,6 +19,7 @@ body {
     margin: 0;
     color: var(--text);
     font-family: "Poppins";
+    user-select: none;
 }
 
 .content {
@@ -83,10 +84,49 @@ body {
 
 .storage_display {
     background-color: var(--secondary);
-    width: 100%;
-    height: calc(100% - 25px);
+    width: calc(100% - 20px);
+    height: calc(100% - 25px - 20px);
     overflow-x: auto;
+    overflow-y: hidden;
     border-radius: 10px;
+    padding: 10px;
+}
+
+.slide {
+    border-radius: 10px;
+    border: 2px dashed var(--text);
+    width: 160px;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    transition: 200ms;
+}
+
+.slide>span {
+    z-index: 1;
+}
+
+.slide::before {
+    content: "";
+    background: #ffffff86;
+    width: 160;
+    height: 90px;
+    position: absolute;
+    border-radius: 10px;
+    transform: scale(0);
+    transition: 200ms ease-in-out;
+    z-index: 0;
+}
+
+.slide:hover::before {
+    transform: scale(1);
+}
+
+.slide:hover {
+    color: var(--secondary);
+    font-weight: bold;
 }
 
 .footer {
