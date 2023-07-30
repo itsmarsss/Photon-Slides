@@ -370,4 +370,13 @@ body {
     margin: auto;
     border-radius: 5px;
     margin-top: 10px;
+    transition: 100ms;
+}
+
+.down_up_button:hover {
+    transform: scale(1.02);
+}
+
+.down_up_button:active {
+    transform: scale(0.98);
 }
