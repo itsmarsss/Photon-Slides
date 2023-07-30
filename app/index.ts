@@ -363,11 +363,15 @@ function importAction() {
 }
 
 function copyJSON() {
-  navigator.clipboard.writeText("Hello World");
+  navigator.clipboard.writeText(json_out.value);
+  json_out.focus();
+  json_out.select();
 }
 
 function copyEmbed() {
-  navigator.clipboard.writeText("Hello World");
+  navigator.clipboard.writeText(embed_out.value);
+  embed_out.focus();
+  embed_out.select();
 }
 
 function hidePopups() {
@@ -401,8 +405,7 @@ setInterval(() => {
   "js": "${btoa(slide_js)}",
   "css": [${css.slice(0, -1)}
   ]
-}
-  `;
+}`;
 
   json_out.value = json;
 }, 1000);
