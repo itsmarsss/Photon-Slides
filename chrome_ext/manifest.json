@@ -18,9 +18,12 @@
     "256": "assets/icon-256.png",
     "512": "assets/icon-512.png"
   },
-  // "background": {
-  //   "service_worker": "/scripts/background.js"
-  // },
+  "content_scripts": [
+    {
+      "matches": ["https://itsmarsss.github.io/Photon-Slides/app/"],
+      "js": ["scripts/content.js"]
+    }
+  ],
   "action": {
     "default_popup": "/popup/popup.html"
   }
