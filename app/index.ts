@@ -4,6 +4,8 @@ const js = document.getElementById("tab_js");
 
 const tabList = [css, html, js];
 
+const slide_name = document.getElementById("slide_name") as HTMLTextAreaElement;
+
 const display_list = document.getElementById("display_list") as HTMLElement;
 const preview_cover = document.getElementById("preview_cover") as HTMLElement;
 
@@ -324,6 +326,8 @@ function exportSlides() {
 function importAction() {
   var slidesJSONinput = JSON.parse(import_in.value);
 
+  slide_name.value = slidesJSONinput.name;
+
   slide_html = slidesJSONinput.html;
   slide_js = slidesJSONinput.js;
 
@@ -353,7 +357,11 @@ function importAction() {
   hidePopups();
 }
 
-function copyAction() {
+function copyJSON() {
+  navigator.clipboard.writeText("Hello World");
+}
+
+function copyEmbed() {
   navigator.clipboard.writeText("Hello World");
 }
 
@@ -373,6 +381,8 @@ function hidePopups() {
 setInterval(() => {
   updateiFrames();
 }, 5000);
+
+setInterval(() => {}, 1000);
 
 document.addEventListener("DOMContentLoaded", () => {
   addSlide();

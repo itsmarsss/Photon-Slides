@@ -324,7 +324,7 @@ body {
     padding: 15px;
     margin: auto;
     margin-bottom: 10px;
-    transition: 200ms;
+    transition: 500ms;
 }
 
 .down_up_textarea::-webkit-scrollbar {

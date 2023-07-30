@@ -3,6 +3,7 @@ const css = document.getElementById("tab_css");
 const html = document.getElementById("tab_html");
 const js = document.getElementById("tab_js");
 const tabList = [css, html, js];
+const slide_name = document.getElementById("slide_name");
 const display_list = document.getElementById("display_list");
 const preview_cover = document.getElementById("preview_cover");
 const textarea = document.getElementById("text_editor");
@@ -243,6 +244,7 @@ function exportSlides() {
 }
 function importAction() {
     var slidesJSONinput = JSON.parse(import_in.value);
+    slide_name.value = slidesJSONinput.name;
     slide_html = slidesJSONinput.html;
     slide_js = slidesJSONinput.js;
     display_list.innerHTML = "";
@@ -266,7 +268,10 @@ function importAction() {
     selectSlide(0);
     hidePopups();
 }
-function copyAction() {
+function copyJSON() {
+    navigator.clipboard.writeText("Hello World");
+}
+function copyEmbed() {
     navigator.clipboard.writeText("Hello World");
 }
 function hidePopups() {
