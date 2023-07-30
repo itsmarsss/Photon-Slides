@@ -21,7 +21,12 @@ const download_popup = document.getElementById("download") as HTMLElement;
 const upload_popup = document.getElementById("upload") as HTMLElement;
 
 const import_in = document.getElementById("import_in") as HTMLTextAreaElement;
-const export_out = document.getElementById("export_out") as HTMLTextAreaElement;
+const json_out = document.getElementById(
+  "json_export_out"
+) as HTMLTextAreaElement;
+const embed_out = document.getElementById(
+  "embed_export_out"
+) as HTMLTextAreaElement;
 
 textarea.addEventListener("keyup", () => {
   adjustTextArea();
@@ -382,7 +387,25 @@ setInterval(() => {
   updateiFrames();
 }, 5000);
 
-setInterval(() => {}, 1000);
+setInterval(() => {
+  var css: string = "";
+
+  slides_css.forEach((element) => {
+    css += `
+      "${element.css}",`;
+  });
+
+  var json = `{
+  "name": "${slide_name.value}",
+  "html": "${slide_html}",
+  "js": "${slide_js}",
+  "css": [${css}
+  ]
+}
+  `;
+
+  json_out.value = json;
+}, 1000);
 
 document.addEventListener("DOMContentLoaded", () => {
   addSlide();

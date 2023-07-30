@@ -13,7 +13,8 @@ const lineNumbers = document.getElementById("line_numbers");
 const download_popup = document.getElementById("download");
 const upload_popup = document.getElementById("upload");
 const import_in = document.getElementById("import_in");
-const export_out = document.getElementById("export_out");
+const json_out = document.getElementById("json_export_out");
+const embed_out = document.getElementById("embed_export_out");
 textarea.addEventListener("keyup", () => {
     adjustTextArea();
     adjustLineNumber();
@@ -287,6 +288,22 @@ function hidePopups() {
 setInterval(() => {
     updateiFrames();
 }, 5000);
+setInterval(() => {
+    var css = "";
+    slides_css.forEach((element) => {
+        css += `
+      "${element.css}",`;
+    });
+    var json = `{
+  "name": "${slide_name.value}",
+  "html": "${slide_html}",
+  "js": "${slide_js}",
+  "css": [${css}
+  ]
+}
+  `;
+    json_out.value = json;
+}, 1000);
 document.addEventListener("DOMContentLoaded", () => {
     addSlide();
 });
