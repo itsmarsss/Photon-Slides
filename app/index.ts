@@ -261,7 +261,7 @@ preview_cover.addEventListener("keydown", (event) => {
   }
 });
 
-preview_cover.addEventListener("dblclick", () => {
+preview_cover.addEventListener("dblclick", (e) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
   if (scale + 1 > 8) {
@@ -270,7 +270,11 @@ preview_cover.addEventListener("dblclick", () => {
 
   iframe.style.transition = "200ms";
 
-  scale += 1;
+  if (e.shiftKey) {
+    scale -= 1;
+  } else {
+    scale += 1;
+  }
   iframe.style.transform = `scale(${scale})`;
 
   setTimeout(() => {
