@@ -318,6 +318,41 @@ function exportSlides() {
   upload_popup.style.opacity = "0";
 }
 
+function importAction() {
+  var slidesJSONinput = JSON.parse(
+    (document.getElementById("import_in") as HTMLTextAreaElement).value
+  );
+
+  slide_html = slidesJSONinput.html;
+  slide_js = slidesJSONinput.js;
+
+  display_list.innerHTML = "";
+  slides_css = [];
+
+  slidesJSONinput.css.forEach((element: string) => {
+    display_list.innerHTML += `
+<div class="slide_card" id="slide-${slides_css.length}">
+    <div class="left">${slides_css.length}</div>
+    <div class="right">
+        <iframe id="container-${slides_css.length}" name="preview-${slides_css.length}">
+        </iframe>
+    </div>
+    <div class="card_cover" onclick="selectSlide(${slides_css.length}); updateCode();"></div>
+</div>
+    `;
+
+    const slide: Slide = {
+      css: element,
+    };
+
+    slides_css.push(slide);
+  });
+
+  selectSlide(0);
+}
+
+function copyAction() {}
+
 function hidePopups() {
   download_popup.style.opacity = "0";
   upload_popup.style.opacity = "0";
