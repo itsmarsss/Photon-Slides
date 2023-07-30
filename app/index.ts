@@ -331,10 +331,10 @@ function exportSlides() {
 function importAction() {
   var slidesJSONinput = JSON.parse(import_in.value);
 
-  slide_name.value = slidesJSONinput.name;
+  slide_name.value = atob(slidesJSONinput.name);
 
-  slide_html = slidesJSONinput.html;
-  slide_js = slidesJSONinput.js;
+  slide_html = atob(slidesJSONinput.html);
+  slide_js = atob(slidesJSONinput.js);
 
   display_list.innerHTML = "";
   slides_css = [];
@@ -352,7 +352,7 @@ function importAction() {
     `;
 
     const slide: Slide = {
-      css: element,
+      css: atob(element),
     };
 
     slides_css.push(slide);
@@ -392,14 +392,14 @@ setInterval(() => {
 
   slides_css.forEach((element) => {
     css += `
-      "${element.css}",`;
+      "${btoa(element.css)}",`;
   });
 
   var json = `{
-  "name": "${slide_name.value}",
-  "html": "${slide_html}",
-  "js": "${slide_js}",
-  "css": [${css}
+  "name": "${btoa(slide_name.value)}",
+  "html": "${btoa(slide_html)}",
+  "js": "${btoa(slide_js)}",
+  "css": [${css.slice(0, -1)}
   ]
 }
   `;
