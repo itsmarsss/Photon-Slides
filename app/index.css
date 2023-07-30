@@ -6,6 +6,8 @@
     --secondary: #252525 !important;
     --tertiary: #333333 !important;
 
+    --accent: #ffb000 !important;
+
     --text: #c6c6c6 !important;
     --text-accent: #939393 !important;
 }
@@ -144,7 +146,7 @@ body {
 }
 
 #remove {
-    color: #ff9494;
+    color: var(--accent);
 }
 
 #slide_editing {
@@ -200,7 +202,7 @@ body {
 }
 
 .tab.active {
-    color: var(--text);
+    color: var(--accent);
     border-bottom: 1px var(--text) solid;
 }
 
