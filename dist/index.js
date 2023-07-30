@@ -11,6 +11,8 @@ const highlighting_content = document.getElementById("highlighting_content");
 const lineNumbers = document.getElementById("line_numbers");
 const download_popup = document.getElementById("download");
 const upload_popup = document.getElementById("upload");
+const import_in = document.getElementById("import_in");
+const export_out = document.getElementById("export_out");
 textarea.addEventListener("keyup", () => {
     adjustTextArea();
     adjustLineNumber();
@@ -147,7 +149,7 @@ preview_cover.addEventListener("wheel", (event) => {
     scale -= scrollAmt;
     iframe.style.transition = "100ms";
     iframe.style.transform = `scale(${scale})`;
-    setTimeout(function () {
+    setTimeout(() => {
         iframe.style.transition = "0ms";
     }, 110);
 });
@@ -240,7 +242,7 @@ function exportSlides() {
     upload_popup.style.opacity = "0";
 }
 function importAction() {
-    var slidesJSONinput = JSON.parse(document.getElementById("import_in").value);
+    var slidesJSONinput = JSON.parse(import_in.value);
     slide_html = slidesJSONinput.html;
     slide_js = slidesJSONinput.js;
     display_list.innerHTML = "";
@@ -262,25 +264,28 @@ function importAction() {
         slides_css.push(slide);
     });
     selectSlide(0);
+    hidePopups();
 }
-function copyAction() { }
+function copyAction() {
+    navigator.clipboard.writeText("Hello World");
+}
 function hidePopups() {
     download_popup.style.opacity = "0";
     upload_popup.style.opacity = "0";
-    setTimeout(function () {
+    setTimeout(() => {
         download_popup.style.transform = "scale(0)";
         upload_popup.style.transform = "scale(0)";
     }, 250);
     download_popup.classList.remove("showing");
     upload_popup.classList.remove("showing");
 }
-setInterval(function () {
+setInterval(() => {
     updateiFrames();
 }, 5000);
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
     addSlide();
 });
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && (event.key === "s" || event.key === "S")) {
         event.preventDefault();
         event.stopPropagation();

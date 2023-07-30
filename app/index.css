@@ -324,10 +324,37 @@ body {
     padding: 15px;
     margin: auto;
     margin-bottom: 10px;
+    transition: 200ms;
 }
 
 .down_up_textarea::-webkit-scrollbar {
     border-radius: 10px;
+}
+
+.export_cont,
+.button_cont {
+    display: flex;
+    gap: 10px;
+}
+
+.export_cont {
+    height: 100%;
+}
+
+.text_cont {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    align-items: center;
+    font-family: "Poppins";
+    color: var(--text);
+}
+
+.short {
+    margin: 0;
+    width: 80%;
+    height: 285px;
 }
 
 .down_up_button {

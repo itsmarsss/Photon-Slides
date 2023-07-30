@@ -18,6 +18,9 @@ const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 const download_popup = document.getElementById("download") as HTMLElement;
 const upload_popup = document.getElementById("upload") as HTMLElement;
 
+const import_in = document.getElementById("import_in") as HTMLTextAreaElement;
+const export_out = document.getElementById("export_out") as HTMLTextAreaElement;
+
 textarea.addEventListener("keyup", () => {
   adjustTextArea();
   adjustLineNumber();
@@ -202,7 +205,7 @@ preview_cover.addEventListener("wheel", (event) => {
   iframe.style.transition = "100ms";
   iframe.style.transform = `scale(${scale})`;
 
-  setTimeout(function () {
+  setTimeout(() => {
     iframe.style.transition = "0ms";
   }, 110);
 });
@@ -319,9 +322,7 @@ function exportSlides() {
 }
 
 function importAction() {
-  var slidesJSONinput = JSON.parse(
-    (document.getElementById("import_in") as HTMLTextAreaElement).value
-  );
+  var slidesJSONinput = JSON.parse(import_in.value);
 
   slide_html = slidesJSONinput.html;
   slide_js = slidesJSONinput.js;
@@ -349,15 +350,18 @@ function importAction() {
   });
 
   selectSlide(0);
+  hidePopups();
 }
 
-function copyAction() {}
+function copyAction() {
+  navigator.clipboard.writeText("Hello World");
+}
 
 function hidePopups() {
   download_popup.style.opacity = "0";
   upload_popup.style.opacity = "0";
 
-  setTimeout(function () {
+  setTimeout(() => {
     download_popup.style.transform = "scale(0)";
     upload_popup.style.transform = "scale(0)";
   }, 250);
@@ -366,15 +370,15 @@ function hidePopups() {
   upload_popup.classList.remove("showing");
 }
 
-setInterval(function () {
+setInterval(() => {
   updateiFrames();
 }, 5000);
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   addSlide();
 });
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keydown", (event) => {
   if (event.ctrlKey && (event.key === "s" || event.key === "S")) {
     event.preventDefault();
     event.stopPropagation();
