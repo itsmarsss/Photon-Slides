@@ -144,7 +144,11 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
         return;
     }
     scale -= scrollAmt;
+    iframe.style.transition = "100ms";
     iframe.style.transform = `scale(${scale})`;
+    setTimeout(function () {
+        iframe.style.transition = "0ms";
+    }, 110);
 });
 var x;
 var y;

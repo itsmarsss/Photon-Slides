@@ -196,7 +196,12 @@ preview_cover?.addEventListener("wheel", (event) => {
   }
 
   scale -= scrollAmt;
+  iframe.style.transition = "100ms";
   iframe.style.transform = `scale(${scale})`;
+
+  setTimeout(function () {
+    iframe.style.transition = "0ms";
+  }, 110);
 });
 
 var x: number;
