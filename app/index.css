@@ -326,6 +326,10 @@ body {
     margin-bottom: 10px;
 }
 
+.down_up_textarea::-webkit-scrollbar {
+    border-radius: 10px;
+}
+
 .down_up_button {
     color: var(--text);
     background: var(--tertiary);
