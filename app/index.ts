@@ -15,18 +15,21 @@ const highlighting_content = document.getElementById(
 
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 
-textarea?.addEventListener("keyup", () => {
+const download_popup = document.getElementById("download") as HTMLElement;
+const upload_popup = document.getElementById("upload") as HTMLElement;
+
+textarea.addEventListener("keyup", () => {
   adjustTextArea();
   adjustLineNumber();
 });
 
-textarea?.addEventListener("keydown", () => {
+textarea.addEventListener("keydown", () => {
   adjustTextArea();
   adjustLineNumber();
 });
 
 function adjustTextArea() {
-  const numberOfLines = textarea.value?.split("\n").length;
+  const numberOfLines = textarea.value.split("\n").length;
 
   const height = numberOfLines * 20 + 20 + "px";
 
@@ -54,8 +57,8 @@ function adjustTextArea() {
     slide_html = textarea.value;
 
     const iframe = document.getElementById("container") as HTMLIFrameElement;
-    const preview = (iframe?.contentDocument ||
-      iframe?.contentWindow?.document) as Document;
+    const preview = (iframe.contentDocument ||
+      iframe.contentWindow?.document) as Document;
 
     preview.body.innerHTML = slide_html;
   }
@@ -68,7 +71,7 @@ function adjustTextArea() {
 }
 
 function adjustLineNumber() {
-  const numberOfLines = textarea.value?.split("\n").length;
+  const numberOfLines = textarea.value.split("\n").length;
   lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 }
 
@@ -150,7 +153,7 @@ function addSlide() {
 
   slides_css.push(slide);
 
-  selectSlide(slides_css?.length - 1);
+  selectSlide(slides_css.length - 1);
 }
 
 function deleteSlide() {
@@ -186,10 +189,10 @@ function getSlides() {
 
 var scale: number = 1;
 
-preview_cover?.addEventListener("wheel", (event) => {
+preview_cover.addEventListener("wheel", (event) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  const scrollAmt = event?.deltaY / 2500;
+  const scrollAmt = event.deltaY / 2500;
 
   if (scale - scrollAmt < 0.05 || scale - scrollAmt > 8) {
     return;
@@ -210,7 +213,7 @@ var xPos: number;
 var yPos: number;
 var isDragging: boolean = false;
 
-preview_cover?.addEventListener("mousedown", (event) => {
+preview_cover.addEventListener("mousedown", (event) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
   x = event.clientX;
@@ -221,15 +224,15 @@ preview_cover?.addEventListener("mousedown", (event) => {
   isDragging = true;
 });
 
-preview_cover?.addEventListener("mouseup", () => {
+preview_cover.addEventListener("mouseup", () => {
   isDragging = false;
 });
 
-preview_cover?.addEventListener("mouseout", () => {
+preview_cover.addEventListener("mouseout", () => {
   isDragging = false;
 });
 
-preview_cover?.addEventListener("mousemove", (event) => {
+preview_cover.addEventListener("mousemove", (event) => {
   if (isDragging) {
     const iframe = document.getElementById("container") as HTMLIFrameElement;
 
@@ -241,7 +244,7 @@ preview_cover?.addEventListener("mousemove", (event) => {
   }
 });
 
-preview_cover?.addEventListener("keydown", (event) => {
+preview_cover.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "ArrowLeft":
     case "ArrowUp":
@@ -258,7 +261,7 @@ preview_cover?.addEventListener("keydown", (event) => {
   }
 });
 
-preview_cover?.addEventListener("dblclick", () => {
+preview_cover.addEventListener("dblclick", () => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
   if (scale + 1 > 8) {
@@ -280,8 +283,8 @@ function updateiFrames() {
     const iframe = document.getElementById(
       "container-" + i
     ) as HTMLIFrameElement;
-    const preview = (iframe?.contentDocument ||
-      iframe?.contentWindow?.document) as Document;
+    const preview = (iframe.contentDocument ||
+      iframe.contentWindow?.document) as Document;
 
     preview.body.innerHTML = slide_html;
 
@@ -290,9 +293,19 @@ function updateiFrames() {
       style.setAttribute("id", "slideNum-" + j);
       style.innerHTML = slides_css[j].css;
 
-      preview?.body?.appendChild(style);
+      preview.body.appendChild(style);
     }
   }
+}
+
+function importSlides() {
+  download_popup.style.transform = "translateX(-100%)";
+  upload_popup.style.transform = "translateX(0%)";
+}
+
+function exportSlides() {
+  download_popup.style.transform = "translateX(0%)";
+  upload_popup.style.transform = "translateX(-100%)";
 }
 
 setInterval(function () {

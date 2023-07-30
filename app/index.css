@@ -298,7 +298,8 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 5;
-    display: none;
+    transform: translateX(-100%);
+    transition: 100ms;
 }
 
 .popup_content {

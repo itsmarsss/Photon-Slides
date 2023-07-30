@@ -17,8 +17,8 @@
                 placeholder="Untitled Photon Slide"></input>&nbsp;&nbsp;-&nbsp;&nbsp;Photon Slides
         </div>
         <div id="aside">
-            <button class="data_button">Import</button>
-            <button class="data_button">Export</button>
+            <button class="data_button" onclick="importSlides()">Import</button>
+            <button class="data_button" onclick="exportSlides()">Export</button>
         </div>
     </div>
     <div id="main_content">
@@ -48,7 +48,7 @@
                 <iframe id="container" name="preview">
 
                 </iframe>
-                <div id="preview_cover" tabindex="0" onkeyup="updateCode();"></div>
+                <div id="preview_cover" tabindex="0" onkeyup="updateCode()"></div>
             </div>
             <div id="file_editing">
                 <div id="tabs">
@@ -70,7 +70,7 @@
         </div>
     </div>
 
-    <div id="download" class="popup">
+    <div id="download" class="popup" onclick="hidePopups()">
         <div id="popup_content">
             <textarea readonly="true"></textarea>
         </div>

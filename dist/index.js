@@ -9,17 +9,19 @@ const textarea = document.getElementById("text_editor");
 const highlighting = document.getElementById("highlighting");
 const highlighting_content = document.getElementById("highlighting_content");
 const lineNumbers = document.getElementById("line_numbers");
-textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keyup", () => {
+const download_popup = document.getElementById("download");
+const upload_popup = document.getElementById("upload");
+textarea.addEventListener("keyup", () => {
     adjustTextArea();
     adjustLineNumber();
 });
-textarea === null || textarea === void 0 ? void 0 : textarea.addEventListener("keydown", () => {
+textarea.addEventListener("keydown", () => {
     adjustTextArea();
     adjustLineNumber();
 });
 function adjustTextArea() {
-    var _a, _b;
-    const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
+    var _a;
+    const numberOfLines = textarea.value.split("\n").length;
     const height = numberOfLines * 20 + 20 + "px";
     const lines = textarea.value.split("\n");
     var max = 0;
@@ -39,8 +41,8 @@ function adjustTextArea() {
     if (editorIndex == 1) {
         slide_html = textarea.value;
         const iframe = document.getElementById("container");
-        const preview = ((iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) ||
-            ((_b = iframe === null || iframe === void 0 ? void 0 : iframe.contentWindow) === null || _b === void 0 ? void 0 : _b.document));
+        const preview = (iframe.contentDocument ||
+            ((_a = iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
         preview.body.innerHTML = slide_html;
     }
     if (editorIndex == 2) {
@@ -49,8 +51,7 @@ function adjustTextArea() {
     setSlide(activeSlide);
 }
 function adjustLineNumber() {
-    var _a;
-    const numberOfLines = (_a = textarea.value) === null || _a === void 0 ? void 0 : _a.split("\n").length;
+    const numberOfLines = textarea.value.split("\n").length;
     lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 }
 var slide_html = "";
@@ -110,7 +111,7 @@ function addSlide() {
         css: "",
     };
     slides_css.push(slide);
-    selectSlide((slides_css === null || slides_css === void 0 ? void 0 : slides_css.length) - 1);
+    selectSlide(slides_css.length - 1);
 }
 function deleteSlide() {
     display_list.innerHTML = "";
@@ -137,9 +138,9 @@ function getSlides() {
     return slides_css;
 }
 var scale = 1;
-preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("wheel", (event) => {
+preview_cover.addEventListener("wheel", (event) => {
     const iframe = document.getElementById("container");
-    const scrollAmt = (event === null || event === void 0 ? void 0 : event.deltaY) / 2500;
+    const scrollAmt = event.deltaY / 2500;
     if (scale - scrollAmt < 0.05 || scale - scrollAmt > 8) {
         return;
     }
@@ -155,7 +156,7 @@ var y;
 var xPos;
 var yPos;
 var isDragging = false;
-preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("mousedown", (event) => {
+preview_cover.addEventListener("mousedown", (event) => {
     const iframe = document.getElementById("container");
     x = event.clientX;
     y = event.clientY;
@@ -163,13 +164,13 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
     yPos = iframe.offsetTop;
     isDragging = true;
 });
-preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("mouseup", () => {
+preview_cover.addEventListener("mouseup", () => {
     isDragging = false;
 });
-preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("mouseout", () => {
+preview_cover.addEventListener("mouseout", () => {
     isDragging = false;
 });
-preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("mousemove", (event) => {
+preview_cover.addEventListener("mousemove", (event) => {
     if (isDragging) {
         const iframe = document.getElementById("container");
         const xOffset = xPos + (event.clientX - x);
@@ -178,7 +179,7 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
         iframe.style.top = yOffset + "px";
     }
 });
-preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("keydown", (event) => {
+preview_cover.addEventListener("keydown", (event) => {
     switch (event.key) {
         case "ArrowLeft":
         case "ArrowUp":
@@ -194,7 +195,7 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
             break;
     }
 });
-preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addEventListener("dblclick", () => {
+preview_cover.addEventListener("dblclick", () => {
     const iframe = document.getElementById("container");
     if (scale + 1 > 8) {
         return;
@@ -207,19 +208,27 @@ preview_cover === null || preview_cover === void 0 ? void 0 : preview_cover.addE
     }, 200);
 });
 function updateiFrames() {
-    var _a, _b;
+    var _a;
     for (var i = 0; i < slides_css.length; i++) {
         const iframe = document.getElementById("container-" + i);
-        const preview = ((iframe === null || iframe === void 0 ? void 0 : iframe.contentDocument) ||
-            ((_a = iframe === null || iframe === void 0 ? void 0 : iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
+        const preview = (iframe.contentDocument ||
+            ((_a = iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
         preview.body.innerHTML = slide_html;
         for (var j = 0; j <= i; j++) {
             const style = preview.createElement("style");
             style.setAttribute("id", "slideNum-" + j);
             style.innerHTML = slides_css[j].css;
-            (_b = preview === null || preview === void 0 ? void 0 : preview.body) === null || _b === void 0 ? void 0 : _b.appendChild(style);
+            preview.body.appendChild(style);
         }
     }
+}
+function importSlides() {
+    download_popup.style.transform = "translateX(-100%)";
+    upload_popup.style.transform = "translateX(0%)";
+}
+function exportSlides() {
+    download_popup.style.transform = "translateX(0%)";
+    upload_popup.style.transform = "translateX(-100%)";
 }
 setInterval(function () {
     updateiFrames();
