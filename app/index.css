@@ -262,3 +262,24 @@ body {
 #text_editor::-webkit-scrollbar {
     display: none;
 }
+
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #00000079;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.popup_content {
+    width: 50%;
+    min-width: 500px;
+    height: 400px;
+    background: var(--main);
+    border-radius: 10px;
+}
