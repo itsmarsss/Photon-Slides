@@ -309,4 +309,34 @@ body {
     height: 400px;
     background: var(--main);
     border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.down_up_textarea {
+    background: var(--secondary);
+    color: var(--text);
+    resize: none;
+    border-radius: 10px;
+    width: calc(80% - 30px);
+    height: 70%;
+    padding: 15px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.down_up_button {
+    color: var(--text);
+    background: var(--tertiary);
+    font-family: "Poppins";
+    border: none;
+    outline: none;
+    cursor: pointer;
+    letter-spacing: 3px;
+    font-weight: bold;
+    width: 80%;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 10px;
 }

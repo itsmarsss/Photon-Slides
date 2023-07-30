@@ -303,19 +303,19 @@ function updateiFrames() {
 }
 
 function importSlides() {
-  download_popup.style.transform = "scale(1)";
-  download_popup.style.opacity = "1";
-
-  upload_popup.style.transform = "scale(0)";
-  upload_popup.style.opacity = "0";
-}
-
-function exportSlides() {
   download_popup.style.transform = "scale(0)";
   download_popup.style.opacity = "0";
 
   upload_popup.style.transform = "scale(1)";
   upload_popup.style.opacity = "1";
+}
+
+function exportSlides() {
+  download_popup.style.transform = "scale(1)";
+  download_popup.style.opacity = "1";
+
+  upload_popup.style.transform = "scale(0)";
+  upload_popup.style.opacity = "0";
 }
 
 function hidePopups() {
