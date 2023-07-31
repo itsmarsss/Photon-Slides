@@ -273,6 +273,8 @@ function importAction() {
     var slidesJSONinput = JSON.parse(import_in.value);
     slide_name.value = atob(slidesJSONinput.name);
     slide_html = atob(slidesJSONinput.html);
+    setup_in.value = atob(slidesJSONinput.iframe);
+    updateSetupAction();
     display_list.innerHTML = "";
     slides_css = [];
     slidesJSONinput.css.forEach((element) => {
@@ -329,6 +331,7 @@ setInterval(() => {
     var json = `{
   "name": "${btoa(slide_name.value)}",
   "html": "${btoa(slide_html)}",
+  "iframe": "${btoa(iframe_css)}",
   "css": [${css.slice(0, -1)}
   ]
 }`;

@@ -385,6 +385,9 @@ function importAction() {
 
   slide_html = atob(slidesJSONinput.html);
 
+  setup_in.value = atob(slidesJSONinput.iframe);
+  updateSetupAction();
+
   display_list.innerHTML = "";
   slides_css = [];
 
@@ -458,6 +461,7 @@ setInterval(() => {
   var json: string = `{
   "name": "${btoa(slide_name.value)}",
   "html": "${btoa(slide_html)}",
+  "iframe": "${btoa(iframe_css)}",
   "css": [${css.slice(0, -1)}
   ]
 }`;
