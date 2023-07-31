@@ -138,7 +138,13 @@ function getSlides() {
 var scale = 1;
 preview_cover.addEventListener("wheel", (event) => {
     const iframe = document.getElementById("container");
-    const scrollAmt = event.deltaY / 2500;
+    var scrollAmt = event.deltaY / 2500;
+    if (event.altKey) {
+        scrollAmt /= 5;
+    }
+    else if (event.shiftKey) {
+        scrollAmt *= 5;
+    }
     if (scale - scrollAmt < 0.005 || scale - scrollAmt > 8) {
         return;
     }
@@ -149,6 +155,17 @@ preview_cover.addEventListener("wheel", (event) => {
         iframe.style.transition = "0ms";
     }, 110);
 });
+function scaleToFit() {
+    const iframe = document.getElementById("container");
+    const cover = document.getElementById("preview_cover");
+    console.log(iframe.offsetWidth);
+    scale = Math.min(cover.offsetWidth / iframe.offsetWidth, cover.offsetHeight / iframe.offsetHeight);
+    iframe.style.transition = "100ms";
+    iframe.style.transform = `scale(${scale})`;
+    setTimeout(() => {
+        iframe.style.transition = "0ms";
+    }, 110);
+}
 var x;
 var y;
 var xPos;
@@ -294,6 +311,7 @@ setInterval(() => {
 }, 1000);
 document.addEventListener("DOMContentLoaded", () => {
     addSlide();
+    scaleToFit();
 });
 document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && (event.key === "s" || event.key === "S")) {
