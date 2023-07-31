@@ -85,7 +85,7 @@ function newEntry(location, slides) {
     }
 
 
-    element.innerHTML = `<div class="slide">
+    element.innerHTML = `<div class="slide" id="${id}-cont">
     <span class="title">&nbsp${atob(jsonSlides.name)}</span>
     <iframe style="${atob(jsonSlides.iframe)
             .split("\n")
@@ -117,9 +117,7 @@ function rerenderSlides() {
     });
 
     local_slides.forEach((value, key) => {
-        for (const [key, value] of Object.entries(local_slides)) {
-            addPreview(value, key);
-        }
+        addPreview(value, key);
     });
 }
 

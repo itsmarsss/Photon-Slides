@@ -136,7 +136,7 @@ body {
     position: absolute;
     width: 100%;
     height: calc(100% - 30px);
-    content: "PH SD";
+    content: "edit";
     font-family: Arial, sans-serif;
     font-size: 30px;
     font-style: italic;
