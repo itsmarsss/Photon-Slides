@@ -5,6 +5,8 @@ var photonslides = (async function () {
         function (request, sender, sendResponse) {
             if (request.message === "query") {
                 sendResponse(document.getElementById("json_export_out").value);
+
+                console.log(document.getElementById("json_export_out").value);
             } else if (request.message === "import") {
                 document.getElementById("import_in").value = request.value;
 
