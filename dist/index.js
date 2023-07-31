@@ -295,13 +295,16 @@ setInterval(() => {
 }, 5000);
 setInterval(() => {
     var css = "";
+    var cssArray = "[";
     slides_css.forEach((element) => {
         css += `
       {
         "${btoa(element.css)}",
         "${btoa(element.notes)}"
       }`;
+        cssArray += `"${btoa(element.css)}",`;
     });
+    cssArray = cssArray.slice(0, -1) + "]";
     var json = `{
   "name": "${btoa(slide_name.value)}",
   "html": "${btoa(slide_html)}",
@@ -309,6 +312,8 @@ setInterval(() => {
   ]
 }`;
     json_out.value = json;
+    var embed = `<iframe style="${`width: 1280px; height: 720px; background: #fff; border: none;`}" srcdoc='<style id="styles"></style><script>const slides_css = ${cssArray}; const styles = document.getElementById("styles"); var slide_num = 0; styles.innerHTML = atob(slides_css[slide_num]); document.addEventListener("mousedown", () => { slide_num++; if(slide_num >= slides_css.length) { styles.innerHTML= ""; slide_num = 0} styles.innerHTML += atob(slides_css[slide_num]); }); </script>'></iframe>`;
+    embed_out.value = embed;
 }, 1000);
 document.addEventListener("DOMContentLoaded", () => {
     addSlide();

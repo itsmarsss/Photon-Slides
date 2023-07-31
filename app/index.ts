@@ -45,7 +45,7 @@ function adjustTextArea() {
 
   const lines = textarea.value.split("\n");
 
-  var max = 0;
+  var max: number = 0;
   for (var i = 0; i < lines.length; i++) {
     max = Math.max(max, lines[i].length);
   }
@@ -198,7 +198,7 @@ var scale: number = 1;
 preview_cover.addEventListener("wheel", (event) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  var scrollAmt = event.deltaY / 2500;
+  var scrollAmt: number = event.deltaY / 2500;
 
   if (event.altKey) {
     scrollAmt /= 5;
@@ -405,6 +405,7 @@ setInterval(() => {
 
 setInterval(() => {
   var css: string = "";
+  var cssArray: string = "[";
 
   slides_css.forEach((element) => {
     css += `
@@ -412,9 +413,13 @@ setInterval(() => {
         "${btoa(element.css)}",
         "${btoa(element.notes)}"
       }`;
+
+    cssArray += `"${btoa(element.css)}",`;
   });
 
-  var json = `{
+  cssArray = cssArray.slice(0, -1) + "]";
+
+  var json: string = `{
   "name": "${btoa(slide_name.value)}",
   "html": "${btoa(slide_html)}",
   "css": [${css.slice(0, -1)}
@@ -422,6 +427,10 @@ setInterval(() => {
 }`;
 
   json_out.value = json;
+
+  var embed: string = `<iframe style="${`width: 1280px; height: 720px; background: #fff; border: none;`}" srcdoc='<style id="styles"></style><script>const slides_css = ${cssArray}; const styles = document.getElementById("styles"); var slide_num = 0; styles.innerHTML = atob(slides_css[slide_num]); document.addEventListener("mousedown", () => { slide_num++; if(slide_num >= slides_css.length) { styles.innerHTML= ""; slide_num = 0} styles.innerHTML += atob(slides_css[slide_num]); }); </script>'></iframe>`;
+
+  embed_out.value = embed;
 }, 1000);
 
 document.addEventListener("DOMContentLoaded", () => {

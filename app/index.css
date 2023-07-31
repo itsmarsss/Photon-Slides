@@ -327,10 +327,13 @@ body {
     margin: auto;
     margin-bottom: 10px;
     transition: 500ms;
+    white-space: pre;
+    overflow-wrap: normal;
 }
 
 .down_up_textarea::-webkit-scrollbar {
     width: 0px;
+    height: 0px;
 }
 
 .export_cont,
