@@ -1,7 +1,6 @@
 "use strict";
 function setSlide(index) {
     var _a, _b;
-    const slides_css = getSlides();
     if (index >= slides_css.length || index < 0) {
         return;
     }

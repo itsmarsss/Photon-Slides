@@ -189,10 +189,6 @@ function rerenderSlides() {
   selectSlide(activeSlide - 1);
 }
 
-function getSlides() {
-  return slides_css;
-}
-
 var scale: number = 1;
 
 preview_cover.addEventListener("wheel", (event) => {
@@ -372,6 +368,12 @@ function importAction() {
 
   hidePopups();
   selectSlide(0);
+
+  const iframe = document.getElementById("container") as HTMLIFrameElement;
+  const preview = (iframe.contentDocument ||
+    iframe.contentWindow?.document) as Document;
+
+  preview.body.innerHTML = slide_html;
 
   textarea.dispatchEvent(new Event("input"));
 }

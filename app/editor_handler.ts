@@ -1,6 +1,4 @@
 function setSlide(index: number) {
-  const slides_css = getSlides();
-
   if (index >= slides_css.length || index < 0) {
     return;
   }

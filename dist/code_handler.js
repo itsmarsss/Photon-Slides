@@ -8,7 +8,6 @@ function update(text) {
 function check_tab(element, event) {
     let code = element.value;
     if (event.key == "Tab") {
-
         event.preventDefault();
         let before_tab = code.slice(0, element.selectionStart);
         let after_tab = code.slice(element.selectionEnd, element.value.length);
