@@ -87,6 +87,7 @@ body {
     overflow-x: auto;
     border-radius: 10px;
     padding: 10px;
+    scroll-behavior: smooth;
 }
 
 .scroll::-webkit-scrollbar {
