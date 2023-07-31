@@ -104,16 +104,38 @@ body {
 }
 
 .slide {
-    border-radius: 10px;
-    border: 2px dashed var(--text);
     width: 160px;
     height: 90px;
     display: flex;
-    font-size: 40px;
+    font-size: 15px;
     transition: 200ms;
 }
 
+.title {
+    position: absolute;
+    width: 160px;
+    z-index: 2;
+    font-weight: bold;
+    background: #00000050;
+    color: #fff;
+}
+
+.iframe_cover {
+    position: absolute;
+    width: 160px;
+    height: 90px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.iframe_cover:hover::after {
+    content: "";
+}
+
 .add_new {
+    font-size: 40px;
+    border: 2px dashed var(--text);
+    border-radius: 10px;
     justify-content: center;
     align-items: center;
 }
@@ -295,4 +317,12 @@ body {
     margin: auto;
     height: 30px;
     border-radius: 10px;
+}
+
+iframe {
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    transform-origin: left top;
+    transition: 100ms;
 }
