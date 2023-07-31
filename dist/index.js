@@ -139,7 +139,7 @@ var scale = 1;
 preview_cover.addEventListener("wheel", (event) => {
     const iframe = document.getElementById("container");
     const scrollAmt = event.deltaY / 2500;
-    if (scale - scrollAmt < 0.05 || scale - scrollAmt > 8) {
+    if (scale - scrollAmt < 0.005 || scale - scrollAmt > 8) {
         return;
     }
     scale -= scrollAmt;

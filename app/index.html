@@ -34,20 +34,19 @@
         </div>
         <div id="slide_editing">
             <div id="slide_preview">
-                <style>
+                <style id="container_css">
                     .container {
-                        aspect-ratio: 16 / 9;
-                        height: auto;
-                        width: auto;
+                        width: 1280px;
+                        height: 720px;
                         background: #fff;
                         border: none;
                         position: absolute;
                         z-index: 0;
                     }
                 </style>
-                <iframe id="container" class="container" name="preview">
 
-                </iframe>
+                <iframe id="container" class="container" name="preview"></iframe>
+
                 <div id="preview_cover" tabindex="0" onkeyup="updateCode()"></div>
             </div>
             <div id="file_editing">
