@@ -1,0 +1,17 @@
+<div></div>
+<style id="styles"></style>
+<script>
+    const slides_css = ["ZGl2ewp3aWR0aDogNDAlOwpoZWlnaHQ6IDQwJTsKYmFja2dyb3VuZDogcmVkOwp0cmFuc2l0aW9uOiA1MDBtczsKfQ==", "ZGl2ewp3aWR0aDogNjB2dzsKaGVpZ2h0OiA0MHZoOwpiYWNrZ3JvdW5kOiByZWQ7CnRyYW5zaXRpb246IDUwMG1zOwp9"];
+    const styles = document.getElementById("styles");
+    var slide_num = 0;
+    styles.innerHTML = atob(slides_css[slide_num]);
+    document.addEventListener("mousedown", () => {
+        slide_num++;
+        if (slide_num >= slides_css.length) {
+            styles.innerHTML = "";
+            slide_num = 0
+        }
+        styles.innerHTML += atob(slides_css[slide_num]);
+        console.log(styles.innerHTML)
+    });
+</script>

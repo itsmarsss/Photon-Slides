@@ -8,7 +8,12 @@
 </head>
 
 <body>
-    <textarea id="editing" oninput="update(this.value);"></textarea>
+    <style>
+        body {
+            height: 1000px;
+        }
+    </style>
+    <!-- <textarea id="editing" oninput="update(this.value);"></textarea>
 
     <code class="language-html" id="highlighting-content"></code>
 
@@ -56,10 +61,8 @@
             // Syntax Highlight
             Prism.highlightElement(result_element);
         }
-    </script>
-
-    <iframe style="width: 1280px; height: 720px; background: #fff; border: none;"
-        srcdoc='<style id="styles"></style><script>const slides_css = ["","Ym9keSB7CmJhY2tncm91bmQ6IHJlZDsKfQ=="]; const styles = document.getElementById("styles"); var slide_num = 0; styles.innerHTML = atob(slides_css[slide_num]); document.addEventListener("mousedown", () => { slide_num++; if(slide_num >= slides_css.length) { styles.innerHTML= ""; slide_num = 0} styles.innerHTML += atob(slides_css[slide_num]); }); </script>'></iframe>
+    </script> -->
+    <iframe style="width: 1280px; height: 720px; background: #fff; border: none;" src='/test.html'></iframe>
 </body>
 
 </html>
