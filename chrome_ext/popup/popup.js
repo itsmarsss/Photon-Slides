@@ -13,8 +13,12 @@ Array.prototype.forEach.call(document.getElementsByClassName("scroll"), (element
 const cloud_list = document.getElementById("cloud_list");
 const local_list = document.getElementById("local_list");
 
+const slide_source = document.getElementById("slide_source");
+
 document.getElementById("cloud_new").addEventListener("mouseup", () => {
-    newCloud();
+    showSlideSource();
+
+    //newCloud();
 });
 
 function newCloud() {
@@ -33,7 +37,7 @@ function newCloud() {
 }
 
 document.getElementById("local_new").addEventListener("click", () => {
-    newLocal();
+    //newLocal();
 });
 
 function newLocal() {
@@ -47,6 +51,11 @@ function newLocal() {
             });
         });
     });
+}
+
+function showSlideSource() {
+    slide_source.style.opacity = "1";
+    slide_source.style.transform = "scale(1)";
 }
 
 async function setSlides() {
