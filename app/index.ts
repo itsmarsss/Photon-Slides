@@ -330,6 +330,11 @@ function updateiFrames() {
     const iframe = document.getElementById(
       "container-" + i
     ) as HTMLIFrameElement;
+
+    iframe.style.transform = `scaleX(${220 / iframe.offsetWidth}) scaleY(${
+      120 / iframe.offsetHeight
+    })`;
+
     const preview = (iframe.contentDocument ||
       iframe.contentWindow?.document) as Document;
 

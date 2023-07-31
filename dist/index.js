@@ -235,6 +235,7 @@ function updateiFrames() {
     var _a;
     for (var i = 0; i < slides_css.length; i++) {
         const iframe = document.getElementById("container-" + i);
+        iframe.style.transform = `scaleX(${220 / iframe.offsetWidth}) scaleY(${120 / iframe.offsetHeight})`;
         const preview = (iframe.contentDocument ||
             ((_a = iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
         preview.body.innerHTML = slide_html;
