@@ -40,9 +40,6 @@
 
 .right>iframe {
     object-fit: cover;
-    aspect-ratio: 16 / 9;
-    background: #fff;
-    border: none;
     position: absolute;
     top: 0;
     left: 0;
