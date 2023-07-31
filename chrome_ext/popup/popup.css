@@ -202,6 +202,31 @@ body {
     transition: 200ms;
 }
 
+#cancel_new {
+    z-index: 3;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    background: var(--topbar);
+    color: var(--text);
+    border-radius: 50%;
+    border: 1px solid var(--text);
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+#cancel_new:hover {
+    transform: rotate(45deg);
+}
+
+#cancel_new:active {
+    transform: scale(1.05);
+}
+
 .manual_cont {
     display: flex;
     flex-direction: column;
@@ -224,6 +249,11 @@ body {
     transition: 500ms;
     white-space: pre;
     overflow-wrap: normal;
+}
+
+#manual::-webkit-scrollbar {
+    width: 0;
+    height: 0;
 }
 
 .down_up_button {

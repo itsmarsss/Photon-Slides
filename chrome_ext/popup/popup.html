@@ -1,3 +1,5 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <link href="popup.css" rel="stylesheet" type="text/css" />
 
 <div class="content">
@@ -94,14 +96,16 @@
     </div>
 
     <div id="slide_source">
+        <button id="cancel_new">✕</button>
+
         <div class="manual_cont">
             <textarea id="manual" placeholder="Manual upload JSON here"></textarea>
-            <button class="down_up_button">Upload from manual input</button>
+            <button class="down_up_button" id="manual_button">Upload from manual input</button>
         </div>
 
         <span class="or">or</span>
 
-        <button class="down_up_button">Upload from current site</button>
+        <button class="down_up_button" id="website_button">Upload from current site</button>
 
         <select id="location_select">
             <option value="cloud">Cloud Storage</option>
