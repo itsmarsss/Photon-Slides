@@ -315,8 +315,7 @@ setInterval(() => {
   ]
 }`;
     json_out.value = json;
-    var embed = `
-  _____ Place iFrame into your HTML file; make sure to edit <path to Photon Slides [.html]> _____
+    var embed = `_____ Place iFrame into your HTML file; make sure to edit <path to Photon Slides [.html]> _____
   <iframe style="${`width: 1280px; height: 720px; background: #fff; border: none;`}" src="<path to Photon Slides [.html]>"></iframe>
   
   _____ This is your <path to Photon Slides [.html]> content _____

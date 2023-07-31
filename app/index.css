@@ -323,7 +323,7 @@ body {
     border-radius: 10px;
     width: calc(80% - 30px);
     height: 70%;
-    padding: 15px;
+    padding: 5px;
     margin: auto;
     margin-bottom: 10px;
     transition: 500ms;
