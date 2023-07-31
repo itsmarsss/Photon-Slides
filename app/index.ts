@@ -168,7 +168,7 @@ function addSlide() {
 
   selectSlide(slides_css.length - 1);
 
-  highlighting_content.innerHTML = "";
+  textarea.dispatchEvent(new Event("input"));
 }
 
 function deleteSlide() {
@@ -370,8 +370,10 @@ function importAction() {
     slides_css.push(slide);
   });
 
-  selectSlide(0);
   hidePopups();
+  selectSlide(0);
+
+  textarea.dispatchEvent(new Event("input"));
 }
 
 function copyJSON() {
@@ -410,9 +412,9 @@ setInterval(() => {
   slides_css.forEach((element) => {
     css += `
       {
-        "${btoa(element.css)}",
-        "${btoa(element.notes)}"
-      }`;
+        "css": "${btoa(element.css)}",
+        "notes": "${btoa(element.notes)}"
+      },`;
 
     cssArray += `"${btoa(element.css)}",`;
   });
@@ -428,7 +430,32 @@ setInterval(() => {
 
   json_out.value = json;
 
-  var embed: string = `<iframe style="${`width: 1280px; height: 720px; background: #fff; border: none;`}" srcdoc='<style id="styles"></style><script>const slides_css = ${cssArray}; const styles = document.getElementById("styles"); var slide_num = 0; styles.innerHTML = atob(slides_css[slide_num]); document.addEventListener("mousedown", () => { slide_num++; if(slide_num >= slides_css.length) { styles.innerHTML= ""; slide_num = 0} styles.innerHTML += atob(slides_css[slide_num]); }); </script>'></iframe>`;
+  var embed: string = `
+  _____ Place iFrame into your HTML file; make sure to edit <path to Photon Slides [.html]> _____
+  <iframe style="${`width: 1280px; height: 720px; background: #fff; border: none;`}" src="<path to Photon Slides [.html]>"></iframe>
+  
+  _____ This is your <path to Photon Slides [.html]> content _____
+  ${slide_html.split("\n").join("")}
+  <style id="styles">
+  </style><script>
+  
+  const slides_css = ${cssArray};
+  const styles = document.getElementById("styles");
+
+  var slide_num = 0;
+  styles.innerHTML = atob(slides_css[slide_num]);
+  
+  document.addEventListener("mousedown", () => {
+    slide_num++;
+
+    if (slide_num >= slides_css.length) {
+      styles.innerHTML= "";
+      slide_num = 0
+    }
+    
+    styles.innerHTML += atob(slides_css[slide_num]);
+  });
+  </script>`;
 
   embed_out.value = embed;
 }, 1000);
