@@ -102,7 +102,7 @@ function displayListAppend(index) {
 <div class="slide_card" id="slide-${index}">
     <div class="left">${index}</div>
     <div class="right">
-        <iframe id="container-${index}" class="container" name="preview-${index}">
+        <iframe style="transform: scaleX(${220 / 1280}) scaleY(${120 / 720})" id="container-${index}" class="container" name="preview-${index}">
         </iframe>
     </div>
     <div class="card_cover" onclick="selectSlide(${index}); updateCode();"></div>
