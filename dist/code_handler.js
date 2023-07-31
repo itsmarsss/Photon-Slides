@@ -1,4 +1,3 @@
-
 function update(text) {
     const result_element = document.getElementById("highlighting_content");
 

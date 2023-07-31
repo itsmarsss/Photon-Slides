@@ -330,7 +330,7 @@ body {
 }
 
 .down_up_textarea::-webkit-scrollbar {
-    border-radius: 10px;
+    width: 0px;
 }
 
 .export_cont,

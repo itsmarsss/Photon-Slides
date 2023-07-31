@@ -1,8 +1,8 @@
 const css = document.getElementById("tab_css");
 const html = document.getElementById("tab_html");
-const js = document.getElementById("tab_js");
+const notes = document.getElementById("tab_notes");
 
-const tabList = [css, html, js];
+const tabList = [css, html, notes];
 
 const slide_name = document.getElementById("slide_name") as HTMLTextAreaElement;
 
@@ -74,7 +74,7 @@ function adjustTextArea() {
   }
 
   if (editorIndex == 2) {
-    slide_js = textarea.value;
+    slides_css[activeSlide].notes = textarea.value;
   }
 
   setSlide(activeSlide);
@@ -86,10 +86,10 @@ function adjustLineNumber() {
 }
 
 var slide_html: string = "";
-var slide_js: string = "";
 
 type Slide = {
   css: string;
+  notes: string;
 };
 
 var slides_css: Slide[] = [];
@@ -98,13 +98,12 @@ var editorIndex: number = 0;
 function switchView(view: number) {
   css?.classList.remove("active");
   html?.classList.remove("active");
-  js?.classList.remove("active");
+  notes?.classList.remove("active");
 
   tabList[view]?.classList.add("active");
 
   highlighting_content.classList.remove("language-css");
   highlighting_content.classList.remove("language-html");
-  highlighting_content.classList.remove("language-js");
 
   editorIndex = view;
 
@@ -119,8 +118,7 @@ function switchView(view: number) {
   }
 
   if (view == 2) {
-    textarea.value = slide_js;
-    highlighting_content.classList.add("language-js");
+    textarea.value = slides_css[activeSlide].notes;
   }
 
   adjustTextArea();
@@ -163,11 +161,14 @@ function addSlide() {
 
   const slide: Slide = {
     css: "",
+    notes: "",
   };
 
   slides_css.push(slide);
 
   selectSlide(slides_css.length - 1);
+
+  highlighting_content.innerHTML = "";
 }
 
 function deleteSlide() {
@@ -354,16 +355,16 @@ function importAction() {
   slide_name.value = atob(slidesJSONinput.name);
 
   slide_html = atob(slidesJSONinput.html);
-  slide_js = atob(slidesJSONinput.js);
 
   display_list.innerHTML = "";
   slides_css = [];
 
-  slidesJSONinput.css.forEach((element: string) => {
+  slidesJSONinput.css.forEach((element: { css: string; notes: string }) => {
     displayListAppend(slides_css.length);
 
     const slide: Slide = {
-      css: atob(element),
+      css: atob(element.css),
+      notes: atob(element.notes),
     };
 
     slides_css.push(slide);
@@ -407,13 +408,15 @@ setInterval(() => {
 
   slides_css.forEach((element) => {
     css += `
-      "${btoa(element.css)}",`;
+      {
+        "${btoa(element.css)}",
+        "${btoa(element.notes)}"
+      }`;
   });
 
   var json = `{
   "name": "${btoa(slide_name.value)}",
   "html": "${btoa(slide_html)}",
-  "js": "${btoa(slide_js)}",
   "css": [${css.slice(0, -1)}
   ]
 }`;

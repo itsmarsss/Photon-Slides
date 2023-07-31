@@ -1,8 +1,8 @@
 "use strict";
 const css = document.getElementById("tab_css");
 const html = document.getElementById("tab_html");
-const js = document.getElementById("tab_js");
-const tabList = [css, html, js];
+const notes = document.getElementById("tab_notes");
+const tabList = [css, html, notes];
 const slide_name = document.getElementById("slide_name");
 const display_list = document.getElementById("display_list");
 const preview_cover = document.getElementById("preview_cover");
@@ -50,7 +50,7 @@ function adjustTextArea() {
         preview.body.innerHTML = slide_html;
     }
     if (editorIndex == 2) {
-        slide_js = textarea.value;
+        slides_css[activeSlide].notes = textarea.value;
     }
     setSlide(activeSlide);
 }
@@ -59,18 +59,16 @@ function adjustLineNumber() {
     lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 }
 var slide_html = "";
-var slide_js = "";
 var slides_css = [];
 var editorIndex = 0;
 function switchView(view) {
     var _a;
     css === null || css === void 0 ? void 0 : css.classList.remove("active");
     html === null || html === void 0 ? void 0 : html.classList.remove("active");
-    js === null || js === void 0 ? void 0 : js.classList.remove("active");
+    notes === null || notes === void 0 ? void 0 : notes.classList.remove("active");
     (_a = tabList[view]) === null || _a === void 0 ? void 0 : _a.classList.add("active");
     highlighting_content.classList.remove("language-css");
     highlighting_content.classList.remove("language-html");
-    highlighting_content.classList.remove("language-js");
     editorIndex = view;
     if (view == 0) {
         textarea.value = slides_css[activeSlide].css;
@@ -81,8 +79,7 @@ function switchView(view) {
         highlighting_content.classList.add("language-html");
     }
     if (view == 2) {
-        textarea.value = slide_js;
-        highlighting_content.classList.add("language-js");
+        textarea.value = slides_css[activeSlide].notes;
     }
     adjustTextArea();
     adjustLineNumber();
@@ -116,9 +113,11 @@ function addSlide() {
     displayListAppend(slides_css.length);
     const slide = {
         css: "",
+        notes: "",
     };
     slides_css.push(slide);
     selectSlide(slides_css.length - 1);
+    highlighting_content.innerHTML = "";
 }
 function deleteSlide() {
     display_list.innerHTML = "";
@@ -258,13 +257,13 @@ function importAction() {
     var slidesJSONinput = JSON.parse(import_in.value);
     slide_name.value = atob(slidesJSONinput.name);
     slide_html = atob(slidesJSONinput.html);
-    slide_js = atob(slidesJSONinput.js);
     display_list.innerHTML = "";
     slides_css = [];
     slidesJSONinput.css.forEach((element) => {
         displayListAppend(slides_css.length);
         const slide = {
-            css: atob(element),
+            css: atob(element.css),
+            notes: atob(element.notes),
         };
         slides_css.push(slide);
     });
@@ -298,12 +297,14 @@ setInterval(() => {
     var css = "";
     slides_css.forEach((element) => {
         css += `
-      "${btoa(element.css)}",`;
+      {
+        "${btoa(element.css)}",
+        "${btoa(element.notes)}"
+      }`;
     });
     var json = `{
   "name": "${btoa(slide_name.value)}",
   "html": "${btoa(slide_html)}",
-  "js": "${btoa(slide_js)}",
   "css": [${css.slice(0, -1)}
   ]
 }`;
