@@ -220,6 +220,7 @@ body {
     height: 250px;
     padding: 5px;
     margin-top: 10px;
+    margin-bottom: 10px;
     transition: 500ms;
     white-space: pre;
     overflow-wrap: normal;
@@ -235,9 +236,9 @@ body {
     cursor: pointer;
     font-weight: bold;
     margin: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
     border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
     transition: 100ms;
 }
 
@@ -253,4 +254,15 @@ body {
     text-align: center;
     font-family: "Poppins";
     font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#location_select {
+    color: var(--text);
+    background: var(--secondary);
+    width: 95%;
+    margin: auto;
+    height: 30px;
+    border-radius: 10px;
 }
