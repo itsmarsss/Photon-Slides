@@ -5,6 +5,9 @@
     --main: #1e1e1e !important;
     --secondary: #252525 !important;
     --tertiary: #333333 !important;
+    --tertiary: #333333 !important;
+
+    --accent: #ffb000 !important;
 
     --text: #c6c6c6 !important;
     --text-accent: #939393 !important;
@@ -104,6 +107,7 @@ body {
 }
 
 .slide {
+    position: relative;
     width: 160px;
     height: 90px;
     display: flex;
@@ -114,7 +118,7 @@ body {
 .title {
     position: absolute;
     width: 160px;
-    z-index: 2;
+    z-index: 1;
     font-weight: bold;
     background: #00000050;
     color: #fff;
@@ -124,12 +128,30 @@ body {
     position: absolute;
     width: 160px;
     height: 90px;
-    z-index: 3;
+    z-index: 2;
     cursor: pointer;
 }
 
+.iframe_cover::after {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 30px);
+    content: "PH SD";
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 30px;
+    color: var(--accent);
+    transform-origin: top;
+    background: #1e1e1e90;
+    transform: scaleY(0);
+    transition: 200ms;
+}
+
 .iframe_cover:hover::after {
-    content: "";
+    transform: scaleY(1);
 }
 
 .add_new {
@@ -320,6 +342,7 @@ body {
 }
 
 iframe {
+    position: absolute;
     object-fit: cover;
     top: 0;
     left: 0;

@@ -1,5 +1,8 @@
 const manifest = chrome.runtime.getManifest();
 
+var local_slides = new Map();
+var cloud_slides = new Map();
+
 document.getElementById("title").innerHTML += `v${manifest.version}`;
 
 Array.prototype.forEach.call(document.getElementsByClassName("scroll"), (element) => {
@@ -18,10 +21,12 @@ const manual_textarea = document.getElementById("manual");
 const location_select = document.getElementById("location_select");
 
 document.getElementById("cloud_new").addEventListener("click", () => {
+    location_select.value = "cloud";
     showSlideSource();
 });
 
 document.getElementById("local_new").addEventListener("click", () => {
+    location_select.value = "local";
     showSlideSource();
 });
 
@@ -31,9 +36,9 @@ document.getElementById("cancel_new").addEventListener("click", () => {
 
 document.getElementById("manual_button").addEventListener("click", () => {
     if (location_select.value === "cloud") {
-        newCloud(manual_textarea.value);
+        newEntry(cloud_list, response);
     } else {
-        newLocal(manual_textarea.value);
+        newEntry(local_list, response);
     }
 
     hideSlideSource();
@@ -44,9 +49,9 @@ document.getElementById("website_button").addEventListener("click", () => {
         var activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, { "message": "query" }, function (response) {
             if (location_select.value === "cloud") {
-                newCloud(response);
+                newEntry("cloud", response);
             } else {
-                newLocal(response);
+                newEntry("local", response);
             }
 
             hideSlideSource();
@@ -64,43 +69,69 @@ function hideSlideSource() {
     slide_source.style.transform = "scale(0)";
 }
 
-function newCloud(slides) {
+function newEntry(location, slides) {
     var jsonSlides = JSON.parse(slides);
 
     var id = "container-" + Date.now();
 
-    cloud_list.innerHTML = `<div class="slide">
+    var element;
+
+    if (location === "cloud") {
+        element = cloud_list;
+        cloud_slides.set(id, jsonSlides);
+    } else {
+        element = local_list;
+        local_slides.set(id, jsonSlides);
+    }
+
+
+    element.innerHTML = `<div class="slide">
     <span class="title">&nbsp${atob(jsonSlides.name)}</span>
     <iframe style="${atob(jsonSlides.iframe)
             .split("\n")
             .join("")}" id="${id}" class="container"></iframe>
     <div class="iframe_cover" data-iframe="${id}"></div>
-    </div>` + cloud_list.innerHTML;
+    </div>` + element.innerHTML;
 
     const iframe = document.getElementById(id);
-    const preview = iframe.contentWindow.document;
 
     iframe.style.transform = `scaleX(${160 / iframe.offsetWidth}) scaleY(${90 / iframe.offsetHeight})`;
+
+
+    rerenderSlides();
+
+    document.getElementById("cloud_new").addEventListener("click", () => {
+        location_select.value = "cloud";
+        showSlideSource();
+    });
+
+    document.getElementById("local_new").addEventListener("click", () => {
+        location_select.value = "local";
+        showSlideSource();
+    });
+}
+
+function rerenderSlides() {
+    cloud_slides.forEach((value, key) => {
+        addPreview(value, key);
+    });
+
+    local_slides.forEach((value, key) => {
+        for (const [key, value] of Object.entries(local_slides)) {
+            addPreview(value, key);
+        }
+    });
+}
+
+function addPreview(jsonSlides, id) {
+    const iframe = document.getElementById(id);
+    const preview = iframe.contentWindow.document;
 
     preview.body.innerHTML = atob(jsonSlides.html);
 
     const style = preview.createElement("style");
     style.innerHTML = atob(jsonSlides.css[0].css);
     preview.body.appendChild(style);
-
-    document.getElementById("cloud_new").addEventListener("mousedown", () => {
-        showSlideSource();
-    });
-}
-
-function newLocal(slides) {
-    local_list.innerHTML = `<div class="slide">
-    <span class="title">${JSON.parse(slides).name}</span>
-    </div>` + local_list.innerHTML;
-
-    document.getElementById("local_new").addEventListener("click", () => {
-        showSlideSource();
-    });
 }
 
 async function setSlides() {
