@@ -17,9 +17,11 @@ const highlighting_content = document.getElementById(
 
 const lineNumbers = document.getElementById("line_numbers") as HTMLElement;
 
+const frame_setup = document.getElementById("setup") as HTMLElement;
 const download_popup = document.getElementById("download") as HTMLElement;
 const upload_popup = document.getElementById("upload") as HTMLElement;
 
+const setup_in = document.getElementById("setup_in") as HTMLTextAreaElement;
 const import_in = document.getElementById("import_in") as HTMLTextAreaElement;
 const json_out = document.getElementById(
   "json_export_out"
@@ -27,6 +29,10 @@ const json_out = document.getElementById(
 const embed_out = document.getElementById(
   "embed_export_out"
 ) as HTMLTextAreaElement;
+
+const iframe_setup = document.getElementById(
+  "iframe_setup"
+) as HTMLStyleElement;
 
 textarea.addEventListener("keyup", () => {
   adjustTextArea();
@@ -93,6 +99,12 @@ type Slide = {
 };
 
 var slides_css: Slide[] = [];
+
+var iframe_css: string = `width: 1280px;
+height: 720px;
+background: #fff;
+border: none;`;
+
 var editorIndex: number = 0;
 
 function switchView(view: number) {
@@ -144,12 +156,14 @@ function selectSlide(slideIndex: number) {
 }
 
 function displayListAppend(index: number) {
+  const iframe = document.getElementById("container") as HTMLIFrameElement;
+
   display_list.innerHTML += `
 <div class="slide_card" id="slide-${index}">
     <div class="left">${index}</div>
     <div class="right">
-        <iframe style="transform: scaleX(${220 / 1280}) scaleY(${
-    120 / 720
+        <iframe style="transform: scaleX(${220 / iframe.offsetWidth}) scaleY(${
+    120 / iframe.offsetHeight
   })" id="container-${index}" class="container" name="preview-${index}">
         </iframe>
     </div>
@@ -331,10 +345,14 @@ function updateiFrames() {
   }
 }
 
-function importSlides() {
-  download_popup.style.transform = "scale(0)";
-  download_popup.style.opacity = "0";
+function frameSetup() {
+  frame_setup.style.transform = "scale(1)";
+  frame_setup.style.opacity = "1";
 
+  setup_in.value = iframe_css;
+}
+
+function importSlides() {
   upload_popup.style.transform = "scale(1)";
   upload_popup.style.opacity = "1";
 }
@@ -342,9 +360,17 @@ function importSlides() {
 function exportSlides() {
   download_popup.style.transform = "scale(1)";
   download_popup.style.opacity = "1";
+}
 
-  upload_popup.style.transform = "scale(0)";
-  upload_popup.style.opacity = "0";
+function updateSetupAction() {
+  iframe_css = setup_in.value;
+
+  iframe_setup.innerHTML = `.container {
+  ${iframe_css}
+}
+  `;
+
+  hidePopups();
 }
 
 function importAction() {
@@ -393,16 +419,15 @@ function copyEmbed() {
 }
 
 function hidePopups() {
+  frame_setup.style.opacity = "0";
   download_popup.style.opacity = "0";
   upload_popup.style.opacity = "0";
 
   setTimeout(() => {
+    frame_setup.style.transform = "scale(0)";
     download_popup.style.transform = "scale(0)";
     upload_popup.style.transform = "scale(0)";
   }, 250);
-
-  download_popup.classList.remove("showing");
-  upload_popup.classList.remove("showing");
 }
 
 setInterval(() => {
@@ -438,7 +463,7 @@ setInterval(() => {
   
   <iframe style="${`width: 1280px; height: 720px; background: #fff; border: none;`}" src="<path to Photon Slides [.html]>"></iframe>
   
-  
+
 _____ This is your <path to Photon Slides [.html]> content _____
   ${slide_html.split("\n").join("")}
   <style id="styles">

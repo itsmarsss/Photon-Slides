@@ -17,6 +17,7 @@
                 placeholder="Untitled Photon Slide"></input>&nbsp;&nbsp;-&nbsp;&nbsp;Photon Slides
         </div>
         <div id="aside">
+            <button class="data_button" onclick="frameSetup()">Frame Setup</button>
             <button class="data_button" onclick="importSlides()">Import</button>
             <button class="data_button" onclick="exportSlides()">Export</button>
         </div>
@@ -36,21 +37,21 @@
             <div id="slide_preview">
                 <style id="container_css">
                     .container {
-                        width: 1280px;
-                        height: 720px;
-                        background: #fff;
-                        border: none;
                         position: absolute;
                         z-index: 0;
                     }
                 </style>
 
-                <iframe style="
+                <style id="iframe_setup">
+                    .container {
                         width: 1280px;
                         height: 720px;
                         background: #fff;
                         border: none;
-                        " id="container" class="container" name="preview"></iframe>
+                    }
+                </style>
+
+                <iframe id="container" class="container" name="preview"></iframe>
 
                 <div id="preview_cover" tabindex="0" onkeyup="updateCode()"></div>
             </div>
@@ -71,6 +72,15 @@
                     </pre>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div id="setup" class="popup" onclick="hidePopups()">
+        <div class="popup_content" onclick="event.stopPropagation()">
+            <textarea id="setup_in"
+                placeholder="iFrame setup css here&#10;(e.g. background color, border radius, width/height... etc)"
+                class="down_up_textarea" spellcheck="false"></textarea>
+            <button class="down_up_button" onclick="updateSetupAction()">Update Changes</button>
         </div>
     </div>
 
