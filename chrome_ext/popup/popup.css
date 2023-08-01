@@ -412,3 +412,19 @@ iframe {
     margin: auto;
     margin-top: 0;
 }
+
+.notif {
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    background: var(--tertiary);
+    bottom: 0px;
+    text-align: center;
+    line-height: 25px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top: 1px solid var(--text);
+    z-index: 80085;
+    opacity: 0;
+    transform: scale(0);
+}

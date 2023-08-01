@@ -11,6 +11,8 @@ var photonslides = (async function () {
                 document.getElementById("import_in").value = request.value;
 
                 document.getElementById("import_button").click();
+
+                sendResponse("DONE");
             }
         }
     );

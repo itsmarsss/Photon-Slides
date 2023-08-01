@@ -74,6 +74,8 @@ document.getElementById("ok_button").addEventListener("click", () => {
     }
 
     document.getElementById(currentID + "-name").innerHTML = escapeHtml(new_name.value);
+
+    sendNotification("Update slide name");
 });
 
 document.getElementById("import_slides").addEventListener("click", () => {
@@ -89,6 +91,11 @@ document.getElementById("import_slides").addEventListener("click", () => {
         var activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, { "message": "import", "value": slidesJSON }, function (response) {
             console.log(response);
+            if (response === undefined) {
+                sendNotification("Unable to import slide into Photon Slides");
+            } else {
+                sendNotification("Successfully imported slide into Photon Slides");
+            }
         });
     });
 });
@@ -104,6 +111,8 @@ document.getElementById("delete_slides").addEventListener("click", () => {
     elem.parentNode.removeChild(elem);
 
     hideSlideEdit();
+
+    sendNotification(`Selected ${currentLocation} entry deleted`);
 });
 
 function showSlideSource() {
@@ -127,9 +136,9 @@ function hideSlideEdit() {
 }
 
 function newEntry(slides) {
-    var jsonSlides = JSON.parse(slides);
+    const jsonSlides = JSON.parse(slides);
 
-    var id = "container-" + Date.now();
+    const id = "container-" + Date.now();
 
     var element;
 
@@ -140,7 +149,6 @@ function newEntry(slides) {
         element = local_list;
         local_slides.set(id, jsonSlides);
     }
-
 
     element.innerHTML = `<div class="slide" id="${id}-cont">
     <span class="title" id="${id}-name">&nbsp${atob(jsonSlides.name)}</span>
@@ -166,6 +174,8 @@ function newEntry(slides) {
         location_select.value = "local";
         showSlideSource();
     });
+
+    sendNotification(`New ${location_select.value} entry added`);
 }
 
 function rerenderSlides() {
@@ -225,6 +235,24 @@ function addPreview(jsonSlides, id) {
     preview.body.appendChild(style);
 }
 
+async function sendNotification(text) {
+    const id = Date.now();
+    const notif = document.createElement("div");
+    notif.setAttribute("class", "notif");
+    notif.setAttribute("id", id);
+    notif.setAttribute("style", "transition: 200ms;")
+    notif.innerHTML = text;
+    document.body.appendChild(notif);
+
+    notif.style.opacity = "1";
+    notif.style.transform = "scale(1)";
+
+    setTimeout(() => {
+        notif.style.opacity = "0";
+        notif.style.transform = "scale(0)";
+    }, 1000)
+}
+
 function escapeHtml(text) {
     return text
         .replace(/&/g, "&")
@@ -233,3 +261,5 @@ function escapeHtml(text) {
         .replace(/"/g, "\"")
         .replace(/'/g, "'");
 }
+
+sendNotification("Extension Loaded!");
