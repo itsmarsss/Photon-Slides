@@ -34,6 +34,11 @@ const iframe_setup = document.getElementById(
   "iframe_setup"
 ) as HTMLStyleElement;
 
+const auto_play = document.getElementById("auto_play") as HTMLInputElement;
+const slide_length = document.getElementById(
+  "slide_length"
+) as HTMLInputElement;
+
 textarea.addEventListener("keyup", () => {
   adjustTextArea();
   adjustLineNumber();
@@ -517,6 +522,32 @@ setInterval(() => {
 
   json_out.value = json;
 
+  var slideProgression: string;
+
+  if (auto_play.checked) {
+    slideProgression = `setInterval(() => {
+      slide_num++;
+
+      if (slide_num >= slides_css.length) {
+        styles.innerHTML= "";
+        slide_num = 0
+      }
+      
+      styles.innerHTML += atob(slides_css[slide_num]);
+    }, ${slide_length.value});`;
+  } else {
+    slideProgression = `document.addEventListener("mousedown", () => {
+      slide_num++;
+
+      if (slide_num >= slides_css.length) {
+        styles.innerHTML= "";
+        slide_num = 0
+      }
+      
+      styles.innerHTML += atob(slides_css[slide_num]);
+    });`;
+  }
+
   var embed: string = `_____ Place iFrame into your HTML file; make sure to edit <path to Photon Slides [.html]> _____
   
   <iframe style="${iframe_css
@@ -527,24 +558,16 @@ setInterval(() => {
 _____ This is your <path to Photon Slides [.html]> content _____
   ${slide_html.split("\n").join("")}
   <style id="styles">
-  </style><script>
+  </style>
   
-  const slides_css = ${cssArray};
-  const styles = document.getElementById("styles");
+  <script>
+    const slides_css = ${cssArray};
+    const styles = document.getElementById("styles");
 
-  var slide_num = 0;
-  styles.innerHTML = atob(slides_css[slide_num]);
-  
-  document.addEventListener("mousedown", () => {
-    slide_num++;
-
-    if (slide_num >= slides_css.length) {
-      styles.innerHTML= "";
-      slide_num = 0
-    }
+    var slide_num = 0;
+    styles.innerHTML = atob(slides_css[slide_num]);
     
-    styles.innerHTML += atob(slides_css[slide_num]);
-  });
+    ${slideProgression}
   </script>`;
 
   embed_out.value = embed;
