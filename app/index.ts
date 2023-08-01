@@ -459,7 +459,9 @@ setInterval(() => {
   cssArray = cssArray.slice(0, -1) + "]";
 
   var json: string = `{
-  "name": "${btoa(slide_name.value)}",
+  "name": "${btoa(
+    !slide_name.value ? "Untitled Photon Slide" : slide_name.value
+  )}",
   "html": "${btoa(slide_html)}",
   "iframe": "${btoa(iframe_css)}",
   "css": [${css.slice(0, -1)}
