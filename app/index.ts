@@ -307,7 +307,7 @@ preview_cover.addEventListener("keydown", (event) => {
 preview_cover.addEventListener("dblclick", (e) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  if (scale + 1 > 8) {
+  if (scale + 1 > 8 || scale - 1 < 0) {
     return;
   }
 
