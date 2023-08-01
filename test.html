@@ -3,13 +3,26 @@
 </style>
 
 <script>
-    const slides_css = ["ZGl2IHsKd2lkdGg6IDUwMHB4OwpoZWlnaHQ6IDUwMHB4OwpiYWNrZ3JvdW5kOiB5ZWxsb3c7CnRyYW5zaXRpb246IDIwMG1zOwp9", "ZGl2IHsKd2lkdGg6IDIwMHB4Owp9"];
+    const slides_css = ["ZGl2IHsKd2lkdGg6IDMwMHB4OwpoZWlnaHQ6IDEwMHB4OwpiYWNrZ3JvdW5kOiBvcmFuZ2U7CnRyYW5zaXRpb246IDEwMG1zOwp9", "ZGl2IHsKd2lkdGg6IDE1MHB4Owp9"];
     const styles = document.getElementById("styles");
 
     var slide_num = 0;
     styles.innerHTML = atob(slides_css[slide_num]);
 
-    setInterval(() => {
+    document.addEventListener("mousedown", () => {
+        advanceSlide();
+    });
+    document.addEventListener("keydown", (event) => {
+        switch (event.key) {
+            case "ArrowRight":
+            case "ArrowDown":
+            case "Enter":
+            case " ":
+                advanceSlide();
+        }
+    });
+
+    function advanceSlide() {
         slide_num++;
 
         if (slide_num >= slides_css.length) {
@@ -18,5 +31,5 @@
         }
 
         styles.innerHTML += atob(slides_css[slide_num]);
-    }, 5000);
+    }
 </script>

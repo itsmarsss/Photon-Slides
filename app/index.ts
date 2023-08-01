@@ -526,25 +526,20 @@ setInterval(() => {
 
   if (auto_play.checked) {
     slideProgression = `setInterval(() => {
-      slide_num++;
-
-      if (slide_num >= slides_css.length) {
-        styles.innerHTML= "";
-        slide_num = 0
-      }
-      
-      styles.innerHTML += atob(slides_css[slide_num]);
+      advanceSlide();
     }, ${slide_length.value});`;
   } else {
     slideProgression = `document.addEventListener("mousedown", () => {
-      slide_num++;
-
-      if (slide_num >= slides_css.length) {
-        styles.innerHTML= "";
-        slide_num = 0
+      advanceSlide();
+    });
+    document.addEventListener("keydown", (event) => {
+      switch (event.key) {
+        case "ArrowRight":
+        case "ArrowDown":
+        case "Enter":
+        case " ":
+          advanceSlide();
       }
-      
-      styles.innerHTML += atob(slides_css[slide_num]);
     });`;
   }
 
@@ -568,6 +563,17 @@ _____ This is your <path to Photon Slides [.html]> content _____
     styles.innerHTML = atob(slides_css[slide_num]);
     
     ${slideProgression}
+
+    function advanceSlide() {
+      slide_num++;
+
+        if (slide_num >= slides_css.length) {
+          styles.innerHTML= "";
+          slide_num = 0
+        }
+        
+        styles.innerHTML += atob(slides_css[slide_num]);
+    }
   </script>`;
 
   embed_out.value = embed;
