@@ -488,6 +488,39 @@ function hidePopups() {
   }, 250);
 }
 
+var fullscreened: boolean = false;
+
+document.addEventListener("keydown", (event) => {
+  if (fullscreened) {
+    switch (event.key) {
+      case "ArrowLeft":
+      case "ArrowUp":
+      case "Delete":
+        setSlide(activeSlide - 1);
+        selectSlide(activeSlide - 1);
+        break;
+      case "ArrowRight":
+      case "ArrowDown":
+      case " ":
+        setSlide(activeSlide + 1);
+        selectSlide(activeSlide + 1);
+        break;
+    }
+  }
+});
+
+function toggleFullScreen() {
+  const iframe = document.getElementById("container") as HTMLIFrameElement;
+
+  if (fullscreened) {
+    document.exitFullscreen();
+  } else {
+    iframe.requestFullscreen();
+  }
+
+  fullscreened = !fullscreened;
+}
+
 setInterval(() => {
   updateiFrames();
 }, 5000);
