@@ -351,8 +351,6 @@ iframe {
 }
 
 #slide_edit {
-    transform: scale(1);
-    opacity: 1;
     padding-top: 15px;
 }
 

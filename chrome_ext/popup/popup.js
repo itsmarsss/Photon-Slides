@@ -20,6 +20,8 @@ const slide_source = document.getElementById("slide_source");
 const manual_textarea = document.getElementById("manual");
 const location_select = document.getElementById("location_select");
 
+const slide_edit = document.getElementById("slide_edit");
+
 document.getElementById("cloud_new").addEventListener("click", () => {
     location_select.value = "cloud";
     showSlideSource();
@@ -32,6 +34,10 @@ document.getElementById("local_new").addEventListener("click", () => {
 
 document.getElementById("cancel_new").addEventListener("click", () => {
     hideSlideSource();
+});
+
+document.getElementById("cancel_edit").addEventListener("click", () => {
+    hideSlideEdit();
 });
 
 document.getElementById("manual_button").addEventListener("click", () => {
@@ -69,6 +75,16 @@ function hideSlideSource() {
     slide_source.style.transform = "scale(0)";
 }
 
+function showSlideEdit() {
+    slide_edit.style.opacity = "1";
+    slide_edit.style.transform = "scale(1)";
+}
+
+function hideSlideEdit() {
+    slide_edit.style.opacity = "0";
+    slide_edit.style.transform = "scale(0)";
+}
+
 function newEntry(location, slides) {
     var jsonSlides = JSON.parse(slides);
 
@@ -90,7 +106,7 @@ function newEntry(location, slides) {
     <iframe style="${atob(jsonSlides.iframe)
             .split("\n")
             .join("")}" id="${id}" class="container"></iframe>
-    <div class="iframe_cover" data-iframe="${id}"></div>
+    <div class="iframe_cover" data-id="${id}"></div>
     </div>` + element.innerHTML;
 
     const iframe = document.getElementById(id);
@@ -118,6 +134,14 @@ function rerenderSlides() {
 
     local_slides.forEach((value, key) => {
         addPreview(value, key);
+    });
+
+
+    Array.prototype.forEach.call(document.getElementsByClassName("iframe_cover"), (element) => {
+        element.addEventListener("click", (event) => {
+            const id = element.getAttribute("data-id");
+            showSlideEdit();
+        });
     });
 }
 
