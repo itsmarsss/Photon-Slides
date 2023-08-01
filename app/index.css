@@ -444,3 +444,70 @@ body {
 .down_up_button:active {
     transform: scale(0.98);
 }
+
+#auto_play_cont {
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#slide_length {
+    background: var(--secondary);
+    color: var(--text);
+    border: 1px solid var(--text);
+    border-radius: 5px;
+    width: 75px;
+}
+
+.check_container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.check_container {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    font-size: 15px;
+    user-select: none;
+    transform: translateY(5px);
+}
+
+.checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background: #606062;
+    border-radius: 50px;
+}
+
+.check_container input:checked~.checkmark {
+    background: var(--accent);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.check_container input:checked~.checkmark:after {
+    display: block;
+}
+
+.check_container .checkmark:after {
+    left: 7px;
+    top: 4px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
