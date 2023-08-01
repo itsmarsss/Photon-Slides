@@ -12,12 +12,20 @@
 }
 
 .slide_card:hover {
-    box-shadow: none;
+    outline: 2px var(--accent) solid;
 }
 
 .slide_card.active {
     transform: translateX(10px);
     outline: 4px var(--accent) solid;
+}
+
+.slide_card:hover>.left {
+    border-left: 1px solid var(--text-accent);
+}
+
+.slide_card.active>.left {
+    border-left: 3px solid var(--text-accent);
 }
 
 .card_cover {
@@ -31,8 +39,16 @@
 }
 
 .left {
+    font-family: "Consolas";
     color: var(--text);
+    background: var(--secondary);
     transform: translateX(-30px);
+    border-radius: 5px;
+    padding: 5px;
+    z-index: 1;
+    height: 25px;
+    line-height: 25px;
+    transition: 100ms;
 }
 
 .right>iframe {
