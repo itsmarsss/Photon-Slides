@@ -144,7 +144,7 @@ function newEntry(slides) {
     <iframe style="${atob(jsonSlides.iframe)
             .split("\n")
             .join("")}" id="${id}" class="container"></iframe>
-    <div class="iframe_cover" data-id="${id}" data-location="${location}"></div>
+    <div class="iframe_cover" data-id="${id}" data-location="${location_select.value}"></div>
     </div>` + element.innerHTML;
 
     const iframe = document.getElementById(id);
