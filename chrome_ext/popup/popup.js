@@ -27,8 +27,6 @@ const slide_edit = document.getElementById("slide_edit");
 const new_name = document.getElementById("new_name");
 const slide_JSON = document.getElementById("slide_JSON");
 
-const delete_slides = document.getElementById("delete_slides");
-
 document.getElementById("cloud_new").addEventListener("click", () => {
     location_select.value = "cloud";
     showSlideSource();
@@ -48,11 +46,7 @@ document.getElementById("cancel_edit").addEventListener("click", () => {
 });
 
 document.getElementById("manual_button").addEventListener("click", () => {
-    if (location_select.value === "cloud") {
-        newEntry(cloud_list, response);
-    } else {
-        newEntry(local_list, response);
-    }
+    newEntry(manual_textarea.value);
 
     hideSlideSource();
 });
@@ -61,11 +55,7 @@ document.getElementById("website_button").addEventListener("click", () => {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         var activeTab = tabs[0];
         chrome.tabs.sendMessage(activeTab.id, { "message": "query" }, function (response) {
-            if (location_select.value === "cloud") {
-                newEntry("cloud", response);
-            } else {
-                newEntry("local", response);
-            }
+            newEntry(response);
 
             hideSlideSource();
         });
@@ -99,6 +89,20 @@ document.getElementById("import_slides").addEventListener("click", () => {
     });
 });
 
+document.getElementById("delete_slides").addEventListener("click", () => {
+    if (currentLocation === "cloud") {
+        cloud_slides.delete(currentID);
+    } else {
+        local_slides.delete(currentID);
+    }
+
+
+    var elem = document.getElementById(currentID + "-cont");
+    elem.parentNode.removeChild(elem);
+
+    hideSlideEdit();
+});
+
 function showSlideSource() {
     slide_source.style.opacity = "1";
     slide_source.style.transform = "scale(1)";
@@ -119,14 +123,14 @@ function hideSlideEdit() {
     slide_edit.style.transform = "scale(0)";
 }
 
-function newEntry(location, slides) {
+function newEntry(slides) {
     var jsonSlides = JSON.parse(slides);
 
     var id = "container-" + Date.now();
 
     var element;
 
-    if (location === "cloud") {
+    if (location_select.value === "cloud") {
         element = cloud_list;
         cloud_slides.set(id, jsonSlides);
     } else {
