@@ -25,6 +25,7 @@ const location_select = document.getElementById("location_select");
 
 const slide_edit = document.getElementById("slide_edit");
 const new_name = document.getElementById("new_name");
+const slide_JSON = document.getElementById("slide_JSON");
 
 const delete_slides = document.getElementById("delete_slides");
 
@@ -177,8 +178,10 @@ function rerenderSlides() {
 
             if (currentLocation === "cloud") {
                 new_name.value = atob(cloud_slides.get(currentID).name);
+                slide_JSON.value = JSON.stringify(cloud_slides.get(currentID), null, "   ");
             } else {
                 new_name.value = atob(local_slides.get(currentID).name);
+                slide_JSON.value = JSON.stringify(local_slides.get(currentID), null, "   ");
             }
 
             showSlideEdit();
