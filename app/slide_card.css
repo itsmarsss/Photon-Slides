@@ -7,7 +7,6 @@
     background: var(--tertiary);
     border: 1px var(--text) dotted;
     display: flex;
-    box-shadow: #ffffff33 0px 4px 12px;
     position: relative;
     transition: 200ms;
 }
@@ -18,8 +17,7 @@
 
 .slide_card.active {
     transform: translateX(10px);
-    box-shadow: none;
-    box-shadow: #ffb00084 0px 0px 50px;
+    outline: 4px var(--accent) solid;
 }
 
 .card_cover {
