@@ -218,7 +218,7 @@ preview_cover.addEventListener("wheel", (event) => {
     scrollAmt *= 5;
   }
 
-  if (scale - scrollAmt < 0.005 || scale - scrollAmt > 8) {
+  if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
     return;
   }
 
@@ -307,17 +307,19 @@ preview_cover.addEventListener("keydown", (event) => {
 preview_cover.addEventListener("dblclick", (e) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  if (scale + 1 > 8 || scale - 1 < 0) {
-    return;
+  if (e.shiftKey) {
+    if (scale - 0.5 < 0) {
+      return;
+    }
+    scale -= 0.5;
+  } else {
+    if (scale + 0.5 > 50) {
+      return;
+    }
+    scale += 0.5;
   }
 
   iframe.style.transition = "200ms";
-
-  if (e.shiftKey) {
-    scale -= 1;
-  } else {
-    scale += 1;
-  }
   iframe.style.transform = `scale(${scale})`;
 
   setTimeout(() => {

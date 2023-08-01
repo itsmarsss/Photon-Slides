@@ -1,17 +1,22 @@
 <div></div>
-<style id="styles"></style>
+<style id="styles">
+</style>
 <script>
-    const slides_css = ["ZGl2ewp3aWR0aDogNDAlOwpoZWlnaHQ6IDQwJTsKYmFja2dyb3VuZDogcmVkOwp0cmFuc2l0aW9uOiA1MDBtczsKfQ==", "ZGl2ewp3aWR0aDogNjB2dzsKaGVpZ2h0OiA0MHZoOwpiYWNrZ3JvdW5kOiByZWQ7CnRyYW5zaXRpb246IDUwMG1zOwp9"];
+
+    const slides_css = ["ZGl2IHsKCXdpZHRoOiA1MDBweDsKCWhlaWdodDogMzAwcHg7CgliYWNrZ3JvdW5kOiByZWQ7Cgl0cmFuc2l0aW9uOiAzMDBtczsKCWJhY2tncm91bmQtaW1hZ2U6IHVybCgiaHR0cHM6Ly9jZG4uZGlzY29yZGFwcC5jb20vYXZhdGFycy83NzQ3NzM3NTU5MTc4OTM2NDIvNzUwMzAwOTFjZjgxYjQ3NjYzOWQ0YjBiMTlkY2ZkZDEud2VicD9zaXplPTI0MCIpOwoJYmFja2dyb3VuZC1yZXBlYXQ6IG5vLXJlcGVhdDsKfQoKZGl2OmhvdmVyIHsKCWJhY2tncm91bmQ6IGJsdWU7Cn0=", "ZGl2IHsKCXdpZHRoOiAyMDBweDsKfQ==", "", ""];
     const styles = document.getElementById("styles");
+
     var slide_num = 0;
     styles.innerHTML = atob(slides_css[slide_num]);
+
     document.addEventListener("mousedown", () => {
         slide_num++;
+
         if (slide_num >= slides_css.length) {
             styles.innerHTML = "";
             slide_num = 0
         }
+
         styles.innerHTML += atob(slides_css[slide_num]);
-        console.log(styles.innerHTML)
     });
 </script>
