@@ -201,7 +201,7 @@ body {
     color: var(--text);
 }
 
-.tab:active {
+.tab.active {
     color: var(--accent);
     border-bottom: 1px var(--text) solid;
 }
