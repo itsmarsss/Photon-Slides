@@ -460,7 +460,9 @@ setInterval(() => {
 
   var json: string = `{
   "name": "${btoa(
-    !slide_name.value ? "Untitled Photon Slide" : slide_name.value
+    slide_name.value.split(" ").join("").length == 0
+      ? "Untitled Photon Slide"
+      : slide_name.value
   )}",
   "html": "${btoa(slide_html)}",
   "iframe": "${btoa(iframe_css)}",
