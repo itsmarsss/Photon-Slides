@@ -56,16 +56,6 @@ document.getElementById("manual_button").addEventListener("click", () => {
     hideSlideSource();
 });
 
-document.getElementById("ok_button").addEventListener("click", () => {
-    if (currentLocation === "cloud") {
-        cloud_slides.get(currentID).name = btoa(new_name.value);
-    } else {
-        local_slides.get(currentID).name = btoa(new_name.value);
-    }
-
-    document.getElementById(currentID + "-name").innerHTML = escapeHtml(new_name.value);
-});
-
 document.getElementById("website_button").addEventListener("click", () => {
     chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
         var activeTab = tabs[0];
@@ -77,6 +67,33 @@ document.getElementById("website_button").addEventListener("click", () => {
             }
 
             hideSlideSource();
+        });
+    });
+});
+
+document.getElementById("ok_button").addEventListener("click", () => {
+    if (currentLocation === "cloud") {
+        cloud_slides.get(currentID).name = btoa(new_name.value);
+    } else {
+        local_slides.get(currentID).name = btoa(new_name.value);
+    }
+
+    document.getElementById(currentID + "-name").innerHTML = escapeHtml(new_name.value);
+});
+
+document.getElementById("import_slides").addEventListener("click", () => {
+    var slidesJSON;
+
+    if (currentLocation === "cloud") {
+        slidesJSON = JSON.stringify(cloud_slides.get(currentID));
+    } else {
+        slidesJSON = JSON.stringify(local_slides.get(currentID));
+    }
+
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+        var activeTab = tabs[0];
+        chrome.tabs.sendMessage(activeTab.id, { "message": "import", "value": slidesJSON }, function (response) {
+            console.log(response);
         });
     });
 });
@@ -188,12 +205,3 @@ function escapeHtml(text) {
         .replace(/"/g, "\"")
         .replace(/'/g, "'");
 }
-
-async function setSlides() {
-    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
-        var activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, { "message": "import", "value": "heehee" }, function (response) {
-            console.log(response);
-        });
-    });
-} 
