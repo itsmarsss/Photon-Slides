@@ -195,6 +195,46 @@ body {
     z-index: 1;
 }
 
+#zoom_editor {
+    position: absolute;
+    background: var(--secondary);
+    border: 1px solid var(--text);
+    width: 150px;
+    height: 40px;
+    z-index: 1;
+    right: 0;
+    bottom: 0;
+    border-radius: 5px;
+}
+
+#zoom_select {
+    background: var(--tertiary);
+    border: none;
+    height: 40px;
+    font-family: "Poppins";
+    color: var(--text);
+    border-radius: 5px;
+}
+
+#scale_to_fit {
+    border: none;
+    outline: none;
+    background: transparent;
+    height: 40px;
+    font-family: "Poppins";
+    color: var(--text);
+    cursor: pointer;
+    transition: 100ms;
+}
+
+#scale_to_fit:hover {
+    filter: brightness(1.15);
+}
+
+#scale_to_fit:active {
+    transform: scale(0.99);
+}
+
 #file_editing {
     display: flex;
     flex-direction: column;

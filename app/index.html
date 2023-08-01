@@ -53,6 +53,19 @@
                 <iframe id="container" class="container" name="preview"></iframe>
 
                 <div id="preview_cover" tabindex="0" onkeyup="updateCode()"></div>
+
+                <div id="zoom_editor">
+                    <select id="zoom_select" onchange="scaleTo(this.value)">
+                        <option value="15">15%</option>
+                        <option value="25">25%</option>
+                        <option value="30">30%</option>
+                        <option value="50">50%</option>
+                        <option value="60">60%</option>
+                        <option value="75">75%</option>
+                        <option value="100" selected>100%</option>
+                    </select>
+                    <button id="scale_to_fit" onclick="scaleToFit()">Scale to Fit</button>
+                </div>
             </div>
             <div id="file_editing">
                 <div id="tabs">

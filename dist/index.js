@@ -184,10 +184,21 @@ preview_cover.addEventListener("wheel", (event) => {
 function scaleToFit() {
     const iframe = document.getElementById("container");
     const cover = document.getElementById("preview_cover");
-    console.log(iframe.offsetWidth);
     scale = Math.min(cover.offsetWidth / iframe.offsetWidth, cover.offsetHeight / iframe.offsetHeight);
     iframe.style.transition = "100ms";
     iframe.style.transform = `scale(${scale})`;
+    iframe.style.left = "";
+    iframe.style.top = "";
+    setTimeout(() => {
+        iframe.style.transition = "0ms";
+    }, 110);
+}
+function scaleTo(percent) {
+    const iframe = document.getElementById("container");
+    const cover = document.getElementById("preview_cover");
+    scale = Math.min(cover.offsetWidth / iframe.offsetWidth, cover.offsetHeight / iframe.offsetHeight);
+    iframe.style.transition = "100ms";
+    iframe.style.transform = `scale(${scale * (percent / 100)})`;
     setTimeout(() => {
         iframe.style.transition = "0ms";
     }, 110);
