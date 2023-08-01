@@ -156,6 +156,9 @@ function selectSlide(slideIndex: number) {
 }
 
 function displayListAppend(index: number) {
+  var elem = document.getElementById("add") as HTMLElement;
+  elem?.parentNode?.removeChild(elem);
+
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
   display_list.innerHTML += `
@@ -170,6 +173,8 @@ function displayListAppend(index: number) {
     <div class="card_cover" onclick="selectSlide(${index}); updateCode();"></div>
 </div>
     `;
+
+  display_list.innerHTML += `<i class="fa-solid fa-plus" id="add" onclick="addSlide()"></i>`;
 }
 
 function addSlide() {

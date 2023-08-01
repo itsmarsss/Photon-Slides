@@ -126,6 +126,25 @@ body {
     padding-bottom: 15px;
 }
 
+#add {
+    width: 220px;
+    text-align: center;
+    margin-left: 29px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px dashed var(--text);
+    color: var(--text);
+    cursor: pointer;
+    transition: 200ms;
+}
+
+#add:hover {
+    background: #ffae0083;
+    color: #fff;
+}
+
+
 #slide_configuration {
     background: var(--tertiary);
     color: var(--text-accent);
@@ -134,7 +153,7 @@ body {
 }
 
 #slide_configuration>* {
-    width: 50%;
+    width: 100%;
     text-align: center;
     line-height: 50px;
     cursor: pointer;

@@ -105,6 +105,9 @@ function selectSlide(slideIndex) {
     switchView(editorIndex);
 }
 function displayListAppend(index) {
+    var _a;
+    var elem = document.getElementById("add");
+    (_a = elem === null || elem === void 0 ? void 0 : elem.parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(elem);
     const iframe = document.getElementById("container");
     display_list.innerHTML += `
 <div class="slide_card" id="slide-${index}">
@@ -116,6 +119,7 @@ function displayListAppend(index) {
     <div class="card_cover" onclick="selectSlide(${index}); updateCode();"></div>
 </div>
     `;
+    display_list.innerHTML += `<i class="fa-solid fa-plus" id="add" onclick="addSlide()"></i>`;
 }
 function addSlide() {
     displayListAppend(slides_css.length);
