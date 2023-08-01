@@ -94,12 +94,11 @@
             </div>
         </div>
     </div>
-
-    <div id="slide_source">
-        <button id="cancel_new">✕</button>
+    <div id="slide_source" class="popup">
+        <button id="cancel_new" class="close_button">✕</button>
 
         <div class="manual_cont">
-            <textarea id="manual" placeholder="Manual upload JSON here"></textarea>
+            <textarea id="manual" class="down_up_textarea" placeholder="Manual upload JSON here"></textarea>
             <button class="down_up_button" id="manual_button">Upload from manual input</button>
         </div>
 
@@ -111,6 +110,22 @@
             <option value="cloud">Cloud Storage</option>
             <option value="local">Local Storage</option>
         </select>
+    </div>
+
+    <div id="slide_edit" class="popup">
+        <button id="cancel_edit" class="close_button">✕</button>
+        <div class="top">
+            <div class="slide" id="display_slides"></div>
+            <div class="edit_group">
+                <div class="name_edit">
+                    <input type="text" class="down_up_textarea" id="new_name" placeholder="Slide Name">
+                    <button class="down_up_button" id="ok_button">OK</button>
+                </div>
+                <button class="down_up_button" id="import_slides">Import</button>
+                <button class="down_up_button" id="delete_slides">Delete</button>
+            </div>
+        </div>
+        <textarea id="slide_JSON" class="down_up_textarea" readonly="true"></textarea>
     </div>
 </div>
 

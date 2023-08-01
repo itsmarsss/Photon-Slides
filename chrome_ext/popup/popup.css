@@ -231,7 +231,7 @@ body {
     transform: scale(1.15);
 }
 
-#slide_source {
+.popup {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -246,7 +246,7 @@ body {
     transition: 200ms;
 }
 
-#cancel_new {
+.close_button {
     z-index: 3;
     position: absolute;
     right: 5px;
@@ -263,11 +263,11 @@ body {
     transition: 200ms;
 }
 
-#cancel_new:hover {
+.close_button:hover {
     transform: rotate(45deg);
 }
 
-#cancel_new:active {
+.close_button:active {
     transform: scale(1.05);
 }
 
@@ -281,7 +281,7 @@ body {
     margin: auto;
 }
 
-#manual {
+.down_up_textarea {
     background: var(--main);
     color: var(--text);
     resize: none;
@@ -295,7 +295,7 @@ body {
     overflow-wrap: normal;
 }
 
-#manual::-webkit-scrollbar {
+.down_up_textarea::-webkit-scrollbar {
     width: 0;
     height: 0;
 }
@@ -348,4 +348,69 @@ iframe {
     left: 0;
     transform-origin: left top;
     transition: 100ms;
+}
+
+#slide_edit {
+    transform: scale(1);
+    opacity: 1;
+    padding-top: 15px;
+}
+
+.top {
+    padding: 10px;
+    display: flex;
+    height: 145px;
+    gap: 3px
+}
+
+.top>* {
+    width: 50%;
+}
+
+#display_slides {
+    background: red;
+    width: 250px;
+    height: 140px;
+    margin-left: 5px;
+}
+
+.edit_group {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_group>* {
+    height: 40px;
+}
+
+.name_edit {
+    display: flex;
+    gap: 5px
+}
+
+#new_name {
+    font-size: 15px;
+    border: none;
+    outline: 1px solid var(--secondary);
+    height: 40px;
+    width: 180px;
+    margin: 0;
+    margin-left: 6;
+}
+
+#new_name:is(:active, :focus) {
+    outline: 2px solid var(--text-accent);
+}
+
+#delete_slides {
+    background: var(--accent);
+    color: var(--tertiary);
+}
+
+#slide_JSON {
+    height: 50%;
+    width: 95%;
+    margin: auto;
+    margin-top: 0;
 }
