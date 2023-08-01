@@ -329,7 +329,9 @@ setInterval(() => {
     });
     cssArray = cssArray.slice(0, -1) + "]";
     var json = `{
-  "name": "${btoa(slide_name.value)}",
+  "name": "${btoa(slide_name.value.split(" ").join("").length == 0
+        ? "Untitled Photon Slide"
+        : slide_name.value)}",
   "html": "${btoa(slide_html)}",
   "iframe": "${btoa(iframe_css)}",
   "css": [${css.slice(0, -1)}
