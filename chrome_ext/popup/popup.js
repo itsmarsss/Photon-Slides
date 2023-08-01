@@ -63,6 +63,10 @@ document.getElementById("website_button").addEventListener("click", () => {
 });
 
 document.getElementById("ok_button").addEventListener("click", () => {
+    if (new_name.value.split(" ").join("").length == 0) {
+        new_name.value = "Untitled Photon Slide";
+    }
+
     if (currentLocation === "cloud") {
         cloud_slides.get(currentID).name = btoa(new_name.value);
     } else {
@@ -95,7 +99,6 @@ document.getElementById("delete_slides").addEventListener("click", () => {
     } else {
         local_slides.delete(currentID);
     }
-
 
     var elem = document.getElementById(currentID + "-cont");
     elem.parentNode.removeChild(elem);
@@ -180,13 +183,31 @@ function rerenderSlides() {
             currentID = element.getAttribute("data-id");
             currentLocation = element.getAttribute("data-location");
 
+            var slideJSON;
+
             if (currentLocation === "cloud") {
-                new_name.value = atob(cloud_slides.get(currentID).name);
-                slide_JSON.value = JSON.stringify(cloud_slides.get(currentID), null, "   ");
+                slideJSON = cloud_slides.get(currentID);
             } else {
-                new_name.value = atob(local_slides.get(currentID).name);
-                slide_JSON.value = JSON.stringify(local_slides.get(currentID), null, "   ");
+                slideJSON = local_slides.get(currentID);
             }
+
+            new_name.value = atob(slideJSON.name);
+            slide_JSON.value = JSON.stringify(slideJSON, null, "   ");
+
+            const iframe = document.getElementById("throwaway_joke");
+            const iframe_style = document.getElementById("parent_of_joke");
+
+            iframe_style.innerHTML = `#throwaway_joke {${atob(slideJSON.iframe)}}`;
+
+            const preview = iframe.contentWindow.document;
+
+            preview.body.innerHTML = atob(slideJSON.html);
+
+            const style = preview.createElement("style");
+            style.innerHTML = atob(slideJSON.css[0].css);
+            preview.body.appendChild(style);
+
+            iframe.style.transform = `scaleX(${240 / iframe.offsetWidth}) scaleY(${135 / iframe.offsetHeight})`;
 
             showSlideEdit();
         });

@@ -366,10 +366,10 @@ iframe {
 }
 
 #display_slides {
-    background: red;
-    width: 250px;
-    height: 140px;
+    width: 240px;
+    height: 135px;
     margin-left: 5px;
+    margin-top: 3px;
 }
 
 .edit_group {
