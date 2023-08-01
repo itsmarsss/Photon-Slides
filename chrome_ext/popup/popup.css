@@ -5,6 +5,9 @@
     --main: #1e1e1e !important;
     --secondary: #252525 !important;
     --tertiary: #333333 !important;
+    --tertiary: #333333 !important;
+
+    --accent: #ffb000 !important;
 
     --text: #c6c6c6 !important;
     --text-accent: #939393 !important;
@@ -80,53 +83,95 @@ body {
     padding-top: 5px;
 }
 
-.storage_display {
+.scroll {
     background-color: var(--secondary);
     width: calc(100% - 20px);
-    height: calc(100% - 25px - 20px);
+    height: calc(100% - 25px - 15px);
     overflow-x: auto;
-    overflow-y: hidden;
     border-radius: 10px;
     padding: 10px;
+    scroll-behavior: smooth;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.storage_display {
+    min-width: calc(100% - 20px);
+    width: max-content;
+    height: 100%;
+    overflow-y: hidden;
+    display: flex;
+    gap: 10px;
 }
 
 .slide {
-    border-radius: 10px;
-    border: 2px dashed var(--text);
+    position: relative;
     width: 160px;
-    aspect-ratio: 16 / 9;
+    height: 90px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 40px;
+    font-size: 15px;
     transition: 200ms;
 }
 
-.slide>span {
+.title {
+    position: absolute;
+    width: 160px;
     z-index: 1;
+    font-weight: bold;
+    background: #00000050;
+    color: #fff;
 }
 
-.slide::before {
-    content: "";
-    background: #ffffffee;
-    width: 160;
-    height: 90px;
+.iframe_cover {
     position: absolute;
-    border-radius: 10px;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: 200ms ease-in-out;
-    z-index: 0;
+    width: 160px;
+    height: 90px;
+    z-index: 2;
     cursor: pointer;
 }
 
-.slide:hover::before {
+.iframe_cover::after {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 30px);
+    content: "edit";
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 30px;
+    color: var(--accent);
+    transform-origin: top;
+    background: #1e1e1e90;
+    transform: scaleY(0);
+    transition: 200ms;
+}
+
+.iframe_cover:hover::after {
     transform: scaleY(1);
 }
 
-.slide:hover {
-    color: var(--secondary);
-    font-weight: bold;
+.add_new {
+    font-size: 40px;
+    border: 2px dashed var(--text);
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_new>span {
+    z-index: 1;
+}
+
+.add_new:hover {
+    font-size: 50px;
+}
+
+.add_new:active {
+    font-size: 45px;
 }
 
 .footer {
@@ -184,4 +229,186 @@ body {
 
 .social:hover {
     transform: scale(1.15);
+}
+
+.popup {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--tertiary);
+    transform: scale(0);
+    opacity: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    transition: 200ms;
+}
+
+.close_button {
+    z-index: 3;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 30px;
+    height: 30px;
+    background: var(--topbar);
+    color: var(--text);
+    border-radius: 50%;
+    border: 1px solid var(--text);
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.close_button:hover {
+    transform: rotate(45deg);
+}
+
+.close_button:active {
+    transform: scale(1.05);
+}
+
+.manual_cont {
+    display: flex;
+    flex-direction: column;
+}
+
+.manual_cont>* {
+    width: 95%;
+    margin: auto;
+}
+
+.down_up_textarea {
+    background: var(--main);
+    color: var(--text);
+    resize: none;
+    border-radius: 10px;
+    height: 250px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    transition: 500ms;
+    white-space: pre;
+    overflow-wrap: normal;
+}
+
+.down_up_textarea::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.down_up_button {
+    color: var(--text);
+    background: var(--secondary);
+    width: 95%;
+    font-family: "Poppins";
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-radius: 5px;
+    transition: 100ms;
+}
+
+.down_up_button:hover {
+    transform: scale(1.02);
+}
+
+.down_up_button:active {
+    transform: scale(0.98);
+}
+
+.or {
+    text-align: center;
+    font-family: "Poppins";
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#location_select {
+    color: var(--text);
+    background: var(--secondary);
+    width: 95%;
+    margin: auto;
+    height: 30px;
+    border-radius: 10px;
+}
+
+iframe {
+    position: absolute;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+    transform-origin: left top;
+    transition: 100ms;
+}
+
+#slide_edit {
+    padding-top: 15px;
+}
+
+.top {
+    padding: 10px;
+    display: flex;
+    height: 145px;
+    gap: 3px
+}
+
+.top>* {
+    width: 50%;
+}
+
+#display_slides {
+    background: red;
+    width: 250px;
+    height: 140px;
+    margin-left: 5px;
+}
+
+.edit_group {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_group>* {
+    height: 40px;
+}
+
+.name_edit {
+    display: flex;
+    gap: 5px
+}
+
+#new_name {
+    font-size: 15px;
+    border: none;
+    outline: 1px solid var(--secondary);
+    height: 40px;
+    width: 180px;
+    margin: 0;
+    margin-left: 6;
+}
+
+#new_name:is(:active, :focus) {
+    outline: 2px solid var(--text-accent);
+}
+
+#delete_slides {
+    background: var(--accent);
+    color: var(--tertiary);
+}
+
+#slide_JSON {
+    height: 50%;
+    width: 95%;
+    margin: auto;
+    margin-top: 0;
 }
