@@ -144,23 +144,41 @@ function rerenderSlides() {
     selectSlide(activeSlide - 1);
 }
 var scale = 1;
+var rotation = 0;
 preview_cover.addEventListener("wheel", (event) => {
     const iframe = document.getElementById("container");
-    var scrollAmt = event.deltaY / 2500;
-    if (event.altKey) {
-        scrollAmt /= 5;
+    if (event.altKey && event.shiftKey) {
+        var rotate;
+        if (event.deltaY > 0) {
+            rotate = 15;
+        }
+        else {
+            rotate = -15;
+        }
+        rotation += rotate;
     }
-    else if (event.shiftKey) {
-        scrollAmt *= 5;
+    else {
+        var scrollAmt = event.deltaY / 2500;
+        if (event.altKey) {
+            scrollAmt /= 5;
+        }
+        else if (event.shiftKey) {
+            scrollAmt *= 5;
+        }
+        if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
+            return;
+        }
+        scale -= scrollAmt;
     }
-    if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
-        return;
-    }
-    scale -= scrollAmt;
+    console.log(rotation);
     iframe.style.transition = "100ms";
-    iframe.style.transform = `scale(${scale})`;
+    iframe.style.transform = `scale(${scale}) rotate(${rotation}deg`;
     setTimeout(() => {
         iframe.style.transition = "0ms";
+        if (rotation >= 360 || rotation <= -360) {
+            rotation %= 360;
+            iframe.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+        }
     }, 110);
 });
 function scaleToFit() {

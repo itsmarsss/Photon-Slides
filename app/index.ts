@@ -211,28 +211,49 @@ function rerenderSlides() {
 }
 
 var scale: number = 1;
+var rotation: number = 0;
 
 preview_cover.addEventListener("wheel", (event) => {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  var scrollAmt: number = event.deltaY / 2500;
+  if (event.altKey && event.shiftKey) {
+    var rotate;
 
-  if (event.altKey) {
-    scrollAmt /= 5;
-  } else if (event.shiftKey) {
-    scrollAmt *= 5;
+    if (event.deltaY > 0) {
+      rotate = 15;
+    } else {
+      rotate = -15;
+    }
+
+    rotation += rotate;
+  } else {
+    var scrollAmt: number = event.deltaY / 2500;
+
+    if (event.altKey) {
+      scrollAmt /= 5;
+    } else if (event.shiftKey) {
+      scrollAmt *= 5;
+    }
+
+    if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
+      return;
+    }
+
+    scale -= scrollAmt;
   }
 
-  if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
-    return;
-  }
+  console.log(rotation);
 
-  scale -= scrollAmt;
   iframe.style.transition = "100ms";
-  iframe.style.transform = `scale(${scale})`;
+  iframe.style.transform = `scale(${scale}) rotate(${rotation}deg`;
 
   setTimeout(() => {
     iframe.style.transition = "0ms";
+
+    if (rotation >= 360 || rotation <= -360) {
+      rotation %= 360;
+      iframe.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+    }
   }, 110);
 });
 
