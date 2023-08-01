@@ -3,6 +3,9 @@ const manifest = chrome.runtime.getManifest();
 var local_slides = new Map();
 var cloud_slides = new Map();
 
+var currentLocation;
+var currentID;
+
 document.getElementById("title").innerHTML += `v${manifest.version}`;
 
 Array.prototype.forEach.call(document.getElementsByClassName("scroll"), (element) => {
@@ -21,6 +24,9 @@ const manual_textarea = document.getElementById("manual");
 const location_select = document.getElementById("location_select");
 
 const slide_edit = document.getElementById("slide_edit");
+const new_name = document.getElementById("new_name");
+
+const delete_slides = document.getElementById("delete_slides");
 
 document.getElementById("cloud_new").addEventListener("click", () => {
     location_select.value = "cloud";
@@ -48,6 +54,16 @@ document.getElementById("manual_button").addEventListener("click", () => {
     }
 
     hideSlideSource();
+});
+
+document.getElementById("ok_button").addEventListener("click", () => {
+    if (currentLocation === "cloud") {
+        cloud_slides.get(currentID).name = btoa(new_name.value);
+    } else {
+        local_slides.get(currentID).name = btoa(new_name.value);
+    }
+
+    document.getElementById(currentID + "-name").innerHTML = escapeHtml(new_name.value);
 });
 
 document.getElementById("website_button").addEventListener("click", () => {
@@ -102,11 +118,11 @@ function newEntry(location, slides) {
 
 
     element.innerHTML = `<div class="slide" id="${id}-cont">
-    <span class="title">&nbsp${atob(jsonSlides.name)}</span>
+    <span class="title" id="${id}-name">&nbsp${atob(jsonSlides.name)}</span>
     <iframe style="${atob(jsonSlides.iframe)
             .split("\n")
             .join("")}" id="${id}" class="container"></iframe>
-    <div class="iframe_cover" data-id="${id}"></div>
+    <div class="iframe_cover" data-id="${id}" data-location="${location}"></div>
     </div>` + element.innerHTML;
 
     const iframe = document.getElementById(id);
@@ -139,7 +155,15 @@ function rerenderSlides() {
 
     Array.prototype.forEach.call(document.getElementsByClassName("iframe_cover"), (element) => {
         element.addEventListener("click", (event) => {
-            const id = element.getAttribute("data-id");
+            currentID = element.getAttribute("data-id");
+            currentLocation = element.getAttribute("data-location");
+
+            if (currentLocation === "cloud") {
+                new_name.value = atob(cloud_slides.get(currentID).name);
+            } else {
+                new_name.value = atob(local_slides.get(currentID).name);
+            }
+
             showSlideEdit();
         });
     });
@@ -154,6 +178,15 @@ function addPreview(jsonSlides, id) {
     const style = preview.createElement("style");
     style.innerHTML = atob(jsonSlides.css[0].css);
     preview.body.appendChild(style);
+}
+
+function escapeHtml(text) {
+    return text
+        .replace(/&/g, "&")
+        .replace(/</g, "<")
+        .replace(/>/g, ">")
+        .replace(/"/g, "\"")
+        .replace(/'/g, "'");
 }
 
 async function setSlides() {
