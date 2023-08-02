@@ -96,7 +96,7 @@ document.getElementById("import_slides").addEventListener("click", () => {
             console.log(response);
             if (response === undefined) {
                 sendNotification("Sending you to Photon Slides");
-                window.open(`https://itsmarsss.github.io/Photon-Slides/app/&data=${btoa(slidesJSON)}`, "_blank");
+                window.open(`https://itsmarsss.github.io/Photon-Slides/app/?&data=${btoa(slidesJSON)}`, "_blank");
             } else {
                 sendNotification("Successfully imported slide into Photon Slides");
             }

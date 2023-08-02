@@ -613,6 +613,15 @@ _____ This is your <path to Photon Slides [.html]> content _____
   addSlide();
 
   scaleToFit();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const data = urlParams.get("data");
+
+  if (data != null) {
+    import_in.value = atob(data);
+
+    importAction();
+  }
 });
 
 document.addEventListener("keydown", (event) => {
