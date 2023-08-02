@@ -3,26 +3,24 @@
 At Photon Slides, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website and services ("Service").
 
 1. Information Collection and Use:
-We may collect certain information when you use Photon Slides, including:
+We may collect non-personal information about your interactions with the Service, such as your browser type, device information, and pages visited.
 
-- Usage Data: We may collect non-personal information about your interactions with the Service, such as your browser type, device information, and pages visited.
-
-1. Data Storage and Security:
+2. Data Storage and Security:
 We take appropriate measures to protect your information and maintain its confidentiality. However, please note that no data transmission over the internet can be guaranteed to be 100% secure, and we cannot guarantee the absolute security of your data.
 
-2. Sharing of Information:
+3. Sharing of Information:
 We may share your information with third-party service providers to facilitate the operation of the Service or for analytics purposes. We do not sell or rent your personal information to third parties.
 
-3. Cookies and Similar Technologies:
+4. Cookies and Similar Technologies:
 Photon Slides may use cookies and similar technologies to collect information about your interactions with the Service. You can manage your cookie preferences through your browser settings.
 
-4. Links to Third-Party Sites:
+5. Links to Third-Party Sites:
 Our Service may contain links to third-party websites or services. We are not responsible for the privacy practices or content of such third-party sites.
 
-5. Children's Privacy:
+6. Children's Privacy:
 Photon Slides is not intended for use by individuals under the age of 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected information from a child under 13, please contact us, and we will promptly delete such data.
 
-6. Changes to this Privacy Policy:
+7. Changes to this Privacy Policy:
 We may update this Privacy Policy from time to time. Any changes will be posted on this page. Your continued use of the Service after any modifications signifies your acceptance of the updated Privacy Policy.
 
 # Privacy Policy for Photon Slides Assistant:
