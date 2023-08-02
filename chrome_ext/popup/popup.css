@@ -191,6 +191,7 @@ a {
     border-radius: 10px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .add_new>span {
