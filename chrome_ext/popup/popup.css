@@ -216,30 +216,12 @@ a {
 }
 
 .report_issue {
+    display: flex;
+    gap: 15px;
     cursor: pointer;
-    width: 100px;
+    width: 500px;
     text-align: center;
     transition: 200ms;
-}
-
-.report_issue::after {
-    content: "";
-    width: 100%;
-    height: 2px;
-    background: var(--text);
-    transform: scaleX(0);
-    display: block;
-    transition: 200ms;
-    transform-origin: left;
-}
-
-.report_issue:hover {
-    filter: brightness(1.15);
-}
-
-.report_issue:hover:after {
-    transform: scaleX(1);
-    filter: brightness(1.15);
 }
 
 .socials {
