@@ -69,13 +69,16 @@ document.getElementById("ok_button").addEventListener("click", () => {
 
     if (currentLocation === "cloud") {
         cloud_slides.get(currentID).name = btoa(new_name.value);
+        setStorageCloud();
     } else {
         local_slides.get(currentID).name = btoa(new_name.value);
+        setStorageLocal();
     }
 
     document.getElementById(currentID + "-name").innerHTML = escapeHtml(new_name.value);
 
     sendNotification("Update slide name");
+
 });
 
 document.getElementById("import_slides").addEventListener("click", () => {
@@ -145,9 +148,11 @@ function newEntry(slides) {
     if (location_select.value === "cloud") {
         element = cloud_list;
         cloud_slides.set(id, jsonSlides);
+        setStorageCloud();
     } else {
         element = local_list;
         local_slides.set(id, jsonSlides);
+        setStorageLocal();
     }
 
     element.innerHTML = `<div class="slide" id="${id}-cont">
@@ -253,6 +258,52 @@ async function sendNotification(text) {
     }, 1000)
 }
 
+function setStorageLocal() {
+    var local_array = [];
+
+    local_slides.forEach((value, key) => {
+        local_array.push(value);
+    });
+
+    chrome.storage.local.set({ local: btoa(JSON.stringify(local_array)) }, function () {
+        console.log("Local slides setted");
+    });
+}
+
+function getStorageLocal() {
+    chrome.storage.local.get(["local"], function (result) {
+        var local_array = JSON.parse(atob(result.local));
+
+        local_array.forEach((slide) => {
+            location_select.value = "local";
+            newEntry(JSON.stringify(slide));
+        });
+    });
+}
+
+function setStorageCloud() {
+    var cloud_array = [];
+
+    cloud_slides.forEach((value, key) => {
+        cloud_array.push(value);
+    });
+
+    chrome.storage.sync.set({ cloud: btoa(JSON.stringify(cloud_array)) }, function () {
+        console.log("Cloud slides setted");
+    });
+}
+
+function getStorageCloud() {
+    chrome.storage.sync.get(["cloud"], function (result) {
+        var cloud_array = JSON.parse(atob(result.cloud));
+
+        cloud_array.forEach((slide) => {
+            location_select.value = "cloud";
+            newEntry(JSON.stringify(slide));
+        });
+    });
+}
+
 function escapeHtml(text) {
     return text
         .replace(/&/g, "&")
@@ -263,3 +314,6 @@ function escapeHtml(text) {
 }
 
 sendNotification("Extension Loaded!");
+
+getStorageLocal();
+getStorageCloud();
