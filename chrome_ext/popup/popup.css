@@ -38,7 +38,34 @@ body {
     background: var(--topbar);
     font-size: 15px;
     padding-left: 15px;
-    padding-top: 5px;
+    display: flex;
+}
+
+.topbar>a {
+    color: var(--text);
+    text-decoration: none;
+    transition: 500ms;
+    margin-top: 3px;
+}
+
+.topbar>a:hover {
+    transform: translateY(-3px);
+}
+
+.topbar>a::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background: var(--text);
+    transform: scaleX(0) translateY(-3px);
+    display: block;
+    transition: 200ms;
+    transform-origin: left;
+}
+
+.topbar>a:hover:after {
+    transform: scaleX(1) translateY(-3px);
+    filter: brightness(1.15);
 }
 
 .slide_shows {
