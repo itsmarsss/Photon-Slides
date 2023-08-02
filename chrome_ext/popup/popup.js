@@ -316,7 +316,9 @@ function escapeHtml(text) {
         .replace(/'/g, "'");
 }
 
-sendNotification("Extension Loaded!");
-
 getStorageLocal();
 getStorageCloud();
+
+setTimeout(() => {
+    sendNotification("Extension Loaded!");
+}, 100);
