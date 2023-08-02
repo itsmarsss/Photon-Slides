@@ -403,6 +403,34 @@ iframe {
     margin-top: 3px;
 }
 
+#controls {
+    z-index: 1;
+    width: 240px;
+    display: flex;
+    height: 25px;
+    bottom: 0px;
+    position: absolute;
+}
+
+.control_button {
+    width: 50%;
+    background: #1e1e1e90;
+    color: var(--text);
+    border: none;
+    outline: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.control_button:hover {
+    filter: brightness(0.95);
+}
+
+.control_button:active {
+    transform: scale(0.95);
+}
+
 .edit_group {
     gap: 10px;
     display: flex;

@@ -42,6 +42,7 @@ document.getElementById("cancel_new").addEventListener("click", () => {
 });
 
 document.getElementById("cancel_edit").addEventListener("click", () => {
+    slideIndex = 0;
     hideSlideEdit();
 });
 
@@ -120,6 +121,46 @@ document.getElementById("delete_slides").addEventListener("click", () => {
 
     sendNotification(`Selected ${currentLocation} entry deleted`);
 });
+
+var slideIndex = 0;
+
+document.getElementById("prev").addEventListener("click", () => {
+    slideIndex--;
+    updatePreview();
+});
+
+document.getElementById("next").addEventListener("click", () => {
+    slideIndex++;
+    updatePreview();
+});
+
+function updatePreview() {
+    var slideJSON;
+
+    if (currentLocation === "cloud") {
+        slideJSON = cloud_slides.get(currentID);
+    } else {
+        slideJSON = local_slides.get(currentID);
+    }
+
+    if (slideIndex < 0) {
+        slideIndex++;
+        return;
+    }
+
+    if (slideIndex >= slideJSON.css.length) {
+        slideIndex--;
+        return;
+    }
+
+    const iframe = document.getElementById("throwaway_joke");
+
+    const preview = iframe.contentWindow.document;
+
+    const style = preview.createElement("style");
+    style.innerHTML = atob(slideJSON.css[slideIndex].css);
+    preview.body.appendChild(style);
+}
 
 function showSlideSource() {
     slide_source.style.opacity = "1";
