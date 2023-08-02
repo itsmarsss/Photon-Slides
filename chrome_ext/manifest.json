@@ -1,13 +1,13 @@
 {
   "browser_specific_settings": {
     "gecko": {
-      "id": "photonslides.itsmarzzzzzz@protonmail.com"
+      "id": "photonslidesassistant.itsmarzzzzzz@protonmail.com"
     }
   },
-  "name": "Photon Slides",
-  "version": "1.1.2",
+  "name": "Photon Slides Assistant",
+  "version": "1.2.0",
   "manifest_version": 3,
-  "description": "Assistant for Photon Slides",
+  "description": "Assistant for Photon Slides | Store slides",
   "author": "Marsss' Dev Team",
   "permissions": ["activeTab", "storage"],
   "icons": {
