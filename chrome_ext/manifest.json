@@ -9,7 +9,7 @@
   "manifest_version": 3,
   "description": "Assistant for Photon Slides",
   "author": "Marsss' Dev Team",
-  "permissions": ["scripting", "activeTab", "storage"],
+  "permissions": ["activeTab", "storage"],
   "icons": {
     "16": "assets/icon-16.png",
     "32": "assets/icon-32.png",
@@ -20,7 +20,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://itsmarsss.github.io/Photon-Slides/app/"],
+      "matches": ["https://itsmarsss.github.io/Photon-Slides/app/*"],
       "js": ["scripts/content.js"]
     }
   ],

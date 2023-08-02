@@ -95,7 +95,8 @@ document.getElementById("import_slides").addEventListener("click", () => {
         chrome.tabs.sendMessage(activeTab.id, { "message": "import", "value": slidesJSON }, function (response) {
             console.log(response);
             if (response === undefined) {
-                sendNotification("Unable to import slide into Photon Slides");
+                sendNotification("Sending you to Photon Slides");
+                window.open(`https://itsmarsss.github.io/Photon-Slides/app/&data=${btoa(slidesJSON)}`, "_blank");
             } else {
                 sendNotification("Successfully imported slide into Photon Slides");
             }
