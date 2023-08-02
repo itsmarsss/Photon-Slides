@@ -409,6 +409,12 @@ function showGrepper() {
   grepper.style.transform = "scale(1)";
 }
 
+function checkGrepper() {
+  if (document.getElementsByClassName("open_grepper_editor").length > 0) {
+    showGrepper();
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   preview_cover.addEventListener("wheel", (event) => {
     const iframe = document.getElementById("container") as HTMLIFrameElement;
@@ -646,11 +652,13 @@ _____ This is your <path to Photon Slides [.html]> content _____
     importAction();
   }
 
-  setInterval(() => {
-    if (document.getElementsByClassName("open_grepper_editor").length > 0) {
-      showGrepper();
-    }
+  setTimeout(() => {
+    checkGrepper();
   }, 2000);
+
+  setInterval(() => {
+    checkGrepper();
+  }, 30000);
 });
 
 document.addEventListener("keydown", (event) => {

@@ -514,9 +514,9 @@ body {
 }
 
 #grepper>.popup_content {
-    height: 150px;
+    height: 175px;
 }
 
-#ok_grepper {
-    margin-top: 35px;
+.accented {
+    color: var(--accent);
 }
