@@ -265,6 +265,13 @@ function toggleFullScreen() {
         iframe.requestFullscreen();
     }
 }
+function copyLink(button) {
+    navigator.clipboard.writeText(`https://itsmarsss.github.io/Photon-Slides/app/?&data=${btoa(json_out.value)}`);
+    button.innerHTML = "Copied&nbsp;&nbsp;&#10003;";
+    setTimeout(() => {
+        button.innerHTML = "Copy Link&nbsp;&nbsp;&#9112;";
+    }, 2000);
+}
 document.addEventListener("DOMContentLoaded", () => {
     preview_cover.addEventListener("wheel", (event) => {
         const iframe = document.getElementById("container");
