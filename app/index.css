@@ -355,6 +355,7 @@ body {
     width: 100%;
     height: 100%;
     background: #00000079;
+    color: var(--text);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -510,4 +511,12 @@ body {
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+}
+
+#grepper>.popup_content {
+    height: 150px;
+}
+
+#ok_grepper {
+    margin-top: 35px;
 }

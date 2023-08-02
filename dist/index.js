@@ -20,6 +20,7 @@ const embed_out = document.getElementById("embed_export_out");
 const iframe_setup = document.getElementById("iframe_setup");
 const auto_play = document.getElementById("auto_play");
 const slide_length = document.getElementById("slide_length");
+const grepper = document.getElementById("grepper");
 textarea.addEventListener("keyup", () => {
     adjustTextArea();
     adjustLineNumber();
@@ -250,10 +251,12 @@ function hidePopups() {
     frame_setup.style.opacity = "0";
     download_popup.style.opacity = "0";
     upload_popup.style.opacity = "0";
+    grepper.style.opacity = "0";
     setTimeout(() => {
         frame_setup.style.transform = "scale(0)";
         download_popup.style.transform = "scale(0)";
         upload_popup.style.transform = "scale(0)";
+        grepper.style.transform = "scale(0)";
     }, 250);
 }
 function toggleFullScreen() {
@@ -271,6 +274,10 @@ function copyLink(button) {
     setTimeout(() => {
         button.innerHTML = "Copy Link&nbsp;&nbsp;&#9112;";
     }, 2000);
+}
+function showGrepper() {
+    grepper.style.opacity = "1";
+    grepper.style.transform = "scale(1)";
 }
 document.addEventListener("DOMContentLoaded", () => {
     preview_cover.addEventListener("wheel", (event) => {
@@ -472,6 +479,11 @@ _____ This is your <path to Photon Slides [.html]> content _____
         import_in.value = atob(data);
         importAction();
     }
+    setInterval(() => {
+        if (document.getElementsByClassName("open_grepper_editor").length > 0) {
+            showGrepper();
+        }
+    }, 2000);
 });
 document.addEventListener("keydown", (event) => {
     if (event.ctrlKey && (event.key === "s" || event.key === "S")) {

@@ -138,6 +138,18 @@
             <button id="import_button" class="down_up_button" onclick="importAction()">Import</button>
         </div>
     </div>
+
+    <div id="grepper" class="popup" onclick="hidePopups()">
+        <div class="popup_content" onclick="event.stopPropagation()">
+            We kindly request that you turn off Grepper when using the code editor. Grepper has been causing disruptions
+            and
+            breaking the functionality of the editor. By disabling Grepper, you can ensure a smoother and more reliable
+            coding
+            experience.
+
+            <button id="ok_grepper" class="down_up_button" onclick="hidePopups()">Okay</button>
+        </div>
+    </div>
 </body>
 <script type="text/javascript" src="./libraries/prism.js"></script>
 <link rel="stylesheet" href="./libraries/prism.css">

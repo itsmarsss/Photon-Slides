@@ -39,6 +39,8 @@ const slide_length = document.getElementById(
   "slide_length"
 ) as HTMLInputElement;
 
+const grepper = document.getElementById("grepper") as HTMLElement;
+
 textarea.addEventListener("keyup", () => {
   adjustTextArea();
   adjustLineNumber();
@@ -368,11 +370,13 @@ function hidePopups() {
   frame_setup.style.opacity = "0";
   download_popup.style.opacity = "0";
   upload_popup.style.opacity = "0";
+  grepper.style.opacity = "0";
 
   setTimeout(() => {
     frame_setup.style.transform = "scale(0)";
     download_popup.style.transform = "scale(0)";
     upload_popup.style.transform = "scale(0)";
+    grepper.style.transform = "scale(0)";
   }, 250);
 }
 
@@ -398,6 +402,11 @@ function copyLink(button: HTMLButtonElement) {
   setTimeout(() => {
     button.innerHTML = "Copy Link&nbsp;&nbsp;&#9112;";
   }, 2000);
+}
+
+function showGrepper() {
+  grepper.style.opacity = "1";
+  grepper.style.transform = "scale(1)";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -636,6 +645,12 @@ _____ This is your <path to Photon Slides [.html]> content _____
 
     importAction();
   }
+
+  setInterval(() => {
+    if (document.getElementsByClassName("open_grepper_editor").length > 0) {
+      showGrepper();
+    }
+  }, 2000);
 });
 
 document.addEventListener("keydown", (event) => {
