@@ -157,6 +157,7 @@ function scaleToFit() {
     const iframe = document.getElementById("container");
     const cover = document.getElementById("preview_cover");
     scale = Math.min(cover.offsetWidth / iframe.offsetWidth, cover.offsetHeight / iframe.offsetHeight);
+    rotation = 0;
     iframe.style.transition = "100ms";
     iframe.style.transform = `scale(${scale})`;
     iframe.style.left = "";

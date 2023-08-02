@@ -235,6 +235,8 @@ function scaleToFit() {
     cover.offsetHeight / iframe.offsetHeight
   );
 
+  rotation = 0;
+
   iframe.style.transition = "100ms";
   iframe.style.transform = `scale(${scale})`;
 
