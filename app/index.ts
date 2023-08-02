@@ -112,6 +112,17 @@ border: none;`;
 
 var editorIndex: number = 0;
 
+var scale: number = 1;
+var rotation: number = 0;
+
+var activeSlide: number = 0;
+
+var x: number;
+var y: number;
+var xPos: number;
+var yPos: number;
+var isDragging: boolean = false;
+
 function switchView(view: number) {
   css?.classList.remove("active");
   html?.classList.remove("active");
@@ -142,8 +153,6 @@ function switchView(view: number) {
   adjustLineNumber();
   updateiFrames();
 }
-
-var activeSlide: number = 0;
 
 function selectSlide(slideIndex: number) {
   if (slideIndex >= slides_css.length || slideIndex < 0) {
@@ -215,53 +224,6 @@ function rerenderSlides() {
   selectSlide(activeSlide - 1);
 }
 
-var scale: number = 1;
-var rotation: number = 0;
-
-preview_cover.addEventListener("wheel", (event) => {
-  const iframe = document.getElementById("container") as HTMLIFrameElement;
-
-  if (event.altKey && event.shiftKey) {
-    var rotate;
-
-    if (event.deltaY > 0) {
-      rotate = 15;
-    } else {
-      rotate = -15;
-    }
-
-    rotation += rotate;
-  } else {
-    var scrollAmt: number = event.deltaY / 2500;
-
-    if (event.altKey) {
-      scrollAmt /= 5;
-    } else if (event.shiftKey) {
-      scrollAmt *= 5;
-    }
-
-    if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
-      return;
-    }
-
-    scale -= scrollAmt;
-  }
-
-  console.log(rotation);
-
-  iframe.style.transition = "100ms";
-  iframe.style.transform = `scale(${scale}) rotate(${rotation}deg`;
-
-  setTimeout(() => {
-    iframe.style.transition = "0ms";
-
-    if (rotation >= 360 || rotation <= -360) {
-      rotation %= 360;
-      iframe.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
-    }
-  }, 110);
-});
-
 function scaleToFit() {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
   const cover = document.getElementById("preview_cover") as HTMLElement;
@@ -281,6 +243,7 @@ function scaleToFit() {
     iframe.style.transition = "0ms";
   }, 110);
 }
+
 function scaleTo(percent: number) {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
   const cover = document.getElementById("preview_cover") as HTMLElement;
@@ -291,89 +254,14 @@ function scaleTo(percent: number) {
   );
 
   iframe.style.transition = "100ms";
-  iframe.style.transform = `scale(${scale * (percent / 100)})`;
+  iframe.style.transform = `scale(${
+    scale * (percent / 100)
+  }) rotate(${rotation}deg)`;
 
   setTimeout(() => {
     iframe.style.transition = "0ms";
   }, 110);
 }
-
-var x: number;
-var y: number;
-var xPos: number;
-var yPos: number;
-var isDragging: boolean = false;
-
-preview_cover.addEventListener("mousedown", (event) => {
-  const iframe = document.getElementById("container") as HTMLIFrameElement;
-
-  x = event.clientX;
-  y = event.clientY;
-  xPos = iframe.offsetLeft;
-  yPos = iframe.offsetTop;
-
-  isDragging = true;
-});
-
-preview_cover.addEventListener("mouseup", () => {
-  isDragging = false;
-});
-
-preview_cover.addEventListener("mouseout", () => {
-  isDragging = false;
-});
-
-preview_cover.addEventListener("mousemove", (event) => {
-  if (isDragging) {
-    const iframe = document.getElementById("container") as HTMLIFrameElement;
-
-    const xOffset = xPos + (event.clientX - x);
-    const yOffset = yPos + (event.clientY - y);
-
-    iframe.style.left = xOffset + "px";
-    iframe.style.top = yOffset + "px";
-  }
-});
-
-preview_cover.addEventListener("keydown", (event) => {
-  switch (event.key) {
-    case "ArrowLeft":
-    case "ArrowUp":
-    case "Delete":
-      setSlide(activeSlide - 1);
-      selectSlide(activeSlide - 1);
-      break;
-    case "ArrowRight":
-    case "ArrowDown":
-    case " ":
-      setSlide(activeSlide + 1);
-      selectSlide(activeSlide + 1);
-      break;
-  }
-});
-
-preview_cover.addEventListener("dblclick", (e) => {
-  const iframe = document.getElementById("container") as HTMLIFrameElement;
-
-  if (e.shiftKey) {
-    if (scale - 0.5 < 0) {
-      return;
-    }
-    scale -= 0.5;
-  } else {
-    if (scale + 0.5 > 50) {
-      return;
-    }
-    scale += 0.5;
-  }
-
-  iframe.style.transition = "200ms";
-  iframe.style.transform = `scale(${scale})`;
-
-  setTimeout(() => {
-    iframe.style.transition = "";
-  }, 200);
-});
 
 function updateiFrames() {
   for (var i = 0; i < slides_css.length; i++) {
@@ -488,8 +376,110 @@ function hidePopups() {
   }, 250);
 }
 
-document.addEventListener("keydown", (event) => {
+function toggleFullScreen() {
+  const iframe = document.getElementById("container") as HTMLIFrameElement;
+
   if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    iframe.requestFullscreen();
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  preview_cover.addEventListener("wheel", (event) => {
+    const iframe = document.getElementById("container") as HTMLIFrameElement;
+
+    if (event.altKey && event.shiftKey) {
+      var rotate;
+
+      if (event.deltaY > 0) {
+        rotate = 15;
+      } else {
+        rotate = -15;
+      }
+
+      rotation += rotate;
+    } else {
+      var scrollAmt: number = event.deltaY / 2500;
+
+      if (event.altKey) {
+        scrollAmt /= 5;
+      } else if (event.shiftKey) {
+        scrollAmt *= 5;
+      }
+
+      if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
+        return;
+      }
+
+      scale -= scrollAmt;
+    }
+
+    iframe.style.transition = "100ms";
+    iframe.style.transform = `scale(${scale}) rotate(${rotation}deg`;
+
+    setTimeout(() => {
+      iframe.style.transition = "0ms";
+
+      if (rotation >= 360 || rotation <= -360) {
+        rotation %= 360;
+        iframe.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+      }
+    }, 110);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (document.fullscreenElement) {
+      switch (event.key) {
+        case "ArrowLeft":
+        case "ArrowUp":
+        case "Delete":
+          setSlide(activeSlide - 1);
+          selectSlide(activeSlide - 1);
+          break;
+        case "ArrowRight":
+        case "ArrowDown":
+        case " ":
+          setSlide(activeSlide + 1);
+          selectSlide(activeSlide + 1);
+          break;
+      }
+    }
+  });
+
+  preview_cover.addEventListener("mousedown", (event) => {
+    const iframe = document.getElementById("container") as HTMLIFrameElement;
+
+    x = event.clientX;
+    y = event.clientY;
+    xPos = iframe.offsetLeft;
+    yPos = iframe.offsetTop;
+
+    isDragging = true;
+  });
+
+  preview_cover.addEventListener("mouseup", () => {
+    isDragging = false;
+  });
+
+  preview_cover.addEventListener("mouseout", () => {
+    isDragging = false;
+  });
+
+  preview_cover.addEventListener("mousemove", (event) => {
+    if (isDragging) {
+      const iframe = document.getElementById("container") as HTMLIFrameElement;
+
+      const xOffset = xPos + (event.clientX - x);
+      const yOffset = yPos + (event.clientY - y);
+
+      iframe.style.left = xOffset + "px";
+      iframe.style.top = yOffset + "px";
+    }
+  });
+
+  preview_cover.addEventListener("keydown", (event) => {
     switch (event.key) {
       case "ArrowLeft":
       case "ArrowUp":
@@ -504,40 +494,52 @@ document.addEventListener("keydown", (event) => {
         selectSlide(activeSlide + 1);
         break;
     }
-  }
-});
+  });
 
-function toggleFullScreen() {
-  const iframe = document.getElementById("container") as HTMLIFrameElement;
+  preview_cover.addEventListener("dblclick", (e) => {
+    const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  } else {
-    iframe.requestFullscreen();
-  }
-}
+    if (e.shiftKey) {
+      if (scale - 0.5 < 0) {
+        return;
+      }
+      scale -= 0.5;
+    } else {
+      if (scale + 0.5 > 50) {
+        return;
+      }
+      scale += 0.5;
+    }
 
-setInterval(() => {
-  updateiFrames();
-}, 5000);
+    iframe.style.transition = "200ms";
+    iframe.style.transform = `scale(${scale})`;
 
-setInterval(() => {
-  var css: string = "";
-  var cssArray: string = "[";
+    setTimeout(() => {
+      iframe.style.transition = "";
+    }, 200);
+  });
 
-  slides_css.forEach((element) => {
-    css += `
+  setInterval(() => {
+    updateiFrames();
+  }, 5000);
+
+  setInterval(() => {
+    var css: string = "";
+    var cssArray: string = "[";
+
+    slides_css.forEach((element) => {
+      css += `
       {
         "css": "${btoa(element.css)}",
         "notes": "${btoa(element.notes)}"
       },`;
 
-    cssArray += `"${btoa(element.css)}",`;
-  });
+      cssArray += `"${btoa(element.css)}",`;
+    });
 
-  cssArray = cssArray.slice(0, -1) + "]";
+    cssArray = cssArray.slice(0, -1) + "]";
 
-  var json: string = `{
+    var json: string = `{
   "name": "${btoa(
     slide_name.value.split(" ").join("").length == 0
       ? "Untitled Photon Slide"
@@ -549,16 +551,16 @@ setInterval(() => {
   ]
 }`;
 
-  json_out.value = json;
+    json_out.value = json;
 
-  var slideProgression: string;
+    var slideProgression: string;
 
-  if (auto_play.checked) {
-    slideProgression = `setInterval(() => {
+    if (auto_play.checked) {
+      slideProgression = `setInterval(() => {
       advanceSlide();
     }, ${slide_length.value});`;
-  } else {
-    slideProgression = `document.addEventListener("mousedown", () => {
+    } else {
+      slideProgression = `document.addEventListener("mousedown", () => {
       advanceSlide();
     });
     document.addEventListener("keydown", (event) => {
@@ -570,9 +572,9 @@ setInterval(() => {
           advanceSlide();
       }
     });`;
-  }
+    }
 
-  var embed: string = `_____ Place iFrame into your HTML file; make sure to edit <path to Photon Slides [.html]> _____
+    var embed: string = `_____ Place iFrame into your HTML file; make sure to edit <path to Photon Slides [.html]> _____
   
   <iframe style="${iframe_css
     .split("\n")
@@ -605,10 +607,9 @@ _____ This is your <path to Photon Slides [.html]> content _____
     }
   </script>`;
 
-  embed_out.value = embed;
-}, 1000);
+    embed_out.value = embed;
+  }, 1000);
 
-document.addEventListener("DOMContentLoaded", () => {
   addSlide();
 
   scaleToFit();

@@ -70,6 +70,14 @@ height: 720px;
 background: #fff;
 border: none;`;
 var editorIndex = 0;
+var scale = 1;
+var rotation = 0;
+var activeSlide = 0;
+var x;
+var y;
+var xPos;
+var yPos;
+var isDragging = false;
 function switchView(view) {
     var _a;
     css === null || css === void 0 ? void 0 : css.classList.remove("active");
@@ -94,7 +102,6 @@ function switchView(view) {
     adjustLineNumber();
     updateiFrames();
 }
-var activeSlide = 0;
 function selectSlide(slideIndex) {
     var _a, _b;
     if (slideIndex >= slides_css.length || slideIndex < 0) {
@@ -145,44 +152,6 @@ function rerenderSlides() {
     });
     selectSlide(activeSlide - 1);
 }
-var scale = 1;
-var rotation = 0;
-preview_cover.addEventListener("wheel", (event) => {
-    const iframe = document.getElementById("container");
-    if (event.altKey && event.shiftKey) {
-        var rotate;
-        if (event.deltaY > 0) {
-            rotate = 15;
-        }
-        else {
-            rotate = -15;
-        }
-        rotation += rotate;
-    }
-    else {
-        var scrollAmt = event.deltaY / 2500;
-        if (event.altKey) {
-            scrollAmt /= 5;
-        }
-        else if (event.shiftKey) {
-            scrollAmt *= 5;
-        }
-        if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
-            return;
-        }
-        scale -= scrollAmt;
-    }
-    console.log(rotation);
-    iframe.style.transition = "100ms";
-    iframe.style.transform = `scale(${scale}) rotate(${rotation}deg`;
-    setTimeout(() => {
-        iframe.style.transition = "0ms";
-        if (rotation >= 360 || rotation <= -360) {
-            rotation %= 360;
-            iframe.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
-        }
-    }, 110);
-});
 function scaleToFit() {
     const iframe = document.getElementById("container");
     const cover = document.getElementById("preview_cover");
@@ -200,75 +169,11 @@ function scaleTo(percent) {
     const cover = document.getElementById("preview_cover");
     scale = Math.min(cover.offsetWidth / iframe.offsetWidth, cover.offsetHeight / iframe.offsetHeight);
     iframe.style.transition = "100ms";
-    iframe.style.transform = `scale(${scale * (percent / 100)})`;
+    iframe.style.transform = `scale(${scale * (percent / 100)}) rotate(${rotation}deg)`;
     setTimeout(() => {
         iframe.style.transition = "0ms";
     }, 110);
 }
-var x;
-var y;
-var xPos;
-var yPos;
-var isDragging = false;
-preview_cover.addEventListener("mousedown", (event) => {
-    const iframe = document.getElementById("container");
-    x = event.clientX;
-    y = event.clientY;
-    xPos = iframe.offsetLeft;
-    yPos = iframe.offsetTop;
-    isDragging = true;
-});
-preview_cover.addEventListener("mouseup", () => {
-    isDragging = false;
-});
-preview_cover.addEventListener("mouseout", () => {
-    isDragging = false;
-});
-preview_cover.addEventListener("mousemove", (event) => {
-    if (isDragging) {
-        const iframe = document.getElementById("container");
-        const xOffset = xPos + (event.clientX - x);
-        const yOffset = yPos + (event.clientY - y);
-        iframe.style.left = xOffset + "px";
-        iframe.style.top = yOffset + "px";
-    }
-});
-preview_cover.addEventListener("keydown", (event) => {
-    switch (event.key) {
-        case "ArrowLeft":
-        case "ArrowUp":
-        case "Delete":
-            setSlide(activeSlide - 1);
-            selectSlide(activeSlide - 1);
-            break;
-        case "ArrowRight":
-        case "ArrowDown":
-        case " ":
-            setSlide(activeSlide + 1);
-            selectSlide(activeSlide + 1);
-            break;
-    }
-});
-preview_cover.addEventListener("dblclick", (e) => {
-    const iframe = document.getElementById("container");
-    if (e.shiftKey) {
-        if (scale - 0.5 < 0) {
-            return;
-        }
-        scale -= 0.5;
-    }
-    else {
-        if (scale + 0.5 > 50) {
-            return;
-        }
-        scale += 0.5;
-    }
-    iframe.style.transition = "200ms";
-    iframe.style.transform = `scale(${scale})`;
-    setTimeout(() => {
-        iframe.style.transition = "";
-    }, 200);
-});
 function updateiFrames() {
     var _a;
     for (var i = 0; i < slides_css.length; i++) {
@@ -351,8 +256,93 @@ function hidePopups() {
         upload_popup.style.transform = "scale(0)";
     }, 250);
 }
-document.addEventListener("keydown", (event) => {
+function toggleFullScreen() {
+    const iframe = document.getElementById("container");
     if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    else {
+        iframe.requestFullscreen();
+    }
+}
+document.addEventListener("DOMContentLoaded", () => {
+    preview_cover.addEventListener("wheel", (event) => {
+        const iframe = document.getElementById("container");
+        if (event.altKey && event.shiftKey) {
+            var rotate;
+            if (event.deltaY > 0) {
+                rotate = 15;
+            }
+            else {
+                rotate = -15;
+            }
+            rotation += rotate;
+        }
+        else {
+            var scrollAmt = event.deltaY / 2500;
+            if (event.altKey) {
+                scrollAmt /= 5;
+            }
+            else if (event.shiftKey) {
+                scrollAmt *= 5;
+            }
+            if (scale - scrollAmt < 0.005 || scale - scrollAmt > 50) {
+                return;
+            }
+            scale -= scrollAmt;
+        }
+        iframe.style.transition = "100ms";
+        iframe.style.transform = `scale(${scale}) rotate(${rotation}deg`;
+        setTimeout(() => {
+            iframe.style.transition = "0ms";
+            if (rotation >= 360 || rotation <= -360) {
+                rotation %= 360;
+                iframe.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+            }
+        }, 110);
+    });
+    document.addEventListener("keydown", (event) => {
+        if (document.fullscreenElement) {
+            switch (event.key) {
+                case "ArrowLeft":
+                case "ArrowUp":
+                case "Delete":
+                    setSlide(activeSlide - 1);
+                    selectSlide(activeSlide - 1);
+                    break;
+                case "ArrowRight":
+                case "ArrowDown":
+                case " ":
+                    setSlide(activeSlide + 1);
+                    selectSlide(activeSlide + 1);
+                    break;
+            }
+        }
+    });
+    preview_cover.addEventListener("mousedown", (event) => {
+        const iframe = document.getElementById("container");
+        x = event.clientX;
+        y = event.clientY;
+        xPos = iframe.offsetLeft;
+        yPos = iframe.offsetTop;
+        isDragging = true;
+    });
+    preview_cover.addEventListener("mouseup", () => {
+        isDragging = false;
+    });
+    preview_cover.addEventListener("mouseout", () => {
+        isDragging = false;
+    });
+    preview_cover.addEventListener("mousemove", (event) => {
+        if (isDragging) {
+            const iframe = document.getElementById("container");
+            const xOffset = xPos + (event.clientX - x);
+            const yOffset = yPos + (event.clientY - y);
+            iframe.style.left = xOffset + "px";
+            iframe.style.top = yOffset + "px";
+        }
+    });
+    preview_cover.addEventListener("keydown", (event) => {
         switch (event.key) {
             case "ArrowLeft":
             case "ArrowUp":
@@ -367,50 +357,60 @@ document.addEventListener("keydown", (event) => {
                 selectSlide(activeSlide + 1);
                 break;
         }
-    }
-});
-function toggleFullScreen() {
-    const iframe = document.getElementById("container");
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    }
-    else {
-        iframe.requestFullscreen();
-    }
-}
-setInterval(() => {
-    updateiFrames();
-}, 5000);
-setInterval(() => {
-    var css = "";
-    var cssArray = "[";
-    slides_css.forEach((element) => {
-        css += `
+    });
+    preview_cover.addEventListener("dblclick", (e) => {
+        const iframe = document.getElementById("container");
+        if (e.shiftKey) {
+            if (scale - 0.5 < 0) {
+                return;
+            }
+            scale -= 0.5;
+        }
+        else {
+            if (scale + 0.5 > 50) {
+                return;
+            }
+            scale += 0.5;
+        }
+        iframe.style.transition = "200ms";
+        iframe.style.transform = `scale(${scale})`;
+        setTimeout(() => {
+            iframe.style.transition = "";
+        }, 200);
+    });
+    setInterval(() => {
+        updateiFrames();
+    }, 5000);
+    setInterval(() => {
+        var css = "";
+        var cssArray = "[";
+        slides_css.forEach((element) => {
+            css += `
       {
         "css": "${btoa(element.css)}",
         "notes": "${btoa(element.notes)}"
       },`;
-        cssArray += `"${btoa(element.css)}",`;
-    });
-    cssArray = cssArray.slice(0, -1) + "]";
-    var json = `{
+            cssArray += `"${btoa(element.css)}",`;
+        });
+        cssArray = cssArray.slice(0, -1) + "]";
+        var json = `{
   "name": "${btoa(slide_name.value.split(" ").join("").length == 0
-        ? "Untitled Photon Slide"
-        : slide_name.value)}",
+            ? "Untitled Photon Slide"
+            : slide_name.value)}",
   "html": "${btoa(slide_html)}",
   "iframe": "${btoa(iframe_css)}",
   "css": [${css.slice(0, -1)}
   ]
 }`;
-    json_out.value = json;
-    var slideProgression;
-    if (auto_play.checked) {
-        slideProgression = `setInterval(() => {
+        json_out.value = json;
+        var slideProgression;
+        if (auto_play.checked) {
+            slideProgression = `setInterval(() => {
       advanceSlide();
     }, ${slide_length.value});`;
-    }
-    else {
-        slideProgression = `document.addEventListener("mousedown", () => {
+        }
+        else {
+            slideProgression = `document.addEventListener("mousedown", () => {
       advanceSlide();
     });
     document.addEventListener("keydown", (event) => {
@@ -422,12 +422,12 @@ setInterval(() => {
           advanceSlide();
       }
     });`;
-    }
-    var embed = `_____ Place iFrame into your HTML file; make sure to edit <path to Photon Slides [.html]> _____
+        }
+        var embed = `_____ Place iFrame into your HTML file; make sure to edit <path to Photon Slides [.html]> _____
   
   <iframe style="${iframe_css
-        .split("\n")
-        .join("")}" src="<path to Photon Slides [.html]>"></iframe>
+            .split("\n")
+            .join("")}" src="<path to Photon Slides [.html]>"></iframe>
   
 
 _____ This is your <path to Photon Slides [.html]> content _____
@@ -455,9 +455,8 @@ _____ This is your <path to Photon Slides [.html]> content _____
         styles.innerHTML += atob(slides_css[slide_num]);
     }
   </script>`;
-    embed_out.value = embed;
-}, 1000);
-document.addEventListener("DOMContentLoaded", () => {
+        embed_out.value = embed;
+    }, 1000);
     addSlide();
     scaleToFit();
 });
