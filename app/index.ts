@@ -351,6 +351,12 @@ function importAction() {
 
   preview.body.innerHTML = slide_html;
 
+  const style = preview.createElement("style");
+  style.setAttribute("id", "slideNum-0");
+  style.innerHTML = slides_css[0].css;
+
+  preview.body.appendChild(style);
+
   textarea.dispatchEvent(new Event("input"));
 }
 

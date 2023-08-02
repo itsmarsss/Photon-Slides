@@ -235,6 +235,10 @@ function importAction() {
     const preview = (iframe.contentDocument ||
         ((_a = iframe.contentWindow) === null || _a === void 0 ? void 0 : _a.document));
     preview.body.innerHTML = slide_html;
+    const style = preview.createElement("style");
+    style.setAttribute("id", "slideNum-0");
+    style.innerHTML = slides_css[0].css;
+    preview.body.appendChild(style);
     textarea.dispatchEvent(new Event("input"));
 }
 function copyJSON() {
