@@ -106,8 +106,10 @@ document.getElementById("import_slides").addEventListener("click", () => {
 document.getElementById("delete_slides").addEventListener("click", () => {
     if (currentLocation === "cloud") {
         cloud_slides.delete(currentID);
+        setStorageCloud();
     } else {
         local_slides.delete(currentID);
+        setStorageLocal();
     }
 
     var elem = document.getElementById(currentID + "-cont");
