@@ -351,9 +351,8 @@ function hidePopups() {
         upload_popup.style.transform = "scale(0)";
     }, 250);
 }
-var fullscreened = false;
 document.addEventListener("keydown", (event) => {
-    if (fullscreened) {
+    if (document.fullscreenElement) {
         switch (event.key) {
             case "ArrowLeft":
             case "ArrowUp":
@@ -372,13 +371,12 @@ document.addEventListener("keydown", (event) => {
 });
 function toggleFullScreen() {
     const iframe = document.getElementById("container");
-    if (fullscreened) {
+    if (document.fullscreenElement) {
         document.exitFullscreen();
     }
     else {
         iframe.requestFullscreen();
     }
-    fullscreened = !fullscreened;
 }
 setInterval(() => {
     updateiFrames();

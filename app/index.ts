@@ -488,10 +488,8 @@ function hidePopups() {
   }, 250);
 }
 
-var fullscreened: boolean = false;
-
 document.addEventListener("keydown", (event) => {
-  if (fullscreened) {
+  if (document.fullscreenElement) {
     switch (event.key) {
       case "ArrowLeft":
       case "ArrowUp":
@@ -512,13 +510,11 @@ document.addEventListener("keydown", (event) => {
 function toggleFullScreen() {
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  if (fullscreened) {
+  if (document.fullscreenElement) {
     document.exitFullscreen();
   } else {
     iframe.requestFullscreen();
   }
-
-  fullscreened = !fullscreened;
 }
 
 setInterval(() => {
