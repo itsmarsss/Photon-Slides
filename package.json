@@ -5,7 +5,10 @@
   "main": "app/index.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-packager . \"Photon Slides\" --platform=win32 --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite"
+    "build": "npm run build:win && npm run build:mac && npm run build:linux",
+    "build:win": "electron-packager . \"Photon Slides\" --platform=win32 --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite",
+    "build:mac": "electron-packager . \"Photon Slides\" --platform=darwin --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite",
+    "build:linux": "electron-packager . \"Photon Slides\" --platform=linux --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite"
   },
   "author": "itsmarsss",
   "license": "Apache-2.0",
