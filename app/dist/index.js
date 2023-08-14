@@ -1,4 +1,5 @@
 "use strict";
+const tab_title = document.getElementById("tab_title");
 const css = document.getElementById("tab_css");
 const html = document.getElementById("tab_html");
 const notes = document.getElementById("tab_notes");
@@ -81,9 +82,9 @@ var yPos;
 var isDragging = false;
 function switchView(view) {
     var _a;
-    css === null || css === void 0 ? void 0 : css.classList.remove("active");
-    html === null || html === void 0 ? void 0 : html.classList.remove("active");
-    notes === null || notes === void 0 ? void 0 : notes.classList.remove("active");
+    css.classList.remove("active");
+    html.classList.remove("active");
+    notes.classList.remove("active");
     (_a = tabList[view]) === null || _a === void 0 ? void 0 : _a.classList.add("active");
     highlighting_content.classList.remove("language-css");
     highlighting_content.classList.remove("language-html");
@@ -480,6 +481,9 @@ _____ This is your <path to Photon Slides [.html]> content _____
     }
   </script>`;
         embed_out.value = embed;
+        tab_title.innerHTML = `Photon Slides | ${slide_name.value.split(" ").join("").length == 0
+            ? "Untitled Photon Slide"
+            : slide_name.value}`;
     }, 1000);
     addSlide();
     scaleToFit();

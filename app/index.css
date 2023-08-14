@@ -51,6 +51,7 @@ body {
     text-align: center;
     z-index: 1;
     display: flex;
+    gap: 10px;
     justify-content: space-evenly;
 }
 
@@ -70,6 +71,19 @@ body {
 
 #slide_name:is(:active, :focus) {
     outline: 2px solid var(--text-accent);
+}
+
+#aside {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+#aside::-webkit-scrollbar {
+    display: none;
+}
+
+#data_button_cont {
+    width: 485px;
 }
 
 .data_button {

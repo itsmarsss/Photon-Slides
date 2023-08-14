@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photon Slides</title>
+    <title id="tab_title">Photon Slides</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"
         type="text/css">
     <link rel="icon" href="./assets/icon.png" type="image/png">
@@ -17,11 +17,13 @@
                 placeholder="Untitled Photon Slide"></input>&nbsp;&nbsp;-&nbsp;&nbsp;Photon Slides
         </div>
         <div id="aside">
-            <button class="data_button" onclick="frameSetup()">Frame Setup&nbsp;&nbsp;&#9965;</button></button>
-            <button class="data_button" onclick="importSlides()">Import&nbsp;&nbsp;&darr;</button>
-            <button class="data_button" onclick="exportSlides()">Export&nbsp;&nbsp;&uarr;</button>
-            <button class="data_button" onclick="toggleFullScreen()">Present&nbsp;&nbsp;&#9974;</button>
-            <button class="data_button" onclick="copyLink(this)">Copy Link&nbsp;&nbsp;&#9112;</button>
+            <div id="data_button_cont">
+                <button class="data_button" onclick="frameSetup()">Frame Setup&nbsp;&nbsp;&#9965;</button></button>
+                <button class="data_button" onclick="importSlides()">Import&nbsp;&nbsp;&darr;</button>
+                <button class="data_button" onclick="exportSlides()">Export&nbsp;&nbsp;&uarr;</button>
+                <button class="data_button" onclick="toggleFullScreen()">Present&nbsp;&nbsp;&#9974;</button>
+                <button class="data_button" onclick="copyLink(this)">Copy Link&nbsp;&nbsp;&#9112;</button>
+            </div>
         </div>
     </div>
     <div id="main_content">

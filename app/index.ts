@@ -1,6 +1,8 @@
-const css = document.getElementById("tab_css");
-const html = document.getElementById("tab_html");
-const notes = document.getElementById("tab_notes");
+const tab_title = document.getElementById("tab_title") as HTMLElement;
+
+const css = document.getElementById("tab_css") as HTMLElement;
+const html = document.getElementById("tab_html") as HTMLElement;
+const notes = document.getElementById("tab_notes") as HTMLElement;
 
 const tabList = [css, html, notes];
 
@@ -126,9 +128,9 @@ var yPos: number;
 var isDragging: boolean = false;
 
 function switchView(view: number) {
-  css?.classList.remove("active");
-  html?.classList.remove("active");
-  notes?.classList.remove("active");
+  css.classList.remove("active");
+  html.classList.remove("active");
+  notes.classList.remove("active");
 
   tabList[view]?.classList.add("active");
 
@@ -645,6 +647,12 @@ _____ This is your <path to Photon Slides [.html]> content _____
   </script>`;
 
     embed_out.value = embed;
+
+    tab_title.innerHTML = `Photon Slides | ${
+      slide_name.value.split(" ").join("").length == 0
+        ? "Untitled Photon Slide"
+        : slide_name.value
+    }`;
   }, 1000);
 
   addSlide();
