@@ -2,7 +2,7 @@
   "name": "photon-slides",
   "version": "1.0.0",
   "description": "Create stunning HTML/CSS slideshows with beautiful transitions. Unleash your creativity!",
-  "main": "src/index.js",
+  "main": "app/index.js",
   "scripts": {
     "start": "electron ."
   },
