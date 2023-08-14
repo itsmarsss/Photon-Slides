@@ -4,12 +4,12 @@
   "description": "Create stunning HTML/CSS slideshows with beautiful transitions. Unleash your creativity!",
   "main": "app/index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . \"Photon Slides\" --platform=win32 --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite"
   },
   "author": "itsmarsss",
   "license": "Apache-2.0",
   "devDependencies": {
-    "electron": "^25.5.0",
-    "electron-packager": "^17.1.1"
+    "electron": "^25.5.0"
   }
 }
