@@ -379,6 +379,12 @@ body {
     transition: opacity 250ms;
 }
 
+#download {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .popup_content {
     width: 50%;
     min-width: 500px;
@@ -388,6 +394,22 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
+}
+
+#download_assistant {
+    height: 50px;
+}
+
+#download_assistant>p {
+    margin: 0;
+}
+
+#download_assistant>p>a {
+    color: var(--accent);
+}
+
+#download_assistant_button {
+    width: 100%;
 }
 
 .down_up_textarea {
@@ -406,8 +428,7 @@ body {
 }
 
 .down_up_textarea::-webkit-scrollbar {
-    width: 0px;
-    height: 0px;
+    display: none;
 }
 
 .export_cont,

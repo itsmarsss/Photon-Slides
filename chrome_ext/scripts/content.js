@@ -1,6 +1,8 @@
 var photonslides = (async function () {
     console.log("We're in - Photon Slides Assistant");
 
+    document.getElementById("download_assistant").style.display = "none;"
+
     chrome.runtime.onMessage.addListener(
         function (request, sender, sendResponse) {
             if (request.message === "query") {
