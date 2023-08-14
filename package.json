@@ -1,5 +1,6 @@
 {
   "name": "photon-slides",
+  "productName": "Photon Slides",
   "version": "1.0.0",
   "description": "Create stunning HTML/CSS slideshows with beautiful transitions. Unleash your creativity!",
   "main": "app/index.js",
@@ -8,10 +9,32 @@
     "build": "npm run build:win && npm run build:mac && npm run build:linux",
     "build:win": "electron-packager . \"Photon Slides\" --platform=win32 --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite",
     "build:mac": "electron-packager . \"Photon Slides\" --platform=darwin --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite",
-    "build:linux": "electron-packager . \"Photon Slides\" --platform=linux --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite"
+    "build:linux": "electron-packager . \"Photon Slides\" --platform=linux --arch=x64 --out=dist/ --icon=app/assets/icon.ico --overwrite",
+    "build:installer": "npm run build:installer-win && npm run build:installer-mac && npm run build:installer-linux",
+    "build:installer-win": "electron-builder --win",
+    "build:installer-mac": "electron-builder --mac",
+    "build:installer-linux": "electron-builder --linux"
   },
   "author": "itsmarsss",
   "license": "Apache-2.0",
+  "build": {
+    "directories": {
+      "output": "dist/installer/"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "app/assets/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "app/assets/icon.ico",
+      "category": "Utility"
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "app/assets/icon.ico"
+    }
+  },
   "devDependencies": {
     "electron": "^25.5.0"
   }
