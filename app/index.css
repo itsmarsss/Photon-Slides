@@ -211,6 +211,7 @@ body {
 
 #zoom_editor {
     position: absolute;
+    margin-right: 12px;
     background: var(--secondary);
     border: 1px solid var(--text);
     width: 150px;
