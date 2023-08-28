@@ -208,6 +208,38 @@ body {
     justify-content: center;
 }
 
+#fullscreen_controls {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    visibility: hidden;
+}
+
+#fullscreen_container.active>#fullscreen_controls {
+    visibility: visible;
+}
+
+.control_button {
+    width: 50px;
+    background: #1e1e1e90;
+    color: var(--text);
+    border: none;
+    outline: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 100ms;
+    text-align: center;
+}
+
+.control_button:hover {
+    filter: brightness(1.5);
+}
+
+.control_button:active {
+    transform: scale(0.95);
+}
+
 #preview_cover {
     position: absolute;
     background: transparent;

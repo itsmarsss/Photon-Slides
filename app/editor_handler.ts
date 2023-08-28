@@ -20,3 +20,13 @@ function setSlide(index: number) {
     preview.body.appendChild(style);
   }
 }
+
+function left() {
+  setSlide(activeSlide - 1);
+  selectSlide(activeSlide - 1);
+}
+
+function right() {
+  setSlide(activeSlide + 1);
+  selectSlide(activeSlide + 1);
+}
