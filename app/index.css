@@ -198,6 +198,16 @@ body {
     position: relative;
 }
 
+#fullscreen_container.active {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #preview_cover {
     position: absolute;
     background: transparent;

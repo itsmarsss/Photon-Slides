@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 const tab_title = document.getElementById("tab_title");
 const css = document.getElementById("tab_css");
 const html = document.getElementById("tab_html");
@@ -7,6 +16,7 @@ const tabList = [css, html, notes];
 const slide_name = document.getElementById("slide_name");
 const display_list = document.getElementById("display_list");
 const preview_cover = document.getElementById("preview_cover");
+const fullscreen_container = document.getElementById("fullscreen_container");
 const textarea = document.getElementById("text_editor");
 const highlighting = document.getElementById("highlighting");
 const highlighting_content = document.getElementById("highlighting_content");
@@ -266,14 +276,25 @@ function hidePopups() {
     }, 250);
 }
 function toggleFullScreen() {
-    const iframe = document.getElementById("container");
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    }
-    else {
-        iframe.requestFullscreen();
-    }
+    return __awaiter(this, void 0, void 0, function* () {
+        fullscreen_container.classList.add("active");
+        if (fullscreen_container.requestFullscreen) {
+            yield fullscreen_container.requestFullscreen();
+        }
+        const iframe = document.getElementById("container");
+        scale = Math.min(fullscreen_container.offsetWidth / iframe.offsetWidth, fullscreen_container.offsetHeight / iframe.offsetHeight);
+        rotation = 0;
+        iframe.style.left = "";
+        iframe.style.top = "";
+        iframe.style.transform = `scale(${scale})`;
+    });
 }
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        fullscreen_container.classList.remove("active");
+        scaleToFit();
+    }
+});
 function copyLink(button) {
     navigator.clipboard.writeText(`https://itsmarsss.github.io/Photon-Slides/app/?&data=${btoa(json_out.value)}`);
     button.innerHTML = "Copied&nbsp;&nbsp;&#10003;";

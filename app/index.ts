@@ -10,6 +10,9 @@ const slide_name = document.getElementById("slide_name") as HTMLTextAreaElement;
 
 const display_list = document.getElementById("display_list") as HTMLElement;
 const preview_cover = document.getElementById("preview_cover") as HTMLElement;
+const fullscreen_container = document.getElementById(
+  "fullscreen_container"
+) as HTMLElement;
 
 const textarea = document.getElementById("text_editor") as HTMLTextAreaElement;
 const highlighting = document.getElementById("highlighting") as HTMLElement;
@@ -390,15 +393,33 @@ function hidePopups() {
   }, 250);
 }
 
-function toggleFullScreen() {
+async function toggleFullScreen() {
+  fullscreen_container.classList.add("active");
+
+  if (fullscreen_container.requestFullscreen) {
+    await fullscreen_container.requestFullscreen();
+  }
+
   const iframe = document.getElementById("container") as HTMLIFrameElement;
 
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
-  } else {
-    iframe.requestFullscreen();
-  }
+  scale = Math.min(
+    fullscreen_container.offsetWidth / iframe.offsetWidth,
+    fullscreen_container.offsetHeight / iframe.offsetHeight
+  );
+
+  rotation = 0;
+
+  iframe.style.left = "";
+  iframe.style.top = "";
+  iframe.style.transform = `scale(${scale})`;
 }
+
+document.addEventListener("fullscreenchange", () => {
+  if (!document.fullscreenElement) {
+    fullscreen_container.classList.remove("active");
+    scaleToFit();
+  }
+});
 
 function copyLink(button: HTMLButtonElement) {
   navigator.clipboard.writeText(

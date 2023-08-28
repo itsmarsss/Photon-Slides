@@ -57,7 +57,17 @@
                     }
                 </style>
 
-                <iframe id="container" class="container" name="preview"></iframe>
+                <style id="fullscreen_container_style">
+                    #fullscreen_container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+                </style>
+
+                <div id="fullscreen_container">
+                    <iframe id="container" class="container" name="preview"></iframe>
+                </div>
 
                 <div id="preview_cover" tabindex="0" onkeyup="updateCode()"></div>
 
