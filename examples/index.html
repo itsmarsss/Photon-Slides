@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples Directory Listing</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+        html {
+            font-family: "Poppins";
+            margin: 20px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Examples Directory Listing</h1>
+    <ul>
+        <script>
+            const directoryListing = async () => {
+                const response = await fetch("directory-listing.json");
+                const files = await response.json();
+
+                const listContainer = document.querySelector("ul");
+                files.files.forEach(file => {
+                    const listItem = document.createElement("li");
+                    const link = document.createElement("a");
+                    link.textContent = file;
+                    link.href = file;
+                    listItem.appendChild(link);
+                    listContainer.appendChild(listItem);
+                });
+            };
+
+            directoryListing();
+        </script>
+    </ul>
+</body>
+
+</html>
