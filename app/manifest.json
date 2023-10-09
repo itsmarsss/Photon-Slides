@@ -12,7 +12,7 @@
   "background_color": "#1e1e1e",
   "theme_color": "#ffb000",
   "display": "standalone",
-  "start_url": "/Photon-Slides/app/",
-  "scope": "/Photon-Slides/app/",
+  "start_url": "/photon-slides/app/",
+  "scope": "/photon-slides/app/",
   "orientation": "landscape"
 }

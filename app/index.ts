@@ -423,7 +423,7 @@ document.addEventListener("fullscreenchange", () => {
 
 function copyLink(button: HTMLButtonElement) {
   navigator.clipboard.writeText(
-    `https://itsmarsss.github.io/Photon-Slides/app/?&data=${btoa(
+    `https://itsmarsss.github.io/photon-slides/app/?&data=${btoa(
       json_out.value
     )}`
   );

@@ -7,8 +7,8 @@ assignees: 'itsmarsss'
 
 ---
 
-**There is no template for issues that are neither a [bug report](https://github.com/itsmarsss/Photon-Slides/blob/main/.github/ISSUE_TEMPLATE/bug_report.md) or [feature request](https://github.com/itsmarsss/Photon-Slides/blob/main/.github/ISSUE_TEMPLATE/feature_request.md)**
+**There is no template for issues that are neither a [bug report](https://github.com/itsmarsss/photon-slides/blob/main/.github/ISSUE_TEMPLATE/bug_report.md) or [feature request](https://github.com/itsmarsss/photon-slides/blob/main/.github/ISSUE_TEMPLATE/feature_request.md)**
 Make sure your discussion is clear and concise.
 
-**Creating a [discussion](https://github.com/itsmarsss/Photon-Slides/discussions) may be a better idea** 
-Visit the [Discussions](https://github.com/itsmarsss/Photon-Slides/discussions) tab of Photon Slides.
+**Creating a [discussion](https://github.com/itsmarsss/photon-slides/discussions) may be a better idea** 
+Visit the [Discussions](https://github.com/itsmarsss/photon-slides/discussions) tab of Photon Slides.

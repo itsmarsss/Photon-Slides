@@ -20,7 +20,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://itsmarsss.github.io/Photon-Slides/app/*"],
+      "matches": ["https://itsmarsss.github.io/photon-slides/app/*"],
       "js": ["scripts/content.js"]
     }
   ],

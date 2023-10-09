@@ -3,7 +3,7 @@
 Thank you for considering contributing to Photon Slides! 
 
 ### Code of Conduct
-Before contributing, please read our [Code of Conduct](https://github.com/itsmarsss/Photon-Slides/blob/main/CODE_OF_CONDUCT.md) to understand our expectations for behavior within our community.
+Before contributing, please read our [Code of Conduct](https://github.com/itsmarsss/photon-slides/blob/main/CODE_OF_CONDUCT.md) to understand our expectations for behavior within our community.
 
 ### Getting Started
 
