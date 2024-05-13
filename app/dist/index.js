@@ -156,6 +156,7 @@ function deleteSlide() {
     display_list.innerHTML = "";
     slides_css.splice(activeSlide, 1);
     rerenderSlides();
+    updateCode();
 }
 function rerenderSlides() {
     slides_css.forEach((slide, index) => {
@@ -296,7 +297,7 @@ document.addEventListener("fullscreenchange", () => {
     }
 });
 function copyLink(button) {
-    navigator.clipboard.writeText(`https://itsmarsss.github.io/Photon-Slides/app/?&data=${btoa(json_out.value)}`);
+    navigator.clipboard.writeText(`https://itsmarsss.github.io/photon-slides/app/?&data=${btoa(json_out.value)}`);
     button.innerHTML = "Copied&nbsp;&nbsp;&#10003;";
     setTimeout(() => {
         button.innerHTML = "Copy Link&nbsp;&nbsp;&#9112;";

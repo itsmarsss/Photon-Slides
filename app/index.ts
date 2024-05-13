@@ -213,12 +213,15 @@ function addSlide() {
   textarea.dispatchEvent(new Event("input"));
 }
 
+declare function updateCode(): any;
 function deleteSlide() {
   display_list.innerHTML = "";
 
   slides_css.splice(activeSlide, 1);
 
   rerenderSlides();
+
+  updateCode();
 }
 
 function rerenderSlides() {
